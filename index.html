@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>PokéDex</title>
+	<link rel="stylesheet" href="styles/home.css"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="home.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>PokéDex</h1>
+        
+        <ul data-js="pokedex" class="pokedex"></ul>
+
+        <img src="img/spinner.gif" alt="Loading..." id="loading" class="loading">
+    </div>
+
+    <form class="view-pokemon-form" action="pokemon.html">
+        <input id="form-value" name="id" value=""/>
+    </form>
+</body>
+</html>

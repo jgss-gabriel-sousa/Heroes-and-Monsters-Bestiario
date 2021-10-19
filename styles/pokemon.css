@@ -1,0 +1,147 @@
+@import url("styles.css");
+
+h1{
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+h2 {
+    margin-top: 5px;
+    margin-bottom: 0;    
+    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+}
+
+h3 {
+    margin: 10px;
+    text-align: justify;
+    text-align: center;
+}
+
+h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 0 0;
+    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+#stats {
+    min-width: 250px;
+}
+
+#evolution {
+    grid-column-end: 3;
+    grid-column-start: 1;
+    margin-top: 20px;
+}
+
+#stats-bar {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#photo-and-caption{
+    min-width: max-content;
+}
+
+.container{
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+}
+
+.pokemon-image{
+    border: 2px solid #222;
+    border-radius: 50px;
+    max-width: 100%;
+}
+
+.back-button{
+    border: 2px solid #222;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin: 15px;
+    font-size: 20px;
+}
+
+.stats-element{
+    margin: 10px;
+    min-width: 90px;
+}
+
+.progress-bar-background {
+    width: 100px;
+    height: 15px;
+    border: 2px solid #222;
+    border-radius: 4px;
+    background-color: lightgrey;
+    position: relative;
+    width: auto;
+    padding: 1px;
+}
+
+.progress-bar {
+    width: 50%;
+    height: 100%;
+    justify-content: center; 
+    border-radius: 2px;   
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
+.xp     {background-color: #1a8d1a;}
+.hp     {background-color: brown;}
+.atk    {background-color: darkgoldenrod;}
+.def    {background-color: orangered;}
+.sp-atk {background-color: #5db9d3;}
+.sp-def {background-color: #6392cc;}
+.speed  {background-color: #bb6dbf;}
+
+#evolution-chain {
+    display: inline-flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.evo-box {
+    margin: 10px;
+    padding: 10px;
+    text-transform: capitalize;
+}
+
+.evo-image {
+    border: 1px solid #222;
+    border-radius: 10px;
+    box-shadow: 1px 1px black;
+    background-color: darkgray;
+    margin: 10px;
+    padding: 10px;
+    text-transform: capitalize;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }

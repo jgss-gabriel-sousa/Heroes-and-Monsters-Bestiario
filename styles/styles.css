@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik&display=swap");
+
+body {
+    /*background: linear-gradient(to right, #334D8E, #3c5aa6);*/
+    background: #3B4CCA;
+    color: #FFDE00;
+    font-family: rubik;
+    margin: 0;
+}
+
+.container {
+    padding: 40px;
+}
+
+h1 {
+    color: #FFDE00;
+    text-align: center;
+    font-size: 54px;
+    margin-top: 0;
+    text-transform: capitalize;
+    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+}
+
+h2 {
+    color: #FFDE00;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+
+h3 {
+    color: #FFDE00;
+    font-size: 32px;
+    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+}
+
+h4 {
+    color: #FFDE00;
+    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+}
+
+p {
+    color: #FFD429;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 50pt;
+}
+
+.loading {
+    display: block;
+    margin: auto;
+}
+
+.highlight-on-hover{
+    cursor: pointer;
+
+}
+
+.highlight-on-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 0px 5px 3px #333;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #3B4CCA;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5C64A8;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7C7D87;
+}
+
+
+.bug        {background-color: #94BC4A;}
+.dark       {background-color: #736C75;}
+.dragon     {background-color: #6A7BAF;}
+.electric   {background-color: #E5C531;}
+.fairy      {background-color: #E397D1;}
+.fighting   {background-color: #CB5F48;}
+.fire       {background-color: #EA7A3C;}
+.flying     {background-color: #7DA6DE;}
+.ghost      {background-color: #846AB6;}
+.grass      {background-color: #71C558;}
+.ground     {background-color: #CC9F4F;}
+.ice        {background-color: #70CBD4;}
+.normal     {background-color: #AAB09F;}
+.poison     {background-color: #B468B7;}
+.psychic    {background-color: #E5709B;}
+.rock       {background-color: #B2A061;}
+.steel      {background-color: #89A1B0;}
+.water      {background-color: #539AE2;}
