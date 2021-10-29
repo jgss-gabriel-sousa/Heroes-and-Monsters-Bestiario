@@ -1,9 +1,5 @@
 @import url("styles.css");
 
-h2 {
-    color: #222;
-}
-
 .pokedex {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -17,24 +13,34 @@ h2 {
     color: #222;
     text-align: center;
     border-radius: 20px;
+    border: 1px solid;
+    box-shadow: 1px 1px 5px black;
     cursor: pointer;
 }
+
 
 .card-title {
     text-transform: capitalize;
     margin: 0;
     font-size: 24px;
-    font-weight: normal;
+    font-weight: bold;
+    font-size: 32px;
+    color: #222;
 }
 
 .card-subtitle {
     margin-top: 5px;
-    color: #555;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
     text-transform: capitalize;
 }
 
 .card-image {
     z-index: 2;
+    max-width: 90%;
+    max-height: 70%;
+    margin-top: 10px;
 }
 
 .view-pokemon-form {

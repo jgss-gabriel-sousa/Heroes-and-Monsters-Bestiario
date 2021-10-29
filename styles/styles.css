@@ -2,8 +2,7 @@
 
 body {
     /*background: linear-gradient(to right, #334D8E, #3c5aa6);*/
-    background: #3B4CCA;
-    color: #FFDE00;
+    background: #f3edd8;
     font-family: rubik;
     margin: 0;
 }
@@ -13,33 +12,41 @@ body {
 }
 
 h1 {
-    color: #FFDE00;
+    color: #003333;
     text-align: center;
     font-size: 54px;
     margin-top: 0;
     text-transform: capitalize;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    /*
     text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+    */
 }
 
 h2 {
-    color: #FFDE00;
+    color: #003333;
     margin-top: 0;
     text-transform: capitalize;
 }
 
 h3 {
-    color: #FFDE00;
+    color: #003333;
     font-size: 32px;
+    /*
     text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+    */
 }
 
 h4 {
-    color: #FFDE00;
+    color: #003333;
+    /*
     text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+    */
 }
 
 p {
-    color: #FFD429;
+    color: #003333;
     text-align: center;
     font-size: 18px;
     margin-bottom: 50pt;
@@ -65,7 +72,7 @@ p {
 }
 
 ::-webkit-scrollbar-track {
-    background: #3B4CCA;
+    background: #E73D1D;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -78,21 +85,18 @@ p {
 }
 
 
-.bug        {background-color: #94BC4A;}
-.dark       {background-color: #736C75;}
-.dragon     {background-color: #6A7BAF;}
-.electric   {background-color: #E5C531;}
-.fairy      {background-color: #E397D1;}
-.fighting   {background-color: #CB5F48;}
-.fire       {background-color: #EA7A3C;}
-.flying     {background-color: #7DA6DE;}
-.ghost      {background-color: #846AB6;}
-.grass      {background-color: #71C558;}
-.ground     {background-color: #CC9F4F;}
-.ice        {background-color: #70CBD4;}
-.normal     {background-color: #AAB09F;}
-.poison     {background-color: #B468B7;}
-.psychic    {background-color: #E5709B;}
-.rock       {background-color: #B2A061;}
-.steel      {background-color: #89A1B0;}
-.water      {background-color: #539AE2;}
+.humanoide          {background-color:lightgrey;}
+.aberracao          {background-color:#a68fd1;}
+.animal             {background-color:#f0a57c;}
+.celestial          {background-color:rgb(133, 160, 250);}
+.monstro            {background-color:#797067}
+.planta             {background-color:rgb(137, 250, 102)}
+.constructo         {background-color:grey}
+.morto-vivo         {background-color:cadetblue}
+.elemental-fogo     {background-color:rgb(173, 61, 61)}
+.elemental-agua     {background-color:lightseagreen}
+.elemental-terra    {background-color:rgb(131, 115, 95)}
+.elemental-ar       {background-color:lightskyblue}
+.gosma              {background-color:rgb(108, 148, 94)}
+.dragao             {background-color:rgb(255, 228, 78);}
+.gigante            {background-color:#b2c1c3;}

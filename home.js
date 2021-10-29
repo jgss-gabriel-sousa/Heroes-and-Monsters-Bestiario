@@ -1,26 +1,31 @@
 const spinnerLoading = document.querySelector("#loading")
 const PokeList = document.querySelector('[data-js="pokedex"]');
 
-const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`
-const NumberOfPokemon = 898
-const NumberOfPokemonToLoad = 40
+const getPokemonUrl = id => `https://heroes-and-monsters-api.herokuapp.com/monster/${id}`
+const NumberOfPokemon = 2
+const NumberOfPokemonToLoad = 2
 let loaded = 0;
 let allLoaded = false;
 let viewingPokemon;
 
+accentsTidy = function(s){
+    var r = s.toLowerCase();
+    non_asciis = {'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]', 'y': '[ýÿ]'};
+    for (i in non_asciis) { r = r.replace(new RegExp(non_asciis[i], 'g'), i); }
+    return r;
+};
 
-const generatePokemonPromises = toLoad => Array(toLoad).fill().map((_, index) =>     
-    fetch(getPokemonUrl(index+1+loaded)).then(response => response.json()))
+const generatePokemonPromises = toLoad => Array(toLoad).fill().map((_, index) =>
+    fetch(getPokemonUrl(index+loaded)).then(response => response.json()))
     
 
-const generateHTML = pokemon => pokemon.reduce((accumulator, {name, id, types}) => {
-    const elementTypes = types.map(typeInfo => typeInfo.type.name)
+const generateHTML = pokemon => pokemon.reduce((accumulator, {name, type, englishName}) => {
 
     accumulator += `
-    <li class="card ${elementTypes[0]} highlight-on-hover" onclick="viewPokemon('${id}')">
-        <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png" />
-        <h2 class="card-title">${id}. ${name}</h2>
-        <p class="card-subtitle">${elementTypes.join(' | ')}</p>
+    <li class="card ${accentsTidy(type)} highlight-on-hover" onclick="viewPokemon('${name}')">
+        <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/200px/${englishName.toLowerCase()}.png" />
+        <h2 class="card-title">${name}</h2>
+        <p class="card-subtitle">${type}</p>
     </li>
     `
     return accumulator
@@ -30,7 +35,7 @@ const generateHTML = pokemon => pokemon.reduce((accumulator, {name, id, types}) 
 const insertPokemonIntoPage = pokemon => {
     PokeList.innerHTML += pokemon;
     
-    loaded += 40;
+    loaded += NumberOfPokemonToLoad;
     if(loaded > NumberOfPokemon){
         loaded = NumberOfPokemon;
         allLoaded = true;
