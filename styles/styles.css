@@ -33,16 +33,10 @@ h2 {
 h3 {
     color: #003333;
     font-size: 32px;
-    /*
-    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
-    */
 }
 
 h4 {
     color: #003333;
-    /*
-    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
-    */
 }
 
 p {
