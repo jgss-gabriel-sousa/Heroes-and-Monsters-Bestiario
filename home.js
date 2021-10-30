@@ -1,12 +1,13 @@
-const spinnerLoading = document.querySelector("#loading")
-const PokeList = document.querySelector('[data-js="pokedex"]');
+const SpinnerLoading = document.querySelector("#loading")
+const MonsterList = document.querySelector('[data-js="bestiario"]');
 
-const getPokemonUrl = id => `https://heroes-and-monsters-api.herokuapp.com/monster/${id}`
-const NumberOfPokemon = 2
-const NumberOfPokemonToLoad = 2
+const GetMonsterUrl = id => `https://heroes-and-monsters-api.herokuapp.com/monster/${id}`
+const TotalNumberOfMonsters = 4
+const NumberOfMonstersToLoad = 2
 let loaded = 0;
 let allLoaded = false;
-let viewingPokemon;
+let viewingMonster;
+
 
 accentsTidy = function(s){
     var r = s.toLowerCase();
@@ -15,14 +16,15 @@ accentsTidy = function(s){
     return r;
 };
 
-const generatePokemonPromises = toLoad => Array(toLoad).fill().map((_, index) =>
-    fetch(getPokemonUrl(index+loaded)).then(response => response.json()))
+
+const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
+    fetch(GetMonsterUrl(index+loaded)).then(response => response.json()))
     
 
-const generateHTML = pokemon => pokemon.reduce((accumulator, {name, type, englishName}) => {
+const generateHTML = monster => monster.reduce((accumulator, {name, type, englishName}) => {
 
     accumulator += `
-    <li class="card ${accentsTidy(type)} highlight-on-hover" onclick="viewPokemon('${name}')">
+    <li class="card ${accentsTidy(type)} highlight-on-hover" onclick="viewMonster('${name}')">
         <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/200px/${englishName.toLowerCase()}.png" />
         <h2 class="card-title">${name}</h2>
         <p class="card-subtitle">${type}</p>
@@ -31,28 +33,28 @@ const generateHTML = pokemon => pokemon.reduce((accumulator, {name, type, englis
     return accumulator
 }, '')
 
+
+const insertMonsterIntoPage = monster => {
+    MonsterList.innerHTML += monster;
     
-const insertPokemonIntoPage = pokemon => {
-    PokeList.innerHTML += pokemon;
-    
-    loaded += NumberOfPokemonToLoad;
-    if(loaded > NumberOfPokemon){
-        loaded = NumberOfPokemon;
+    loaded += NumberOfMonstersToLoad;
+    if(loaded > TotalNumberOfMonsters){
+        loaded = TotalNumberOfMonsters;
         allLoaded = true;
     }
-    else if(loaded == NumberOfPokemon){
+    else if(loaded == TotalNumberOfMonsters){
         allLoaded = true;
     }
 
-    spinnerLoading.style.display = "none";
+    SpinnerLoading.style.display = "none";
 }
 
 
-function viewPokemon(id){
+function viewMonster(id){
     savePageState();
-    viewingPokemon = true;
+    viewingMonster = true;
 
-    const form = document.querySelector(".view-pokemon-form");
+    const form = document.querySelector(".view-monster");
     const input = document.getElementById("form-value");
     input.value = id;
     form.submit();
@@ -61,9 +63,9 @@ function viewPokemon(id){
 
 function checkScroll(){
     if(allLoaded == false && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-        spinnerLoading.style.display = "block";
+        SpinnerLoading.style.display = "block";
         scrollTo(0, (window.innerHeight + window.pageYOffset));
-        setTimeout(loadPokemon, 2000);
+        setTimeout(loadMonster, 2000);
 
         clearInterval(checkScrollInterval);
         setTimeout( () => {
@@ -71,14 +73,14 @@ function checkScroll(){
         }, 3000);
     }
     if(allLoaded){
-        spinnerLoading.style.display = "none";
+        SpinnerLoading.style.display = "none";
         clearInterval(checkScrollInterval);
     }
 }
 
 
 function savePageState(){
-    sessionStorage.setItem("html", PokeList.innerHTML);
+    sessionStorage.setItem("html", MonsterList.innerHTML);
     sessionStorage.setItem("saved", true);
     sessionStorage.setItem("scroll", window.pageYOffset);
     sessionStorage.setItem("loaded", loaded);
@@ -97,7 +99,7 @@ function pageStateUpdate(){
             allLoaded = false;
         }
 
-        PokeList.innerHTML = sessionStorage.getItem("html");
+        MonsterList.innerHTML = sessionStorage.getItem("html");
         setTimeout(() => {
             scrollTo(0, sessionStorage.getItem("scroll"));
         }, 500);
@@ -110,32 +112,32 @@ function pageStateUpdate(){
 }
 
 
-function loadPokemon(){
-    if(loaded < NumberOfPokemon){
-        spinnerLoading.style.display = "block";
+function loadMonster(){
+    if(loaded < TotalNumberOfMonsters){
+        SpinnerLoading.style.display = "block";
 
         let toLoad;
-        if(NumberOfPokemonToLoad+loaded > NumberOfPokemon){
-            toLoad = NumberOfPokemon-loaded;
+        if(NumberOfMonstersToLoad+loaded > TotalNumberOfMonsters){
+            toLoad = TotalNumberOfMonsters-loaded;
         }
         else{
-            toLoad = NumberOfPokemonToLoad;
+            toLoad = NumberOfMonstersToLoad;
         }
         
-        const pokemonPromises = generatePokemonPromises(toLoad);
+        const monsterPromises = generatePromises(toLoad);
 
-        Promise.all(pokemonPromises)
+        Promise.all(monsterPromises)
             .then(generateHTML)
-            .then(insertPokemonIntoPage);
+            .then(insertMonsterIntoPage);
     }
 }
 
 pageStateUpdate();
-loadPokemon();
+loadMonster();
 var checkScrollInterval = setInterval(checkScroll, 1000);
 
 window.addEventListener("beforeunload", function(){
-    if(!viewingPokemon){
+    if(!viewingMonster){
         sessionStorage.clear();
     }
  }, false);
