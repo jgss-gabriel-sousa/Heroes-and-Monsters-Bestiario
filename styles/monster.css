@@ -2,7 +2,6 @@
 
 h1{
     margin-bottom: 10px;
-    font-size: 40px;
 }
 
 h2 {
@@ -28,6 +27,11 @@ p {
 
 a {
     text-decoration: none;
+}
+
+.container h1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 #stats {
@@ -61,7 +65,7 @@ a {
     grid-gap: 20px;
 }
 
-.pokemon-image{
+.monster-image{
     border: 2px solid #222;
     border-radius: 50px;
     max-width: 100%;
@@ -109,38 +113,3 @@ a {
 .sp-atk {background-color: #5db9d3;}
 .sp-def {background-color: #6392cc;}
 .speed  {background-color: #bb6dbf;}
-
-#evolution-chain {
-    display: inline-flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-}
-
-.evo-box {
-    margin: 10px;
-    padding: 10px;
-    text-transform: capitalize;
-}
-
-.evo-image {
-    border: 1px solid #222;
-    border-radius: 10px;
-    box-shadow: 1px 1px black;
-    background-color: darkgray;
-    margin: 10px;
-    padding: 10px;
-    text-transform: capitalize;
-}
-
-.arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-  }
-  
-  .right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-  }
