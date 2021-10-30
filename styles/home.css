@@ -1,5 +1,9 @@
 @import url("styles.css");
 
+h3 {
+    font-size: 32px;
+}
+
 .bestiario {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));

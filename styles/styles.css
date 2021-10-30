@@ -31,7 +31,6 @@ h2 {
 
 h3 {
     color: #003333;
-    font-size: 32px;
 }
 
 h4 {
@@ -65,16 +64,16 @@ p {
 }
 
 ::-webkit-scrollbar-track {
-    background: #E73D1D;
+    background: #f3edd8;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #5C64A8;
+    background: #9bb8b8;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #7C7D87;
+    background: #668080;
 }
 
 
