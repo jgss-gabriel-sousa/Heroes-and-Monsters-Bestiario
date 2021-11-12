@@ -2,8 +2,8 @@ const SpinnerLoading = document.querySelector("#loading")
 const MonsterList = document.querySelector('[data-js="bestiario"]');
 
 const GetMonsterUrl = id => `https://heroes-and-monsters-api.herokuapp.com/monster/${id}`
-const TotalNumberOfMonsters = 4
-const NumberOfMonstersToLoad = 2
+let TotalNumberOfMonsters;
+const NumberOfMonstersToLoadByStep = 4
 let loaded = 0;
 let allLoaded = false;
 let viewingMonster;
@@ -21,11 +21,11 @@ const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
     fetch(GetMonsterUrl(index+loaded)).then(response => response.json()))
     
 
-const generateHTML = monster => monster.reduce((accumulator, {name, type, englishName}) => {
+const generateHTML = monster => monster.reduce((accumulator, {name, type, english_name}) => {
 
     accumulator += `
     <li class="card ${accentsTidy(type)} highlight-on-hover" onclick="viewMonster('${name}')">
-        <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/200px/${englishName.toLowerCase()}.png" />
+        <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/200px/${english_name.toLowerCase()}.png" />
         <h2 class="card-title">${name}</h2>
         <p class="card-subtitle">${type}</p>
     </li>
@@ -37,7 +37,7 @@ const generateHTML = monster => monster.reduce((accumulator, {name, type, englis
 const insertMonsterIntoPage = monster => {
     MonsterList.innerHTML += monster;
     
-    loaded += NumberOfMonstersToLoad;
+    loaded += NumberOfMonstersToLoadByStep;
     if(loaded > TotalNumberOfMonsters){
         loaded = TotalNumberOfMonsters;
         allLoaded = true;
@@ -117,11 +117,11 @@ function loadMonster(){
         SpinnerLoading.style.display = "block";
 
         let toLoad;
-        if(NumberOfMonstersToLoad+loaded > TotalNumberOfMonsters){
+        if(NumberOfMonstersToLoadByStep+loaded > TotalNumberOfMonsters){
             toLoad = TotalNumberOfMonsters-loaded;
         }
         else{
-            toLoad = NumberOfMonstersToLoad;
+            toLoad = NumberOfMonstersToLoadByStep;
         }
         
         const monsterPromises = generatePromises(toLoad);
@@ -141,3 +141,10 @@ window.addEventListener("beforeunload", function(){
         sessionStorage.clear();
     }
  }, false);
+
+
+window.onload = async function getMonstersTotal() {
+    const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com`);
+    api_info = await response.json();
+    TotalNumberOfMonsters = api_info.monster.length;
+};
