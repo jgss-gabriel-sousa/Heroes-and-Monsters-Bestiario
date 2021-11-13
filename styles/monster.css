@@ -81,35 +81,33 @@ a {
 
 .stats-element{
     margin: 10px;
-    min-width: 90px;
+    min-width: 200px;
 }
 
 .progress-bar-background {
-    width: 100px;
-    height: 15px;
-    border: 2px solid #222;
+    height: 20px;
+    border: 2px solid #111;
     border-radius: 4px;
-    background-color: lightgrey;
+    background-color: #333;
     position: relative;
     width: auto;
-    padding: 1px;
+    padding: 5px;
 }
 
 .progress-bar {
-    width: 50%;
     height: 100%;
+    width: 0%;
     justify-content: center; 
     border-radius: 2px;   
     text-align: center;
-    font-size: 12px;
+    font-size: 16px;
     color: white;
-    text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+    text-shadow: 2px 0 0 black, -2px 0 0 black, 0 1px 0 black, 0 -2px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
 }
 
 .xp     {background-color: #1a8d1a;}
-.hp     {background-color: brown;}
+.hp     {background-color: rgb(200, 0, 0);}
 .atk    {background-color: darkgoldenrod;}
-.def    {background-color: orangered;}
-.sp-atk {background-color: #5db9d3;}
-.sp-def {background-color: #6392cc;}
-.speed  {background-color: #bb6dbf;}
+.def    {background-color: rgb(150, 150, 150);}
+.dmg    {background-color: rgb(211, 56, 0);}
+.res    {background-color: rgb(20, 20, 228);}
