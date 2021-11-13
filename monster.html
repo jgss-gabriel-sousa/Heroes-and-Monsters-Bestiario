@@ -6,54 +6,132 @@
 	<title>Monster</title>
 	<link rel="stylesheet" href="styles/monster.css"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="monster-data-fill.js" defer></script>
     <script src="monster.js" defer></script>
 </head>
 <body>
-    <button class="back-button highlight-on-hover" onclick="goBack()">Back</button>
-    <div class="container">
+    <button id="back-button" class="highlight-on-hover" onclick="goBack()">Back</button>
+    <div id="container">
         <h1>Nome</h1>
 
-        <div id="photo-and-caption">
-            <img class="monster-image"/>
-            <h3>Animal, Grande</h3>
+        <div id="top-section">
+            <div id="photo-and-caption">
+                <img id="monster-image"/>
+                <h3>Animal, Grande</h3>
+            </div>
+
+            <div id="stats">
+                <p id="stats-challenge-ratio"><strong>Desafio:&nbsp</strong><span></span></p>
+                <p id="stats-xp"><strong>XP:&nbsp</strong><span></span></p>
+                
+                <p id="stats-defense"><strong>Defesa:&nbsp</strong><span></span>&nbsp<span id="stats-defense-bonuses"></span></p>
+                <p id="stats-hp"><strong>Vida:&nbsp</strong><span></span></p>
+                <p id="stats-mana"><strong>Mana:&nbsp</strong><span></span></p>
+                
+                <p id="stats-deslocamento-w"><strong>Deslocamento (Andando):&nbsp</strong><span></span></p>
+                <p id="stats-deslocamento-h"><strong>Deslocamento (Pairando):&nbsp</strong><span></span></p>
+                <p id="stats-deslocamento-f"><strong>Deslocamento (Voando):&nbsp</strong><span></span></p>
+                <p id="stats-deslocamento-d"><strong>Deslocamento (Escavando):&nbsp</strong><span></span></p>
+                <p id="stats-deslocamento-c"><strong>Deslocamento (Escalando):&nbsp</strong><span></span></p>
+                <p id="stats-deslocamento-s"><strong>Deslocamento (Nadando):&nbsp</strong><span></span></p>
+                
+                <table id="attributes">
+                    <tr>
+                        <th>FOR</th>
+                        <th>VIT</th>
+                        <th>AGI</th>
+                        <th>CAR</th>
+                        <th>VON</th>
+                        <th>SAB</th>
+                        <th>INT</th>
+                    </tr>
+                    <tr id="attributes-value">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr id="attributes-modifier">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <p id="stats-skills"><strong>Perícia:&nbsp</strong><span></span></p>
+                
+                <p id="stats-resistances"><strong>Resistência:&nbsp</strong><span></span></p>
+                <p id="stats-immunities"><strong>Imunidade:&nbsp</strong><span></span></p>
+                <p id="stats-condition_immunities"><strong>Imunidade de Condição:&nbsp</strong><span></span></p>
+                
+                <p id="stats-dark-vision"><strong>Visão no Escuro:&nbsp</strong><span></span></p>
+                <p id="stats-blind-sight"><strong>Sentido às Cegas:&nbsp</strong><span></span></p>
+                <p id="stats-tremor-sense"><strong>Sentido Sísmico:&nbsp</strong><span></span></p>
+                <p id="stats-true-vision"><strong>Visão Verdadeira:&nbsp</strong><span></span></p>
+            </div>
         </div>
 
-        <div id="stats">
-            <h3>Stats</h3>
+        <hr>
 
-            <div id="stats-bar">
-                <div class="stats-element">
-                    <h4>Ataque</h4> 
+        <div id="data">
+            <div>
+
+            </div>
+        </div>
+
+
+        <div id="nd-window">
+            <h2>Nível de Dificuldade</h2>
+            
+            <div id="nd-window-bars-div">
+                <div class="nd-window-element">
+                    <h3>Total</h3> 
                     <div class="progress-bar-background">
-                        <div id="atk-bar" class="progress-bar atk"></div>
+                        <div id="cr-bar" class="progress-bar cr"></div>
                     </div>
                 </div>
 
-                <div class="stats-element">
-                    <h4>Dano</h4> 
-                    <div class="progress-bar-background">
-                        <div id="dmg-bar" class="progress-bar dmg"></div>
+                <div id="nd-window-bars">
+                    <div class="window-element">
+                        <h4>Ataque</h4> 
+                        <div class="progress-bar-background">
+                            <div id="atk-bar" class="progress-bar atk"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="stats-element">
-                    <h4>Vida</h4> 
-                    <div class="progress-bar-background">
-                        <div id="hp-bar" class="progress-bar hp"></div>
+                    <div class="window-element">
+                        <h4>Dano</h4> 
+                        <div class="progress-bar-background">
+                            <div id="dmg-bar" class="progress-bar dmg"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="stats-element">
-                    <h4>Defesa</h4> 
-                    <div class="progress-bar-background">
-                        <div id="def-bar" class="progress-bar def"></div>
+                    <div class="window-element">
+                        <h4>Vida</h4> 
+                        <div class="progress-bar-background">
+                            <div id="hp-bar" class="progress-bar hp"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="stats-element">
-                    <h4>Resistências e Imunidades</h4> 
-                    <div class="progress-bar-background">
-                        <div id="res-bar" class="progress-bar res"></div>
+                    <div class="window-element">
+                        <h4>Defesa</h4> 
+                        <div class="progress-bar-background">
+                            <div id="def-bar" class="progress-bar def"></div>
+                        </div>
+                    </div>
+
+                    <div class="window-element">
+                        <h4>Resistências e Imunidades</h4> 
+                        <div class="progress-bar-background">
+                            <div id="res-bar" class="progress-bar res"></div>
+                        </div>
                     </div>
                 </div>
             </div>

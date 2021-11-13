@@ -56,7 +56,7 @@ function viewMonster(id){
 
     const form = document.querySelector(".view-monster");
     const input = document.getElementById("form-value");
-    input.value = id;
+    input.value = accentsTidy(id);
     form.submit();
 }
 

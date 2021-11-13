@@ -1,9 +1,5 @@
 @import url("styles.css");
 
-h1{
-    margin-bottom: 10px;
-}
-
 h2 {
     margin-top: 5px;
     margin-bottom: 0;    
@@ -21,30 +17,32 @@ h4 {
 }
 
 p {
-    margin: 0 0;
-    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 2px 2px #333, -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333;
+    margin: 10px 0px;
+    font-size: 16px;
 }
 
 a {
     text-decoration: none;
 }
 
-.container h1 {
-    grid-column-start: 1;
-    grid-column-end: 3;
+#container {
+    padding: 40px;
 }
 
-#stats {
+#nd-window {
     min-width: 250px;
+    background-color: rgba(34, 34, 34, 0.15);
+    border: 1px double black;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
 }
 
-#evolution {
-    grid-column-end: 3;
-    grid-column-start: 1;
-    margin-top: 20px;
+#nd-window h2 {
+    margin-bottom: 25px;
 }
 
-#stats-bar {
+#nd-window-bars {
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -56,30 +54,45 @@ a {
     min-width: max-content;
 }
 
-.container{
-    text-align: center;
-    padding: 10px 20px;
-    margin-bottom: 40px;
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 20px;
-}
-
-.monster-image{
-    border: 2px solid #222;
-    border-radius: 50px;
+#photo-and-caption img{
     max-width: 100%;
+    margin: 0px 20px 0px 20px;
 }
 
-.back-button{
+#top-section{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#top-section h1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+#stats p {
+    text-align: start;
+}
+
+#stats td{
+    text-align: center;
+    width: 50px;
+}
+
+#attributes-modifier{
+    font-weight: bold;
+}
+
+#back-button{
     border: 2px solid #222;
     border-radius: 50px;
     padding: 10px 20px;
     margin: 15px;
     font-size: 20px;
+    position: absolute;
 }
 
-.stats-element{
+.window-element{
     margin: 10px;
     min-width: 200px;
 }
@@ -105,9 +118,21 @@ a {
     text-shadow: 2px 0 0 black, -2px 0 0 black, 0 1px 0 black, 0 -2px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
 }
 
-.xp     {background-color: #1a8d1a;}
+.cr     {background-color: #1a8d1a;}
 .hp     {background-color: rgb(200, 0, 0);}
 .atk    {background-color: darkgoldenrod;}
 .def    {background-color: rgb(150, 150, 150);}
 .dmg    {background-color: rgb(211, 56, 0);}
 .res    {background-color: rgb(20, 20, 228);}
+
+
+#stats-mana,
+#stats-deslocamento-w,#stats-deslocamento-h,#stats-deslocamento-f,#stats-deslocamento-d,#stats-deslocamento-c,#stats-deslocamento-s,
+#stats-skills,
+#stats-resistances,
+#stats-immunities,
+#stats-condition_immunities,
+#stats-dark-vision,#stats-blind-sight,#stats-tremor-sense,#stats-true-vision
+{
+    display: none
+}
