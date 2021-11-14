@@ -31,9 +31,9 @@ function generateHTML() {
     //###############################################################################################################################################################################
 
     document.querySelector("#stats-challenge-ratio span").innerText = convertNumberToFraction(monster.challenge_ratio);
-    document.querySelector("#stats-xp span").innerText = monster.xp;
+    document.querySelector("#stats-xp span").innerText = addDecimalPoints(monster.xp);
     document.querySelector("#stats-defense span").innerText = monster.defense;
-    document.querySelector("#stats-hp span").innerText = monster.hp;
+    document.querySelector("#stats-hp span").innerText = addDecimalPoints(monster.hp);
 
     if(monster.mana != 0){
         document.querySelector("#stats-mana").style.display = "block";
