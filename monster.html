@@ -6,11 +6,12 @@
 	<title>Monster</title>
 	<link rel="stylesheet" href="styles/monster.css"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="monster-events.js" defer></script>
     <script src="monster-data-fill.js" defer></script>
     <script src="monster.js" defer></script>
 </head>
 <body>
-    <button id="back-button" class="highlight-on-hover" onclick="goBack()">Back</button>
+    <button id="back-button" class="highlight-on-hover" onclick="goBack()">Voltar</button>
     <div id="container">
         <h1>Nome</h1>
 
@@ -21,10 +22,12 @@
             </div>
 
             <div id="stats">
+                <p id="stats-alignment"><strong>Alinhamento:&nbsp</strong><span></span></p>
+
                 <p id="stats-challenge-ratio"><strong>Desafio:&nbsp</strong><span></span></p>
                 <p id="stats-xp"><strong>XP:&nbsp</strong><span></span></p>
                 
-                <p id="stats-defense"><strong>Defesa:&nbsp</strong><span></span>&nbsp<span id="stats-defense-bonuses"></span></p>
+                <p id="stats-defense"><strong>Defesa:&nbsp</strong><span></span></p>
                 <p id="stats-hp"><strong>Vida:&nbsp</strong><span></span></p>
                 <p id="stats-mana"><strong>Mana:&nbsp</strong><span></span></p>
                 
@@ -75,15 +78,64 @@
                 <p id="stats-blind-sight"><strong>Sentido às Cegas:&nbsp</strong><span></span></p>
                 <p id="stats-tremor-sense"><strong>Sentido Sísmico:&nbsp</strong><span></span></p>
                 <p id="stats-true-vision"><strong>Visão Verdadeira:&nbsp</strong><span></span></p>
+
+                <p id="stats-languages"><strong>Idiomas:&nbsp</strong><span></span></p>
             </div>
         </div>
 
         <hr>
 
-        <div id="data">
-            <div>
+        <div>
+            <h2>Habilidades</h2>
+        </div>
+        <div id="spells-and-actions">
+            <div id="spells">
+                <h2>Magias</h2>
+                <div id="spellcaster-info">
+                    <p id="spellcaster-level"><strong>Nível de Conjurador:&nbsp</strong><span></span></p>
+                    <p id="spellcasting_attribute"><strong>Atributo de Conjuração:&nbsp</strong><span></span></p>
+                    <p id="special_spell_feature"><strong>Especial:&nbsp</strong><span></span></p>
+                </div>
 
+                <div id="spell-list">
+                    <div class="spell-element">
+                        <div class="spell-name">
+                            <h4>Magia 1</h4>
+                            <button onclick="showSpell('0')">+</button>
+                        </div>
+                        <div id="spell-0-info" class="spell-info">
+                            <p><strong>Círculo:&nbsp</strong><span></span></p>
+                            <p><strong>Custo de Mana:&nbsp</strong><span></span></p>
+                                <div class="spell-description">
+                                    <p><strong>Efeito:&nbsp</strong><span>Você terá vantagem em todos os testes de Carisma direcionados a uma criatura, à sua escolha, que não seja hostil a você.</span></p>
+                                    <p> Quando a magia acabar, a criatura perceberá que você usou magia para influenciar o humor dela, e ficará hostil a você.</p>
+                                    <p> Uma criatura propensa a violência irá atacar você. Outra criatura pode buscar outras formas de retaliação (a critério do Mestre), dependendo da natureza da sua interação com ela</p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div>
+                <h2>Ações</h2>
+            </div>
+            <div>
+                <h2>Ações Lendárias</h2>
+            </div>
+            <div>
+                <h2>Covil</h2>
+            </div>
+            <div>
+                <h2>Ações de Covil</h2>
+            </div>
+            <div>
+                <h2>Efeitos Regionais</h2>
+            </div>
+        </div>
+
+        <hr>
+
+        <div id="description">
+            <h3>Descrição</h3>
         </div>
 
 

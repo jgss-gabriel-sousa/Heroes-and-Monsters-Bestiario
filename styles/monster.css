@@ -83,6 +83,67 @@ a {
     font-weight: bold;
 }
 
+#spells-and-actions{
+}
+
+#spells{
+    margin: 20px;
+    text-align: start;
+}
+#spellcaster-info p{
+    text-align: start;
+}
+#spells h2{
+    text-align: center;
+}
+
+#spell-list{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 20px;
+}
+
+.spell-element {
+    border: 1px solid #222;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 128, 128, 0.1);
+}
+.spell-info {
+    width: 100%;
+}
+.spell-info p {
+    font-size: 12px;
+    margin: 5px 0px;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    text-align: justify;
+}
+
+.spell-description p:nth-child(n+2){
+    text-indent: 20px;
+    margin-top: 10px;
+}
+
+.spell-element button {
+    margin: 5px 5px 5px 10px;
+    font-size: 20px;
+}
+.spell-element button:hover {
+    box-shadow: 0px 0px black;
+}
+
+.spell-name{
+    display: flex;
+}
+
 #back-button{
     border: 2px solid #222;
     border-radius: 50px;
@@ -132,7 +193,9 @@ a {
 #stats-resistances,
 #stats-immunities,
 #stats-condition_immunities,
-#stats-dark-vision,#stats-blind-sight,#stats-tremor-sense,#stats-true-vision
+#stats-dark-vision,#stats-blind-sight,#stats-tremor-sense,#stats-true-vision,
+#stats-languages,
+#spell
 {
     display: none
 }
