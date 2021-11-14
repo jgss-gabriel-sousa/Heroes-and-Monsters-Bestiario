@@ -1,5 +1,3 @@
-# PokeDex
-
- PokeDex showcasing some information about the pokemon, getting all data from external APIs.
+# Heroes and Monsters - Bestiário
  
- https://jgss-gabrielsousa.github.io/PokeDex/
+ https://jgss-gabrielsousa.github.io/Heroes-and-Monsters-Bestiario/
