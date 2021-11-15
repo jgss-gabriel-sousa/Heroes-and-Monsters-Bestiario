@@ -1,6 +1,7 @@
 let monster;
+let spells = [];
+let innate_spells = [];
 const id = getURLParameter("id").toLowerCase();
-let evolutionChain = [];
 
 
 function getURLParameter(parameter) {
@@ -10,8 +11,21 @@ function getURLParameter(parameter) {
 
 
 async function getMonsterData() {
-    const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com/query-${id}`);
-    monster = await response.json();
+    const monster_response = await fetch(`https://heroes-and-monsters-api.herokuapp.com/query-${id}`);
+    monster = await monster_response.json();
+    
+    if(monster.spells.length > 0){
+        for (let i = 0; i < monster.spells.length; i++) {
+            const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com/query-${monster.spells[i]}`);
+            spells[monster.spells[i]] = await response.json()
+        }
+    }
+    if(monster.innate_spellcasting.length > 0){
+        for (let i = 0; i < monster.innate_spellcasting.length; i++) {
+            const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com/query-${monster.innate_spellcasting[i].name}`);
+            spells[monster.spells[i]] = await response.json()
+        }
+    }
 
     generateHTML();
 }

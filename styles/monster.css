@@ -2,18 +2,22 @@
 
 h2 {
     margin-top: 5px;
-    margin-bottom: 0;    
+    margin-bottom: 5px;  
+    text-align: center;  
 }
 
 h3 {
     margin: 10px;
-    text-align: justify;
     text-align: center;
 }
 
 h4 {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+hr {
+    margin-top: 50px;
 }
 
 p {
@@ -26,7 +30,7 @@ a {
 }
 
 #container {
-    padding: 40px;
+    padding: 40px 40px 40px 120px;
 }
 
 #nd-window {
@@ -59,6 +63,10 @@ a {
     margin: 0px 20px 0px 20px;
 }
 
+#photo-and-caption h3{
+    margin-top: 0px;
+}
+
 #top-section{
     text-align: center;
     display: flex;
@@ -68,6 +76,10 @@ a {
 #top-section h1 {
     grid-column-start: 1;
     grid-column-end: 3;
+}
+
+#stats {
+    margin: 0px 20px 0px 20px;
 }
 
 #stats p {
@@ -83,30 +95,21 @@ a {
     font-weight: bold;
 }
 
-#spells-and-actions{
-}
-
 #spells{
-    margin: 20px;
     text-align: start;
-}
-#spellcaster-info p{
-    text-align: start;
-}
-#spells h2{
-    text-align: center;
 }
 
-#spell-list{
+.action-list{
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, 400px);
+    justify-content: center;
 }
 
-.spell-element {
+.action-element {
     border: 1px solid #222;
     border-radius: 5px;
     padding: 10px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     max-width: 100%;
@@ -115,11 +118,11 @@ a {
     align-items: center;
     background-color: rgba(128, 128, 128, 0.1);
 }
-.spell-info {
+.action-info {
     width: 100%;
 }
-.spell-info p {
-    font-size: 12px;
+.action-info p {
+    font-size: 14px;
     margin: 5px 0px;
     justify-content: start;
     align-items: start;
@@ -127,30 +130,63 @@ a {
     text-align: justify;
 }
 
+.spell-description{
+    width: 100%;
+}
+
 .spell-description p:nth-child(n+2){
     text-indent: 20px;
     margin-top: 10px;
 }
 
-.spell-element button {
+.action-element button {
     margin: 5px 5px 5px 10px;
     font-size: 20px;
 }
-.spell-element button:hover {
+.action-element button:hover {
     box-shadow: 0px 0px black;
 }
 
-.spell-name{
+.action-name{
     display: flex;
 }
 
-#back-button{
+.action-info h4{
+    text-align: center;
+    margin-top: 0;
+}
+
+#abilities-list p{
+    text-align: start;
+}
+
+#description p{
+    text-align: justify;
+    text-indent: 40px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-weight: lighter;
+}
+
+
+#side-buttons-section{
+    position: fixed;
+    display: grid;
+    border: 1px solid #222;
+    border-radius: 0px 0px 5px 0px;
+    background-color: #555;
+}
+
+.side-button{
     border: 2px solid #222;
-    border-radius: 50px;
-    padding: 10px 20px;
-    margin: 15px;
-    font-size: 20px;
-    position: absolute;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin: 15px 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#back-button{
 }
 
 .window-element{
@@ -195,7 +231,7 @@ a {
 #stats-condition_immunities,
 #stats-dark-vision,#stats-blind-sight,#stats-tremor-sense,#stats-true-vision,
 #stats-languages,
-#spell
+#abilities,#innate-spells,#spells,#legendary-actions,#lair,#lair-actions,#regional-effects,#description
 {
-    display: none
+    display: none;
 }

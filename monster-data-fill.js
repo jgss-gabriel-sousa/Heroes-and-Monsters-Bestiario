@@ -80,6 +80,9 @@ function generateHTML() {
         document.querySelector("#stats-true-vision").style.display = "block";
         document.querySelector("#stats-true-vision span").innerText = monster.true_vision+" metros";
     }
+    if(monster.spellcaster_level != 0){
+        document.querySelector("#spells").style.display = "block";
+    }
 
 
     if(monster.bonuses_in_defense.length != 0){
@@ -167,8 +170,89 @@ function generateHTML() {
 
     //###############################################################################################################################################################################
 
+    if(monster.abilities.length != 0){
+        document.querySelector("#abilities").style.display = "block";
 
-    if(monster.spellcaster_level != 0){
-        document.querySelector("#spells").style.display = "block";
+        for (let i = 0; i < monster.abilities.length; i++) {            
+            let elementHTML =`
+                    <div class="spell-description">
+                        <p><strong>${monster.abilities[i].name}:&nbsp</strong><span>${monster.abilities[i].description[0]}</span></p>
+                    `
+            
+            if(monster.abilities[i].description.length > 1){
+                for (let j = 1; j < action.effect.length; j++) {
+                    elementHTML += `<p>${monster.abilities[i].description[j]}</p>`;
+                }
+            }
+
+            elementHTML += `</div>`
+            document.getElementById("abilities-list").innerHTML += elementHTML;
+        }
+    }
+
+
+    //###############################################################################################################################################################################
+
+
+    for (let i = 0; i < monster.actions.length; i++) {
+        const action = monster.actions[i];
+
+        let elementHTML = `
+        <div class="action-element">
+            <div class="action-info">
+                <h4>${action.name}</h4>
+        `
+
+        if(action.limit != ""){
+            elementHTML += `<p><strong>Limite:&nbsp</strong>${action.limit}</p>`
+        }
+        if(action.recharge != ""){
+            elementHTML += `<p><strong>Recarga:&nbsp</strong>${action.recharge}</p>`
+        }
+        if(action.range != ""){
+            elementHTML += `<p><strong>Alcance:&nbsp</strong>${action.range}</p>`
+        }
+        if(action.roll != ""){
+            elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>${action.roll}</p>`
+        }
+        if(action.damage != ""){
+            elementHTML += `<p><strong>Dano:&nbsp</strong>${action.damage}</p>`
+        }
+        if(action.save_throw != ""){
+            elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${action.save_throw}</p>`
+        }
+        if(action.time != ""){
+            elementHTML += `<p><strong>Tempo:&nbsp</strong>${action.time}</p>`
+        }
+        if(action.effect.length != 0){
+            elementHTML +=`
+                    <div class="spell-description">
+                        <p><strong>Efeito:&nbsp</strong><span>${action.effect[0]}</span></p>
+                    `
+            
+            if(action.effect.length > 1){
+                for (let j = 1; j < action.effect.length; j++) {
+                    elementHTML += `<p>${action.effect[j]}</p>`;
+                }
+            }
+
+            elementHTML += `</div>`
+        }
+
+        elementHTML +=`</div></div>`
+
+        document.querySelector("#actions .action-list").innerHTML += elementHTML;
+    }
+
+
+    //###############################################################################################################################################################################
+
+
+    if(monster.description.length != 0){
+        document.querySelector("#description").style.display = "block";
+
+        for (let i = 0; i < monster.description.length; i++) {
+            document.querySelector("#description").innerHTML += `<p>${monster.description[i]}</p>`;
+        }
     }
 }

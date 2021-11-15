@@ -11,7 +11,12 @@
     <script src="monster.js" defer></script>
 </head>
 <body>
-    <button id="back-button" class="highlight-on-hover" onclick="goBack()">Voltar</button>
+    <div id="side-buttons-section">
+        <button id="back-button" class="side-button highlight-on-hover" onclick="goBack()">Voltar</button>
+        <button class="side-button highlight-on-hover" onclick="window.location.href='#container'">Topo</button>
+        <button class="side-button highlight-on-hover" onclick="window.location.href='#actions'">Ações</button>
+        <button class="side-button highlight-on-hover" onclick="window.location.href='#description'">Descrição</button>
+    </div>
     <div id="container">
         <h1>Nome</h1>
 
@@ -83,59 +88,116 @@
             </div>
         </div>
 
-        <hr>
 
-        <div>
+        <div id="abilities">
+            <hr>
             <h2>Habilidades</h2>
+            <div id="abilities-list"></div>
         </div>
-        <div id="spells-and-actions">
-            <div id="spells">
-                <h2>Magias</h2>
-                <div id="spellcaster-info">
-                    <p id="spellcaster-level"><strong>Nível de Conjurador:&nbsp</strong><span></span></p>
-                    <p id="spellcasting_attribute"><strong>Atributo de Conjuração:&nbsp</strong><span></span></p>
-                    <p id="special_spell_feature"><strong>Especial:&nbsp</strong><span></span></p>
-                </div>
 
-                <div id="spell-list">
-                    <div class="spell-element">
-                        <div class="spell-name">
-                            <h4>Magia 1</h4>
-                            <button onclick="showSpell('0')">+</button>
-                        </div>
-                        <div id="spell-0-info" class="spell-info">
-                            <p><strong>Círculo:&nbsp</strong><span></span></p>
-                            <p><strong>Custo de Mana:&nbsp</strong><span></span></p>
-                                <div class="spell-description">
-                                    <p><strong>Efeito:&nbsp</strong><span>Você terá vantagem em todos os testes de Carisma direcionados a uma criatura, à sua escolha, que não seja hostil a você.</span></p>
-                                    <p> Quando a magia acabar, a criatura perceberá que você usou magia para influenciar o humor dela, e ficará hostil a você.</p>
-                                    <p> Uma criatura propensa a violência irá atacar você. Outra criatura pode buscar outras formas de retaliação (a critério do Mestre), dependendo da natureza da sua interação com ela</p>
-                                </div>
+        <div id="innate-spells">
+            <hr>
+            <h2>Conjuração Inata</h2>
+
+            <div class="action-list">
+                <div class="action-element">
+                    <div class="action-name">
+                        <h4>Bola de Fogo (<span>4º Círculo</span>)</h4>
+                        <button onclick="showSpell('0')">+</button>
+                    </div>
+                    <h4>1 vez por dia</h4>
+
+                    <div id="spell-0-info" class="action-info">
+
+                        <p><strong>Custo de Mana:&nbsp</strong><span></span></p>
+                        <p><strong>Alcance:&nbsp</strong><span></span></p>
+                        <p><strong>Rolagem de Ataque:&nbsp</strong><span></span></p>
+                        <p><strong>Dano:&nbsp</strong><span></span></p>
+                        <p><strong>Tempo:&nbsp</strong><span></span></p>
+                        <p><strong>Teste de Salvamento:&nbsp</strong><span></span></p>
+                        <p><strong>Duração:&nbsp</strong><span></span></p>
+
+                        <div class="spell-description">
+                            <p><strong>Efeito:&nbsp</strong><span>Você terá vantagem em todos os testes de Carisma direcionados a uma criatura, à sua escolha, que não seja hostil a você.</span></p>
+                            <p> Quando a magia acabar, a criatura perceberá que você usou magia para influenciar o humor dela, e ficará hostil a você.</p>
+                            <p> Uma criatura propensa a violência irá atacar você. Outra criatura pode buscar outras formas de retaliação (a critério do Mestre), dependendo da natureza da sua interação com ela</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <h2>Ações</h2>
+        </div>
+
+        <div id="spells">
+            <hr>
+            <h2>Magias</h2>
+            <div id="spellcaster-info">
+                <p id="spellcaster-level"><strong>Nível de Conjurador:&nbsp</strong><span></span></p>
+                <p id="spellcasting_attribute"><strong>Atributo de Conjuração:&nbsp</strong><span></span></p>
+                <p id="special_spell_feature"><strong>Especial:&nbsp</strong><span></span></p>
             </div>
-            <div>
-                <h2>Ações Lendárias</h2>
-            </div>
-            <div>
-                <h2>Covil</h2>
-            </div>
-            <div>
-                <h2>Ações de Covil</h2>
-            </div>
-            <div>
-                <h2>Efeitos Regionais</h2>
+
+            <div class="action-list">
+                <div class="action-element">
+                    <div class="action-name">
+                        <h4>Bola de Fogo (<span>4º Círculo</span>)</h4>
+                        <button onclick="showSpell('1')">+</button>
+                    </div>
+                    <div id="spell-1-info" class="action-info">
+
+                        <p><strong>Custo de Mana:&nbsp</strong><span></span></p>
+                        <p><strong>Alcance:&nbsp</strong><span></span></p>
+                        <p><strong>Rolagem de Ataque:&nbsp</strong><span></span></p>
+                        <p><strong>Dano:&nbsp</strong><span></span></p>
+                        <p><strong>Tempo:&nbsp</strong><span></span></p>
+                        <p><strong>Teste de Salvamento:&nbsp</strong><span></span></p>
+                        <p><strong>Duração:&nbsp</strong><span></span></p>
+
+                        <div class="spell-description">
+                            <p><strong>Efeito:&nbsp</strong><span>Você terá vantagem em todos os testes de Carisma direcionados a uma criatura, à sua escolha, que não seja hostil a você.</span></p>
+                            <p> Quando a magia acabar, a criatura perceberá que você usou magia para influenciar o humor dela, e ficará hostil a você.</p>
+                            <p> Uma criatura propensa a violência irá atacar você. Outra criatura pode buscar outras formas de retaliação (a critério do Mestre), dependendo da natureza da sua interação com ela</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <hr>
+
+        <div id="actions">
+            <hr>
+            <h2>Ações</h2>
+            <div class="action-list"></div>
+        </div>
+        
+
+        <div id="legendary-actions">
+            <hr>
+            <h2>Ações Lendárias</h2>
+        </div>
+        
+
+        <div id="lair">
+            <hr>
+            <h2>Covil</h2>
+        </div>
+        
+
+        <div id="lair-actions">
+            <hr>
+            <h2>Ações de Covil</h2>
+        </div>
+        
+
+        <div id="regional-effects">
+            <hr>
+            <h2>Efeitos Regionais</h2>
+        </div>
+
 
         <div id="description">
-            <h3>Descrição</h3>
+            <hr>
+            <h2>Descrição</h2>
+            <div></div>
         </div>
 
 
