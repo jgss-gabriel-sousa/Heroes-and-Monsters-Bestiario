@@ -101,7 +101,7 @@ a {
 
 .action-list{
     display: grid;
-    grid-template-columns: repeat(auto-fit, 400px);
+    grid-template-columns: repeat(auto-fit, 350px);
     justify-content: center;
 }
 
@@ -113,8 +113,7 @@ a {
     display: flex;
     flex-direction: column;
     max-width: 100%;
-    height: fit-content;
-    justify-content: center;
+    height: auto;
     align-items: center;
     background-color: rgba(128, 128, 128, 0.1);
 }
