@@ -248,7 +248,7 @@ function generateHTML() {
     //###############################################################################################################################################################################
 
 
-    if(monster.spellcaster_level != 0 || 1){
+    if(monster.spellcaster_level != 0){
         document.querySelector("#spells").style.display = "block";
 
         document.querySelector("#spellcaster-level span").innerText = monster.spellcaster_level;
