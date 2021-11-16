@@ -248,6 +248,77 @@ function generateHTML() {
     //###############################################################################################################################################################################
 
 
+    if(monster.spellcaster_level != 0 || 1){
+        document.querySelector("#spells").style.display = "block";
+
+        document.querySelector("#spellcaster-level span").innerText = monster.spellcaster_level;
+        
+        const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.spellcasting_attribute)-10)/2);
+        
+        document.querySelector("#spellcasting-attribute span").innerText = monster.spellcasting_attribute+" (+"+spell_attribute_modvalue+")";
+
+        if(monster.special_spell_feature != "")
+            document.querySelector("#special-spell-feature span").innerText = monster.special_spell_feature;
+
+        for (let i = 0; i < monster.spells.length; i++) {
+            const spell = spells[monster.spells[i]];
+            const spellID = monster.innate_spellcasting.length+i;
+            const spellDC = 6+spell_attribute_modvalue+spell.magic_circle;
+
+            let elementHTML = `
+            <div class="action-element">
+                <div class="action-name">
+                    <h4>${spell.name} (${spell.magic_circle}º Círculo)</h4>
+                    <button id="showSpell-${spellID}-button" onclick="showSpell('${spellID}')">-</button>
+                </div>
+            <div id="spell-${spellID}-info" class="action-info">
+            `
+
+            elementHTML += `<p><strong>Custo de Mana:&nbsp</strong>${getSpellCost(spell.magic_circle)}</p>`
+            elementHTML += `<p><strong>Tempo de Conjuração:&nbsp</strong>${spell.cast_time}</p>`
+
+            if(spell.attack_roll != false){
+                elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>+${spell_attribute_modvalue}</p>`
+            }
+
+            for (let i = 0; i < spell.damage.length; i++) {
+                elementHTML += `<p><strong>${spell.damage[i][0]}:&nbsp</strong>${spell.damage[i][1]}</p>`
+            }
+
+            if(spell.saving_trow != ""){
+                elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
+            }
+            if(spell.duration != ""){
+                elementHTML += `<p><strong>Duração:&nbsp</strong>${spell.duration}`
+                if(spell.concentration)
+                    elementHTML += ` (Concentração)`;  
+                elementHTML += `</p>`;
+            }
+            if(spell.description.length != 0){
+                elementHTML +=`
+                        <div class="spell-description">
+                            <p><strong>Efeito:&nbsp</strong><span>${spell.description[0]}</span></p>
+                        `
+                
+                if(spell.description.length > 1){
+                    for (let j = 1; j < spell.description.length; j++) {
+                        elementHTML += `<p>${spell.description[j]}</p>`;
+                    }
+                }
+
+                elementHTML += `</div>`
+            }
+
+            elementHTML +=`</div></div>`
+
+            document.querySelector("#spells .action-list").innerHTML += elementHTML;
+        }
+    }
+
+
+    //###############################################################################################################################################################################
+
+
     if(monster.description.length != 0){
         document.querySelector("#description").style.display = "block";
 

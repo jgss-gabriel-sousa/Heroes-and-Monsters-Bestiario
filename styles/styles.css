@@ -94,11 +94,11 @@ tr:nth-child(odd) {
     background: #668080;
 }
 
-.humanoide          {background-color:lightgrey;}
+.humanoide          {background-color:#f7f7f7;}
 .aberracao          {background-color:#a68fd1;}
 .animal             {background-color:#f0a57c;}
 .celestial          {background-color:rgb(133, 160, 250);}
-.monstro            {background-color:#797067}
+.monstro            {background-color:#797067ba}
 .planta             {background-color:rgb(137, 250, 102)}
 .constructo         {background-color:grey}
 .morto-vivo         {background-color:cadetblue}

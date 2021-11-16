@@ -3,8 +3,10 @@ function showSpell(id){
 
     if(element.style.display == "none") {
         element.style.display = "block";
+        document.getElementById("showSpell-"+id+"-button").innerText = "-";
     } 
     else{
         element.style.display = "none";
+        document.getElementById("showSpell-"+id+"-button").innerText = "+";
     }
 }
