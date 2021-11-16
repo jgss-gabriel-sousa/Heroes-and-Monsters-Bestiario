@@ -104,6 +104,15 @@ function generateHTML() {
             }
         }
     }
+    if(monster.vulnerability.length != 0){
+        document.querySelector("#stats-vulnerability").style.display = "block";
+        for (let i = 0; i < monster.vulnerability.length; i++) {
+            document.querySelector("#stats-vulnerability span").innerText += monster.vulnerability[i];
+            if(i+1 < monster.vulnerability.length){
+                document.querySelector("#stats-vulnerability span").innerText += ",\u00A0"
+            }
+        }
+    }
     if(monster.resistances.length != 0){
         document.querySelector("#stats-resistances").style.display = "block";
         for (let i = 0; i < monster.resistances.length; i++) {
