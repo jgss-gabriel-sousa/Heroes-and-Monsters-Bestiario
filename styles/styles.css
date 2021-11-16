@@ -79,6 +79,7 @@ tr:nth-child(odd) {
 
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -97,15 +98,15 @@ tr:nth-child(odd) {
 .humanoide          {background-color:#f7f7f7;}
 .aberracao          {background-color:#a68fd1;}
 .animal             {background-color:#f0a57c;}
-.celestial          {background-color:rgb(133, 160, 250);}
+.celestial          {background-color:rgb(133, 160, 250)}
 .monstro            {background-color:#797067ba}
 .planta             {background-color:rgb(137, 250, 102)}
-.constructo         {background-color:grey}
-.morto-vivo         {background-color:cadetblue}
+.constructo         {background-color:rgba(209, 178, 44, 0.63);}
+.morto-vivo         {background-color:rgb(108, 153, 155)}
 .elemental-fogo     {background-color:rgb(173, 61, 61)}
-.elemental-agua     {background-color:lightseagreen}
+.elemental-agua     {background-color:rgb(26, 138, 132)}
 .elemental-terra    {background-color:rgb(131, 115, 95)}
 .elemental-ar       {background-color:lightskyblue}
-.gosma              {background-color:rgb(108, 148, 94)}
-.dragao             {background-color:rgb(255, 228, 78);}
-.gigante            {background-color:#b2c1c3;}
+.gosma              {background-color:rgb(73, 129, 53)}
+.dragao             {background-color:rgb(211, 154, 12)}
+.gigante            {background-color:#b2c1c3}

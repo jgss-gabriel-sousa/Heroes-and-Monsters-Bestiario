@@ -134,9 +134,9 @@ function generateHTML() {
     if(monster.condition_immunities.length != 0){
         document.querySelector("#stats-condition_immunities").style.display = "block";
         for (let i = 0; i < monster.condition_immunities.length; i++) {
-            document.querySelector("#stats-condition_immunities span").innerText += monster.condition_immunities[i];
+            document.querySelector("#stats-condition_immunities span").innerText += " "+monster.condition_immunities[i];
             if(i+1 < monster.condition_immunities.length){
-                document.querySelector("#stats-condition_immunities span").innerText += ",\u00A0"
+                document.querySelector("#stats-condition_immunities span").innerText += ","
             }
         }
     }
@@ -184,7 +184,7 @@ function generateHTML() {
 
         for (let i = 0; i < monster.abilities.length; i++) {            
             let elementHTML =`
-                    <div class="spell-description">
+                    <div class="ability-description">
                         <p><strong>${monster.abilities[i].name}:&nbsp</strong><span>${monster.abilities[i].description[0]}</span></p>
                     `
             
