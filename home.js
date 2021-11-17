@@ -7,6 +7,7 @@ const NumberOfMonstersToLoadByStep = 12
 let loaded = 0;
 let allLoaded = false;
 let viewingMonster;
+let loadingContent = false;
 
 
 accentsTidy = function(s){
@@ -62,7 +63,8 @@ function viewMonster(id){
 
 
 function checkScroll(){
-    if(allLoaded == false && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+    if(allLoaded == false && loadingContent == false && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+        loadingContent = true;
         SpinnerLoading.style.display = "block";
         scrollTo(0, (window.innerHeight + window.pageYOffset));
         setTimeout(loadMonster, 2000);
@@ -71,6 +73,7 @@ function checkScroll(){
         setTimeout( () => {
             checkScrollInterval = setInterval(checkScroll, 1000);
         }, 3000);
+        loadingContent = false;
     }
     if(allLoaded){
         SpinnerLoading.style.display = "none";
@@ -85,6 +88,7 @@ function savePageState(){
     sessionStorage.setItem("scroll", window.pageYOffset);
     sessionStorage.setItem("loaded", loaded);
     sessionStorage.setItem("allLoaded", allLoaded);
+    sessionStorage.setItem("filter-by-type", document.querySelector("#filter-by-type").selectedIndex);
 }
 
 
@@ -103,6 +107,8 @@ function pageStateUpdate(){
         setTimeout(() => {
             scrollTo(0, sessionStorage.getItem("scroll"));
         }, 500);
+
+        document.querySelector("#filter-by-type").selectedIndex = sessionStorage.getItem("filter-by-type");
     }
     else{
         setTimeout(() => {

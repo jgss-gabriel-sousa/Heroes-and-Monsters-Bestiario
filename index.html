@@ -7,10 +7,31 @@
 	<link rel="stylesheet" href="styles/home.css"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <script src="home.js" defer></script>
+    <script src="home-events.js" defer></script>
 </head>
 <body>
     <div class="container">
         <h1>Bestiário - Heroes & Monsters</h1>
+
+        <div id="top-bar">
+            <label for="filter-by-type" >Filtrar por Tipo:</label>
+            <select id="filter-by-type">
+                <option value="null"></option>
+                <option value="humanoide">Humanoide</option>
+                <option value="aberracao">Aberração</option>
+                <option value="animal">Animal</option>
+                <option value="celestial">Celestial</option>
+                <option value="constructo">Constructo</option>
+                <option value="dragao">Dragão</option>
+                <option value="elemental">Elemental</option>
+                <option value="gigante">Gigante</option>
+                <option value="gosma">Gosma</option>
+                <option value="infernal">Infernal</option>
+                <option value="monstro">Monstro</option>
+                <option value="morto-vivo">Morto-Vivo</option>
+                <option value="planta">Planta</option>
+            </select>
+        </div>
         
         <ul data-js="bestiario" class="bestiario"></ul>
 
