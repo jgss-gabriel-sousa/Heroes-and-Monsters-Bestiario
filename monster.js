@@ -33,6 +33,8 @@ async function getMonsterData() {
         }
     }
 
+    hideSideButtons(monster);
+
     generateHTML();
 }
 
