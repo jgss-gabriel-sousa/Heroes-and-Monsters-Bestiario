@@ -34,7 +34,7 @@ body{
 }
 
 #container {
-    padding: 40px 40px 40px 120px;
+    padding: 40px 20px 40px 130px;
 }
 @media only screen and (max-width: 500px) {
     #container {
@@ -133,6 +133,12 @@ body{
     justify-content: center;
 }
 
+.spell-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 500px);
+    justify-content: center;
+}
+
 .action-element {
     border: 1px solid #222;
     border-radius: 5px;
@@ -164,11 +170,13 @@ body{
 
 .spell-description{
     width: 100%;
+    line-height: 1.5;
 }
 
 .spell-description p:nth-child(n+2){
-    text-indent: 20px;
+    text-indent: 40px;
     margin-top: 10px;
+    line-height: 1.5;
 }
 
 .action-element button {
@@ -196,7 +204,7 @@ body{
     text-align: justify;
     text-indent: 40px;
     margin-bottom: 20px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: lighter;
 }
 
@@ -273,7 +281,7 @@ body{
 #stats-vulnerability,#stats-resistances,#stats-immunities,#stats-condition_immunities,
 #stats-dark-vision,#stats-blind-sight,#stats-tremor-sense,#stats-true-vision,
 #stats-languages,
-#abilities,#innate-spells,#spells,#legendary-actions,#lair,#lair-actions,#regional-effects,#description
+#abilities,#innate-spells,#innate-spells-attribute,#spells,#legendary-actions,#lair,#lair-actions,#regional-effects,#description
 {
     display: none;
 }

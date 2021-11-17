@@ -23,13 +23,13 @@ async function getMonsterData() {
     if(monster.spells.length > 0){
         for (let i = 0; i < monster.spells.length; i++) {
             const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com/query-${accentsTidy(monster.spells[i])}`);
-            spells[spells[i]] = await response.json()
+            spells[monster.spells[i]] = await response.json()
         }
     }
     if(monster.innate_spellcasting.length > 0){
         for (let i = 0; i < monster.innate_spellcasting.length; i++) {
-            const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com/query-${monster.innate_spellcasting[i].name}`);
-            spells[monster.spells[i]] = await response.json()
+            const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com/query-${accentsTidy(monster.innate_spellcasting[i].spell)}`);
+            spells[monster.innate_spellcasting[i].spell] = await response.json()
         }
     }
 

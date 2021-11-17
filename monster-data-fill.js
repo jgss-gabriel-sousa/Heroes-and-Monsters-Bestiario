@@ -257,6 +257,82 @@ function generateHTML() {
     //###############################################################################################################################################################################
 
 
+    if(monster.innate_spellcasting.length != 0){
+        document.querySelector("#innate-spells").style.display = "block";
+
+        const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.innate_spellcasting)-10)/2);
+        
+        if(monster.innate_spellcasting_description != ""){
+            document.querySelector("#innate-spells-description").innerText = monster.innate_spellcasting_description;
+        }
+        else{
+            const name = monster.name_pronoun.charAt(0).toUpperCase() + monster.name_pronoun.slice(1);
+            document.querySelector("#innate-spells-description").innerText = name + " pode conjurar de maneira inata as seguintes magias:";
+        }
+
+        if(monster.innate_spellcasting_attribute != ""){
+            document.querySelector("#innate-spells-attribute").style.display = "block";
+            document.querySelector("#innate-spells-attribute").innerHTML = `<strong>Atributo de Conjuração:&nbsp</strong>${monster.innate_spellcasting_attribute} (+${spell_attribute_modvalue})`;
+        }
+
+        for (let i = 0; i < monster.innate_spellcasting.length; i++) {
+            const spell = spells[monster.innate_spellcasting[i].spell];
+            const spellDC = 6+spell_attribute_modvalue+spell.magic_circle;
+
+            let elementHTML = `
+            <div class="action-element">
+                <div class="action-name">
+                    <h4>${spell.name} (${spell.magic_circle}º Círculo)</h4>
+                </div>
+                <h4>${monster.innate_spellcasting[i].limit}</h4>
+
+                <div id="innate-spell-info" class="action-info">
+            `
+
+            elementHTML += `<p><strong>Tempo de Conjuração:&nbsp</strong>${spell.cast_time}</p>`
+
+            if(spell.attack_roll != false){
+                elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>+${spell_attribute_modvalue}</p>`
+            }
+
+            for (let i = 0; i < spell.damage.length; i++) {
+                elementHTML += `<p><strong>${spell.damage[i][0]}:&nbsp</strong>${spell.damage[i][1]}</p>`
+            }
+
+            if(spell.saving_trow != ""){
+                elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
+            }
+            if(spell.duration != ""){
+                elementHTML += `<p><strong>Duração:&nbsp</strong>${spell.duration}`
+                if(spell.concentration)
+                    elementHTML += ` (Concentração)`;  
+                elementHTML += `</p>`;
+            }
+            if(spell.description.length != 0){
+                elementHTML +=`
+                        <div class="spell-description">
+                            <p><strong>Efeito:&nbsp</strong><span>${spell.description[0]}</span></p>
+                        `
+                
+                if(spell.description.length > 1){
+                    for (let j = 1; j < spell.description.length; j++) {
+                        elementHTML += `<p>${spell.description[j]}</p>`;
+                    }
+                }
+
+                elementHTML += `</div>`
+            }
+
+            elementHTML +=`</div></div>`
+
+            document.querySelector("#innate-spells .spell-list").innerHTML += elementHTML;
+        }
+    }
+
+
+    //###############################################################################################################################################################################
+
+
     if(monster.spellcaster_level != 0){
         document.querySelector("#spells").style.display = "block";
 
@@ -320,7 +396,7 @@ function generateHTML() {
 
             elementHTML +=`</div></div>`
 
-            document.querySelector("#spells .action-list").innerHTML += elementHTML;
+            document.querySelector("#spells .spell-list").innerHTML += elementHTML;
         }
     }
 
