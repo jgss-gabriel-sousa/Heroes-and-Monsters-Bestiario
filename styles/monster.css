@@ -73,8 +73,10 @@ body{
 }
 
 #photo-and-caption img{
-    max-width: 100%;
     margin: 0px 20px 0px 20px;
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
 }
 @media only screen and (max-width: 500px) {
     #photo-and-caption img{
@@ -91,6 +93,7 @@ body{
     text-align: center;
     display: flex;
     flex-wrap: nowrap;
+    justify-content: center;
 }
 @media only screen and (max-width: 950px) {
     #top-section {
@@ -129,14 +132,22 @@ body{
 
 .action-list{
     display: grid;
-    grid-template-columns: repeat(auto-fit, 350px);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 0.5fr));
     justify-content: center;
 }
 
 .spell-list{
     display: grid;
-    grid-template-columns: repeat(auto-fit, 500px);
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     justify-content: center;
+}
+@media only screen and (max-width: 650px) {
+    .action-list {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    .spell-list {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
 }
 
 .action-element {
@@ -233,6 +244,10 @@ body{
     font-size: 14px;
     font-weight: bold;
     width: 85%;
+    cursor: pointer;
+}
+.side-button:hover {
+    box-shadow: 0px 0px 5px 3px #333;
 }
 @media only screen and (max-width: 500px) {
     .side-button{
