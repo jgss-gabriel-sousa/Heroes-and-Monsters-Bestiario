@@ -142,6 +142,12 @@ function generateHTML() {
     }
     if(monster.languages.length != 0){
         document.querySelector("#stats-languages").style.display = "block";
+
+        if(monster.only_understands == true)
+            document.querySelector("#stats-languages").innerHTML = "<strong>Idiomas que compreende, mas não pode falar:&nbsp</strong><span></span>";
+        else
+            document.querySelector("#stats-languages").innerHTML = "<strong>Idiomas:&nbsp</strong><span></span>";
+
         for (let i = 0; i < monster.languages.length; i++) {
             document.querySelector("#stats-languages span").innerText += monster.languages[i];
             if(i+1 < monster.languages.length){
