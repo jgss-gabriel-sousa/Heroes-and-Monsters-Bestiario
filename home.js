@@ -3,7 +3,7 @@ const MonsterList = document.querySelector('[data-js="bestiario"]');
 
 const GetMonsterUrl = id => `https://heroes-and-monsters-api.herokuapp.com/monster/${id}`
 let TotalNumberOfMonsters;
-const NumberOfMonstersToLoadByStep = TotalNumberOfMonsters;
+let NumberOfMonstersToLoadByStep;
 let loaded = 0;
 let allLoaded = false;
 let viewingMonster;
@@ -153,4 +153,5 @@ window.onload = async function getMonstersTotal() {
     const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com`);
     api_info = await response.json();
     TotalNumberOfMonsters = api_info.monster.length;
+    NumberOfMonstersToLoadByStep = TotalNumberOfMonsters;
 };
