@@ -25,8 +25,10 @@ const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
 const generateHTML = monster => monster.reduce((accumulator, {name, type, english_name}) => {
 
     accumulator += `
-    <li class="card ${accentsTidy(type)} highlight-on-hover" onclick="viewMonster('${name}')">
-        <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/${english_name.toLowerCase()}.png" />
+    <li class="monster-element">
+        <div class="card highlight-on-hover ${accentsTidy(type)}" onclick="viewMonster('${name}')">
+            <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/${english_name.toLowerCase()}.png" />
+        </div>
         <h2 class="card-title">${name}</h2>
         <p class="card-subtitle">${type}</p>
     </li>

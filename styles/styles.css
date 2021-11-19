@@ -95,16 +95,17 @@ tr:nth-child(odd) {
     background: #668080;
 }
 
-.humanoide          {background-color:#f7f7f7;}
-.aberracao          {background-color:#a68fd1;}
-.animal             {background-color:#f0a57c;}
-.celestial          {background-color:rgb(133, 160, 250)}
-.monstro            {background-color:#797067ba}
-.planta             {background-color:rgb(137, 250, 102)}
+.aberracao          {background-color:rgb(166, 143, 209)}
+.animal             {background-color:rgb(233, 156, 105)}
+.celestial          {background-color:rgb(69, 179, 226)}
 .constructo         {background-color:rgba(209, 178, 44, 0.63);}
-.morto-vivo         {background-color:rgb(108, 153, 155)}
-.infernal           {background-color:rgb(173, 61, 61)}
-.elemental          {background-color:rgb(26, 138, 132)}
-.gosma              {background-color:rgb(73, 129, 53)}
-.dragao             {background-color:rgb(211, 154, 12)}
-.gigante            {background-color:#b2c1c3}
+.dragao             {background-color:rgb(252, 217, 1)}
+.elemental          {background-color:rgba(2, 152, 129, 0.75)}
+.fada               {background-color:rgb(212, 122, 130)}
+.gigante            {background-color:rgb(78, 100, 44)}
+.gosma              {background-color:rgb(185, 166, 15)}
+.humanoide          {background-color:rgb(238, 238, 238)}
+.infernal           {background-color:rgba(177, 36, 34, 0.75)}
+.monstro            {background-color:rgb(158, 158, 158)}
+.morto-vivo         {background-color:rgb(58, 53, 47)}
+.planta             {background-color:rgb(139, 178, 56)}

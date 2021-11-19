@@ -1,12 +1,12 @@
 function filterByType(typeToStay){
-    const array = document.querySelectorAll(".card");
+    const arrayElem = document.querySelectorAll(".monster-element");
+    const arrayCard = document.querySelectorAll(".card");
 
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i];
-    
-        element.style.display = "block";
-        if(typeToStay != "null" && !element.classList.contains(typeToStay)){
-            element.style.display = "none";
+    for (let i = 0; i < arrayCard.length; i++) {
+        arrayElem[i].style.display = "block";
+        
+        if(typeToStay != "null" && !arrayCard[i].classList.contains(typeToStay)){
+            arrayElem[i].style.display = "none";
         }
     };
 }

@@ -29,37 +29,38 @@ select::-ms-expand {
     justify-content: center;
 }
 
-.card {
+.monster-element {
     list-style: none;
-    color: #222;
     text-align: center;
-    border-radius: 20px;
+}
+
+.card {
     border: 1px solid;
+    border-radius: 20px;
     box-shadow: 1px 1px 5px black;
-    cursor: pointer;
+}
+
+.card-image {
+    z-index: 2;
+    padding: 20px;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    filter: drop-shadow(1px 1px 2px black);
 }
 
 .card-title {
-    margin: 0px 10px 0px 10px;
+    margin: 10px 0px 0px 0px;
     font-size: 24px;
     font-weight: bold;
     color: #222;
 }
 
 .card-subtitle {
-    margin-top: 5px;
-    margin-bottom: 20px;
+    margin: 5px 0px 20px 0px;
     font-weight: bold;
-    color: #333;
     text-transform: capitalize;
-}
-
-.card-image {
-    z-index: 2;
-    margin-top: 10px;
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
+    color: #333;
 }
 
 .view-monster {
