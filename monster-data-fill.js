@@ -305,6 +305,10 @@ function generateHTML() {
                 elementHTML += `<p><strong>${spell.damage[i][0]}:&nbsp</strong>${spell.damage[i][1]}</p>`
             }
 
+            if(spell.heal != ""){
+                elementHTML += `<p><strong>Cura:&nbsp</strong>+${spell.heal}</p>`
+            }
+
             if(spell.saving_trow != ""){
                 elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
             }
@@ -376,6 +380,9 @@ function generateHTML() {
                 elementHTML += `<p><strong>${spell.damage[i][0]}:&nbsp</strong>${spell.damage[i][1]}</p>`
             }
 
+            if(spell.heal != ""){
+                elementHTML += `<p><strong>Cura:&nbsp</strong>+${spell.heal}</p>`
+            }
             if(spell.saving_trow != ""){
                 elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
             }
