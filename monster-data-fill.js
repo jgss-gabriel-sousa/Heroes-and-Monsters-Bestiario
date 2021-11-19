@@ -195,7 +195,7 @@ function generateHTML() {
                     `
             
             if(monster.abilities[i].description.length > 1){
-                for (let j = 1; j < action.effect.length; j++) {
+                for (let j = 1; j < monster.abilities[i].description.length; j++) {
                     elementHTML += `<p>${monster.abilities[i].description[j]}</p>`;
                 }
             }
