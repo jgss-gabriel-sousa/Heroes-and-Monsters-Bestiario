@@ -1,3 +1,4 @@
+/*  UNUSED
 function showSpell(id){
     const element = document.getElementById("spell-"+id+"-info");
 
@@ -10,6 +11,7 @@ function showSpell(id){
         document.getElementById("showSpell-"+id+"-button").innerText = "+";
     }
 }
+*/
 
 
 function hideSideButtons(monster){

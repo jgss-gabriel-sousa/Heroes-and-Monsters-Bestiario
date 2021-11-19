@@ -366,7 +366,6 @@ function generateHTML() {
             <div class="action-element">
                 <div class="action-name">
                     <h4>${spell.name} (${spell.magic_circle}º Círculo)</h4>
-                    <button id="showSpell-${spellID}-button" onclick="showSpell('${spellID}')">-</button>
                 </div>
             <div id="spell-${spellID}-info" class="action-info">
             `
