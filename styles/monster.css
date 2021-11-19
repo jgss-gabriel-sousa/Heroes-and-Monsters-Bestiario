@@ -171,14 +171,20 @@ body{
 
 .ability-description{
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    text-align: justify;
+    line-height: 1.5;
+}
+.ability-description p:nth-child(n+2){
+    text-indent: 40px;
+    margin-top: 10px;
+    line-height: 1.5;
 }
 
 .spell-description{
     width: 100%;
     line-height: 1.5;
 }
-
 .spell-description p:nth-child(n+2){
     text-indent: 40px;
     margin-top: 10px;
@@ -188,7 +194,6 @@ body{
 .action-name{
     display: flex;
 }
-
 .action-info h4{
     text-align: center;
     margin-top: 0;
@@ -205,7 +210,6 @@ body{
     line-height: 1.5;
     font-weight: lighter;
 }
-
 
 #side-buttons-section{
     position: fixed;
