@@ -306,9 +306,11 @@ function generateHTML() {
             }
 
             if(spell.heal != ""){
-                elementHTML += `<p><strong>Cura:&nbsp</strong>+${spell.heal}</p>`
+                if(spell.name == "Cura")
+                    elementHTML += `<p><strong>Cura:&nbsp</strong>d8+${spell_attribute_modvalue}</p>`
+                else
+                    elementHTML += `<p><strong>Cura:&nbsp</strong>${spell.heal}</p>`
             }
-
             if(spell.saving_trow != ""){
                 elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
             }
@@ -381,7 +383,10 @@ function generateHTML() {
             }
 
             if(spell.heal != ""){
-                elementHTML += `<p><strong>Cura:&nbsp</strong>+${spell.heal}</p>`
+                if(spell.name == "Cura")
+                    elementHTML += `<p><strong>Cura:&nbsp</strong>d8+${spell_attribute_modvalue}</p>`
+                else
+                    elementHTML += `<p><strong>Cura:&nbsp</strong>${spell.heal}</p>`
             }
             if(spell.saving_trow != ""){
                 elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
