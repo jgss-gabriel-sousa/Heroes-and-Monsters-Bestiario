@@ -8,6 +8,7 @@ let loaded = 0;
 let allLoaded = false;
 let viewingMonster;
 let loadingContent = false;
+let monsters;
 
 
 accentsTidy = function(s){
@@ -22,19 +23,22 @@ const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
     fetch(GetMonsterUrl(index+loaded)).then(response => response.json()))
     
 
-const generateHTML = monster => monster.reduce((accumulator, {name, type, english_name}) => {
+function generateHTML(monster){
+    monsters = monster;
 
-    accumulator += `
-    <li class="monster-element">
-        <div class="card highlight-on-hover ${accentsTidy(type)}" onclick="viewMonster('${name}')">
-            <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/${english_name.toLowerCase()}.png" />
-        </div>
-        <h2 class="card-title">${name}</h2>
-        <p class="card-subtitle">${type}</p>
-    </li>
-    `
-    return accumulator
-}, '')
+    return monster.reduce((accumulator, {name, type, english_name, source}) => {
+        accumulator += `
+        <li class="monster-element source-${source} type-${accentsTidy(type)}">
+            <div class="card highlight-on-hover ${accentsTidy(type)}" onclick="viewMonster('${accentsTidy(name)}')">
+                <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/${english_name.toLowerCase()}.png" />
+            </div>
+            <h2 class="card-title">${name}</h2>
+            <p class="card-subtitle">${type}</p>
+        </li>
+        `
+        return accumulator
+    }, '');
+}
 
 
 const insertMonsterIntoPage = monster => {
@@ -50,6 +54,7 @@ const insertMonsterIntoPage = monster => {
     }
 
     SpinnerLoading.style.display = "none";
+    filter();
 }
 
 
@@ -59,7 +64,7 @@ function viewMonster(id){
 
     const form = document.querySelector(".view-monster");
     const input = document.getElementById("form-value");
-    input.value = accentsTidy(id);
+    input.value = id;
     form.submit();
 }
 
@@ -80,6 +85,7 @@ function checkScroll(){
     if(allLoaded){
         SpinnerLoading.style.display = "none";
         clearInterval(checkScrollInterval);
+        filter();
     }
 }
 
