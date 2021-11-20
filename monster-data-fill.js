@@ -348,7 +348,7 @@ function generateHTML() {
     if(monster.spellcaster_level != 0){
         document.querySelector("#spells").style.display = "block";
 
-        document.querySelector("#spellcaster-level span").innerText = monster.spellcaster_level;
+        document.querySelector("#spellcaster-level span").innerText = monster.spellcaster_level+"º";
         
         const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.spellcasting_attribute)-10)/2);
         
@@ -356,6 +356,10 @@ function generateHTML() {
 
         if(monster.special_spell_feature != "")
             document.querySelector("#special-spell-feature span").innerText = monster.special_spell_feature;
+        else{
+            const elem = document.getElementById("special-spell-feature");
+            elem.parentNode.removeChild(elem);
+        }
 
         for (let i = 0; i < monster.spells.length; i++) {
             const spell = spells[monster.spells[i]];
