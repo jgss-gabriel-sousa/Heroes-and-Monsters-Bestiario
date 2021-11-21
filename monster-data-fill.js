@@ -52,9 +52,9 @@ function generateHTML() {
         document.querySelector("#stats-deslocamento-f").style.display = "block";
         document.querySelector("#stats-deslocamento-f span").innerText = monster.movement_flying+" metros";
     }
-    if(monster.movement_digging != 0){
+    if(monster.movement_burrow != 0){
         document.querySelector("#stats-deslocamento-d").style.display = "block";
-        document.querySelector("#stats-deslocamento-d span").innerText = monster.movement_digging+" metros";
+        document.querySelector("#stats-deslocamento-d span").innerText = monster.movement_burrow+" metros";
     }
     if(monster.movement_climbing != 0){
         document.querySelector("#stats-deslocamento-c").style.display = "block";
