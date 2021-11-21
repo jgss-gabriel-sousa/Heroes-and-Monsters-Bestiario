@@ -43,6 +43,10 @@ p {
     margin-bottom: 50pt;
 }
 
+a { 
+    color: inherit;
+} 
+
 table {
     border-collapse: collapse;
 }

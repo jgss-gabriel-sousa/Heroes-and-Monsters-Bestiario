@@ -27,11 +27,15 @@ function generateHTML(monster){
     monsters = monster;
 
     return monster.reduce((accumulator, {name, type, english_name, source}) => {
+        const link = window.location.href.substring(0, window.location.href.length-11)+ "/monster.html?id=" + accentsTidy(name);
+
         accumulator += `
         <li class="monster-element source-${source} type-${accentsTidy(type)}">
+            <a href="${link}" target="_self">
             <div class="card highlight-on-hover ${accentsTidy(type)}" onclick="viewMonster('${accentsTidy(name)}')">
                 <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/${english_name.toLowerCase()}.png" />
             </div>
+            </a>
             <h2 class="card-title">${name}</h2>
             <p class="card-subtitle">${type}</p>
         </li>
@@ -61,11 +65,12 @@ const insertMonsterIntoPage = monster => {
 function viewMonster(id){
     savePageState();
     viewingMonster = true;
-
+    /*
     const form = document.querySelector(".view-monster");
     const input = document.getElementById("form-value");
     input.value = id;
     form.submit();
+    */
 }
 
 
