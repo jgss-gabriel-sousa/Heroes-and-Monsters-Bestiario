@@ -27,7 +27,7 @@ function generateHTML(monster){
     monsters = monster;
 
     return monster.reduce((accumulator, {name, type, english_name, source}) => {
-        const link = window.location.href.substring(0, window.location.href.length-11)+ "/monster.html?id=" + accentsTidy(name);
+        const link = window.location.href.substring(0, window.location.href.length-11) + "/monster.html?id=" + accentsTidy(name);
 
         accumulator += `
         <li class="monster-element source-${source} type-${accentsTidy(type)}">
