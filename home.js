@@ -35,7 +35,13 @@ function generateHTML(monster){
             link = window.location.href + "monster.html?id=" + accentsTidy(name);
             
         accumulator += `
-        <li class="monster-element source-${source} type-${accentsTidy(type)}">
+        <li class="monster-element `
+
+        for(let i = 0; i < source.length; i++){
+            accumulator += " source-"+source[i];
+        }
+        
+        accumulator += ` type-${accentsTidy(type)}">
             <a href="${link}" target="_self">
             <div class="card highlight-on-hover ${accentsTidy(type)}" onclick="viewMonster('${accentsTidy(name)}')">
                 <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/${english_name.toLowerCase()}.png" />
