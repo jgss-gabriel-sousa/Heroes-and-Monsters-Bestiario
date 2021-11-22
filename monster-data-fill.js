@@ -8,7 +8,7 @@ function generateHTML() {
     document.querySelector("#container h3").innerHTML = `${monster.type}, ${monster.size}`;
 
     document.querySelector("#monster-image").alt = monster.name;
-    document.querySelector("#monster-image").src = `https://raw.githubusercontent.com/JGSS-GabrielSousa/DnD-Image-API/main/monster/${monster.english_name.toLowerCase()}.png`;
+    document.querySelector("#monster-image").src = `https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${monster.english_name.toLowerCase()}.png`;
 
     document.querySelector("#cr-bar").innerText = convertNumberToFraction(monster.challenge_ratio);
     document.querySelector("#cr-bar").style.width = ((monster.challenge_ratio/30)*100).toString()+"%";
