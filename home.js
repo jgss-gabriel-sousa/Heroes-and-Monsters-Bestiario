@@ -30,10 +30,10 @@ function generateHTML(monster){
         let link;
 
         if(window.location.href.includes("index"))
-            link = window.location.href.substring(0, window.location.href.length-11) + "/monster.html?id=" + accentsTidy(name);
+            link = window.location.href.substring(0, window.location.href.length-11) + "/monster.html?id=" + accentsTidy(name).replace(/ /g, "+");
         else
-            link = window.location.href + "monster.html?id=" + accentsTidy(name);
-            
+            link = window.location.href + "monster.html?id=" + accentsTidy(name).replace(/ /g, "+");
+
         accumulator += `
         <li class="monster-element `
 
