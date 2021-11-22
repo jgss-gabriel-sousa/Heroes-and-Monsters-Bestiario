@@ -169,6 +169,13 @@ body{
     width: 100%;
     text-align: justify;
 }
+.action-info table {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    text-align: center;
+}
 
 .ability-description{
     width: 100%;

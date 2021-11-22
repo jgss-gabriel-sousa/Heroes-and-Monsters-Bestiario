@@ -1,5 +1,5 @@
 let monster;
-let spells = {};
+var spells = {};
 let innate_spells = [];
 const id = getURLParameter("id").toLowerCase();
 

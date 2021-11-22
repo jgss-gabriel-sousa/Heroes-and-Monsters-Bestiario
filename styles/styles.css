@@ -57,7 +57,7 @@ td, th {
 th {
     background-color: #222;
     color: white;
-    font-weight: normal;
+    letter-spacing: 1px;
 }
 tr:nth-child(even) {
     background-color: rgb(226, 226, 226);

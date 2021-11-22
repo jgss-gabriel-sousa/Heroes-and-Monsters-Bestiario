@@ -1,3 +1,124 @@
+function showStats_Meters(variable, element_id){
+    if(variable != 0){
+        document.querySelector(element_id).style.display = "block";
+        document.querySelector(element_id+" span").innerText = variable+" metros";
+    }
+}
+
+function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limit){
+    const spell = spells[spellName];
+    const spellDC = 6 + spell_attribute_modvalue + spell.magic_circle;
+
+    let elementHTML = `
+    <div class="action-element">
+        <div class="action-name">
+            <h4>${spell.name} (${spell.magic_circle}º Círculo)</h4>
+        </div>`
+        
+    if(type == "innate"){
+        elementHTML += `
+            <h4>${spell_limit}</h4>
+
+            <div id="innate-spell-info" class="action-info">
+        `
+    }
+    else{
+        elementHTML += `
+        <div class="action-info">
+            <p><strong>Custo de Mana:&nbsp</strong>${getSpellCost(spell.magic_circle)}</p>
+        `
+    }
+
+    elementHTML += `<p><strong>Tempo de Conjuração:&nbsp</strong>${spell.cast_time}</p>`
+
+    if(spell.attack_roll != false){
+        elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>+${spell_attribute_modvalue}</p>`
+    }
+
+    for (let i = 0; i < spell.damage.length; i++) {
+        elementHTML += `<p><strong>${spell.damage[i][0]}:&nbsp</strong>${spell.damage[i][1]}</p>`
+    }
+
+    if(spell.heal != ""){
+        if(spell.name == "Cura")
+            elementHTML += `<p><strong>Cura:&nbsp</strong>d8+${spell_attribute_modvalue}</p>`
+        else
+            elementHTML += `<p><strong>Cura:&nbsp</strong>${spell.heal}</p>`
+    }
+    if(spell.saving_trow != ""){
+        elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
+    }
+    if(spell.duration != ""){
+        elementHTML += `<p><strong>Duração:&nbsp</strong>${spell.duration}`
+        if(spell.concentration)
+            elementHTML += ` (Concentração)`;  
+        elementHTML += `</p>`;
+    }
+    if(spell.description.length != 0){
+        elementHTML +=`
+                <div class="spell-description">
+                    <p><strong>Efeito:&nbsp</strong><span>${spell.description[0]}</span></p>
+                `
+        
+        if(spell.description.length > 1){
+            for (let j = 1; j < spell.description.length; j++) {
+                elementHTML += `<p>${spell.description[j]}</p>`;
+            }
+        }
+    }
+    if(spell.spell_evolution.length != 0){
+        if(spell.spell_evolution_type == "level"){
+            elementHTML += "<p>Esta magia evolui conforme seu nível de conjurador:</p>"
+        }
+        else if(spell.spell_evolution_type == "mana"){
+            elementHTML += "<p>Esta magia evolui se conjurada com o custo de mana de um círculo superior:</p>"
+        }
+        else{
+            elementHTML += `<p>${spell.spell_evolution_desc}</p>`
+        }
+        elementHTML += `</div>`
+        
+        elementHTML += "<table><tr><th>"
+
+        if(spell.spell_evolution_type == "level"){
+            elementHTML += "Nível</th>";
+        }
+        else if(spell.spell_evolution_type == "mana"){
+            elementHTML += "Mana</th>";
+        }
+        else{
+            elementHTML += spell.spell_evolution_type+"</th>";
+        }
+        
+        elementHTML += "<th>Efeito</th></tr>"
+
+        for(let i = 0; i < spell.spell_evolution.length; i++){
+            const element = spell.spell_evolution[i];
+
+            elementHTML += `
+            <tr>
+                <td>${element[0]}</td>
+                <td>${element[1]}</td>
+            </tr>
+            `;
+        }
+
+    }
+    else{
+        elementHTML += `</table></div>`
+    }
+
+    elementHTML +=`</div></div>`
+
+    if(type == "innate"){
+        document.querySelector("#innate-spells .spell-list").innerHTML += elementHTML;
+    }
+    else{
+        document.querySelector("#spells .spell-list").innerHTML += elementHTML;
+    }
+}
+
+
 function generateHTML() {
     let title = monster.name;
     title = title.charAt(0).toUpperCase() + title.slice(1);
@@ -40,50 +161,20 @@ function generateHTML() {
         document.querySelector("#stats-mana").style.display = "block";
         document.querySelector("#stats-mana span").innerText = monster.mana;
     }
-    if(monster.movement_walking != 0){
-        document.querySelector("#stats-deslocamento-w").style.display = "block";
-        document.querySelector("#stats-deslocamento-w span").innerText = monster.movement_walking+" metros";
-    }
-    if(monster.movement_hovering != 0){
-        document.querySelector("#stats-deslocamento-h").style.display = "block";
-        document.querySelector("#stats-deslocamento-h span").innerText = monster.movement_hovering+" metros";
-    }
-    if(monster.movement_flying != 0){
-        document.querySelector("#stats-deslocamento-f").style.display = "block";
-        document.querySelector("#stats-deslocamento-f span").innerText = monster.movement_flying+" metros";
-    }
-    if(monster.movement_burrow != 0){
-        document.querySelector("#stats-deslocamento-d").style.display = "block";
-        document.querySelector("#stats-deslocamento-d span").innerText = monster.movement_burrow+" metros";
-    }
-    if(monster.movement_climbing != 0){
-        document.querySelector("#stats-deslocamento-c").style.display = "block";
-        document.querySelector("#stats-deslocamento-c span").innerText = monster.movement_climbing+" metros";
-    }
-    if(monster.movement_swimming != 0){
-        document.querySelector("#stats-deslocamento-s").style.display = "block";
-        document.querySelector("#stats-deslocamento-s span").innerText = monster.movement_swimming+" metros";
-    }
-    if(monster.dark_vision != 0){
-        document.querySelector("#stats-dark-vision").style.display = "block";
-        document.querySelector("#stats-dark-vision span").innerText = monster.dark_vision+" metros";
-    }
-    if(monster.blind_sight != 0){
-        document.querySelector("#stats-blind-sight").style.display = "block";
-        document.querySelector("#stats-blind-sight span").innerText = monster.blind_sight+" metros";
-    }
-    if(monster.tremor_sense != 0){
-        document.querySelector("#stats-tremor-sense").style.display = "block";
-        document.querySelector("#stats-tremor-sense span").innerText = monster.tremor_sense+" metros";
-    }
-    if(monster.true_vision != 0){
-        document.querySelector("#stats-true-vision").style.display = "block";
-        document.querySelector("#stats-true-vision span").innerText = monster.true_vision+" metros";
-    }
+    showStats_Meters(monster.movement_walking,"#stats-deslocamento-w");
+    showStats_Meters(monster.movement_hovering,"#stats-deslocamento-h");
+    showStats_Meters(monster.movement_flying,"#stats-deslocamento-f");
+    showStats_Meters(monster.movement_burrow,"#stats-deslocamento-d");
+    showStats_Meters(monster.movement_climbing,"#stats-deslocamento-c");
+    showStats_Meters(monster.movement_swimming,"#stats-deslocamento-s");
+    showStats_Meters(monster.dark_vision,"#stats-dark-vision");
+    showStats_Meters(monster.blind_sight,"#stats-blind-sight");
+    showStats_Meters(monster.tremor_sense,"#stats-tremor-sense");
+    showStats_Meters(monster.true_vision,"#stats-true-vision");
+
     if(monster.spellcaster_level != 0){
         document.querySelector("#spells").style.display = "block";
     }
-
 
     if(monster.bonuses_in_defense.length != 0){
         document.querySelector("#stats-defense span").innerText += "\u00A0("
@@ -282,62 +373,7 @@ function generateHTML() {
         }
 
         for (let i = 0; i < monster.innate_spellcasting.length; i++) {
-            const spell = spells[monster.innate_spellcasting[i].spell];
-            const spellDC = 6+spell_attribute_modvalue+spell.magic_circle;
-
-            let elementHTML = `
-            <div class="action-element">
-                <div class="action-name">
-                    <h4>${spell.name} (${spell.magic_circle}º Círculo)</h4>
-                </div>
-                <h4>${monster.innate_spellcasting[i].limit}</h4>
-
-                <div id="innate-spell-info" class="action-info">
-            `
-
-            elementHTML += `<p><strong>Tempo de Conjuração:&nbsp</strong>${spell.cast_time}</p>`
-
-            if(spell.attack_roll != false){
-                elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>+${spell_attribute_modvalue}</p>`
-            }
-
-            for (let i = 0; i < spell.damage.length; i++) {
-                elementHTML += `<p><strong>${spell.damage[i][0]}:&nbsp</strong>${spell.damage[i][1]}</p>`
-            }
-
-            if(spell.heal != ""){
-                if(spell.name == "Cura")
-                    elementHTML += `<p><strong>Cura:&nbsp</strong>d8+${spell_attribute_modvalue}</p>`
-                else
-                    elementHTML += `<p><strong>Cura:&nbsp</strong>${spell.heal}</p>`
-            }
-            if(spell.saving_trow != ""){
-                elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
-            }
-            if(spell.duration != ""){
-                elementHTML += `<p><strong>Duração:&nbsp</strong>${spell.duration}`
-                if(spell.concentration)
-                    elementHTML += ` (Concentração)`;  
-                elementHTML += `</p>`;
-            }
-            if(spell.description.length != 0){
-                elementHTML +=`
-                        <div class="spell-description">
-                            <p><strong>Efeito:&nbsp</strong><span>${spell.description[0]}</span></p>
-                        `
-                
-                if(spell.description.length > 1){
-                    for (let j = 1; j < spell.description.length; j++) {
-                        elementHTML += `<p>${spell.description[j]}</p>`;
-                    }
-                }
-
-                elementHTML += `</div>`
-            }
-
-            elementHTML +=`</div></div>`
-
-            document.querySelector("#innate-spells .spell-list").innerHTML += elementHTML;
+            generateSpellHTML("innate",monster.innate_spellcasting[i].spell,spell_attribute_modvalue,monster.innate_spellcasting[i].limit);
         }
     }
 
@@ -362,62 +398,7 @@ function generateHTML() {
         }
 
         for (let i = 0; i < monster.spells.length; i++) {
-            const spell = spells[monster.spells[i]];
-            const spellID = monster.innate_spellcasting.length+i;
-            const spellDC = 6+spell_attribute_modvalue+spell.magic_circle;
-
-            let elementHTML = `
-            <div class="action-element">
-                <div class="action-name">
-                    <h4>${spell.name} (${spell.magic_circle}º Círculo)</h4>
-                </div>
-            <div id="spell-${spellID}-info" class="action-info">
-            `
-
-            elementHTML += `<p><strong>Custo de Mana:&nbsp</strong>${getSpellCost(spell.magic_circle)}</p>`
-            elementHTML += `<p><strong>Tempo de Conjuração:&nbsp</strong>${spell.cast_time}</p>`
-
-            if(spell.attack_roll != false){
-                elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>+${spell_attribute_modvalue}</p>`
-            }
-
-            for (let i = 0; i < spell.damage.length; i++) {
-                elementHTML += `<p><strong>${spell.damage[i][0]}:&nbsp</strong>${spell.damage[i][1]}</p>`
-            }
-
-            if(spell.heal != ""){
-                if(spell.name == "Cura")
-                    elementHTML += `<p><strong>Cura:&nbsp</strong>d8+${spell_attribute_modvalue}</p>`
-                else
-                    elementHTML += `<p><strong>Cura:&nbsp</strong>${spell.heal}</p>`
-            }
-            if(spell.saving_trow != ""){
-                elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
-            }
-            if(spell.duration != ""){
-                elementHTML += `<p><strong>Duração:&nbsp</strong>${spell.duration}`
-                if(spell.concentration)
-                    elementHTML += ` (Concentração)`;  
-                elementHTML += `</p>`;
-            }
-            if(spell.description.length != 0){
-                elementHTML +=`
-                        <div class="spell-description">
-                            <p><strong>Efeito:&nbsp</strong><span>${spell.description[0]}</span></p>
-                        `
-                
-                if(spell.description.length > 1){
-                    for (let j = 1; j < spell.description.length; j++) {
-                        elementHTML += `<p>${spell.description[j]}</p>`;
-                    }
-                }
-
-                elementHTML += `</div>`
-            }
-
-            elementHTML +=`</div></div>`
-
-            document.querySelector("#spells .spell-list").innerHTML += elementHTML;
+            generateSpellHTML("spell",monster.spells[i],spell_attribute_modvalue,"");
         }
     }
 
