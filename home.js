@@ -35,7 +35,7 @@ function generateHTML(monster){
             link = window.location.href + "monster.html?id=" + accentsTidy(name).replace(/ /g, "+");
 
         accumulator += `
-        <li class="monster-element `
+        <li class="monster-element ${name.replace(/ /g, "-")} `
 
         for(let i = 0; i < source.length; i++){
             accumulator += " source-"+source[i];
@@ -76,12 +76,6 @@ const insertMonsterIntoPage = monster => {
 function viewMonster(id){
     savePageState();
     viewingMonster = true;
-    /*
-    const form = document.querySelector(".view-monster");
-    const input = document.getElementById("form-value");
-    input.value = id;
-    form.submit();
-    */
 }
 
 

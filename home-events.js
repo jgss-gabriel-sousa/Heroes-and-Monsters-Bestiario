@@ -1,13 +1,18 @@
-let activeFiltersKeys = ["all","all"];
+let activeFiltersKeys = ["all","all","all"];
+
 
 function filter(){
     const array = document.querySelectorAll(".monster-element");
-
+    
     for(let i = 0, x = 0; i < array.length; i++){
         x = 0;
 
         for (let j = 0; j < activeFiltersKeys.length; j++) {
-            if(activeFiltersKeys[j] == "all" || array[i].classList.contains(activeFiltersKeys[j]))
+            if(j == 2){
+                if(activeFiltersKeys[j] == "all" || array[i].classList[1].includes(activeFiltersKeys[2]) || accentsTidy(array[i].classList[1]).includes(activeFiltersKeys[2]))
+                    x++;
+            }
+            else if(activeFiltersKeys[j] == "all" || array[i].classList.contains(activeFiltersKeys[j]))
                 x++;
         }
 
@@ -22,17 +27,18 @@ function filter(){
 
 
 document.getElementById("filter-by-type").addEventListener('change', (event) => {
-
-    //document.getElementById("filter-by-source").selectedIndex = 0;
-
     activeFiltersKeys[0] = event.target.value;
     filter();
 });
 
 document.getElementById("filter-by-source").addEventListener('change', (event) => {
-    //document.getElementById("filter-by-type").selectedIndex = 0;
-
     activeFiltersKeys[1] = event.target.value;
+    filter();
+});
+
+document.getElementById("filter-by-name").addEventListener('input', (event) => {
+    activeFiltersKeys[2] = event.target.value.replace(/ /g, "-");;
+
     filter();
 });
 
