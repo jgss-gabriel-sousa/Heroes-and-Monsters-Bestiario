@@ -397,6 +397,14 @@ function generateHTML() {
             elem.parentNode.removeChild(elem);
         }
 
+        if(monster.arcane_failure != 0)
+            document.querySelector("#arcane-failure span").innerText = monster.arcane_failure+"%"
+        else{
+            const elem = document.getElementById("arcane-failure");
+            elem.parentNode.removeChild(elem);
+        }
+        
+
         for (let i = 0; i < monster.spells.length; i++) {
             generateSpellHTML("spell",monster.spells[i],spell_attribute_modvalue,"");
         }
