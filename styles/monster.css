@@ -33,6 +33,11 @@ body{
     width: 100%;
 }
 
+li {
+    text-align: justify;
+    font-size: 16px;
+}
+
 #container {
     padding: 40px 20px 40px 150px;
 }
@@ -211,7 +216,36 @@ body{
     text-align: start;
 }
 
-#description p{
+#legendary-actions p{
+    text-indent: 40px;
+    text-align: justify;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+#legendary-actions li{
+    text-indent: 40px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#lair-actions p{
+    text-indent: 40px;
+    text-align: justify;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+#lair-actions li{
+    text-indent: 40px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#regional-effects p{
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.description-text{
     text-align: justify;
     text-indent: 40px;
     margin-bottom: 20px;

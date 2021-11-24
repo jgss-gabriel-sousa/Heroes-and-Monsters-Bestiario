@@ -405,12 +405,79 @@ function generateHTML() {
 
     //###############################################################################################################################################################################
 
+    
+    if(monster.legendary_actions.length != 0){
+        document.querySelector("#legendary-actions").style.display = "block";
+
+        const name = monster.name_pronoun.charAt(0).toUpperCase() + monster.name_pronoun.slice(1);
+
+        document.querySelector("#legendary-actions").innerHTML += "<p>"+name+" pode realizar 3 ações lendárias, escolhidas dentre as opções abaixo. Apenas uma ação lendária pode ser usada por vez e apenas no final do turno de outra criatura. "+name+" recupera as ações lendárias gastas no começo do turno dele:</p>";
+
+        for (let i = 0; i < monster.legendary_actions.length; i++) {
+            let action = "<li><strong>"+monster.legendary_actions[i].name;
+
+            if(monster.legendary_actions[i].cost == 1){
+                action += ":</strong>";
+            }
+            else{
+                action += " (Custa "+monster.legendary_actions[i].cost+" Ações):</strong>";
+            }
+
+            action += ` ${monster.legendary_actions[i].description}</li>`;
+
+            document.querySelector("#legendary-actions").innerHTML += action;
+        }
+    }
+    
+    
+    //###############################################################################################################################################################################
+
+
+    if(monster.lair_description.length != 0){
+        document.querySelector("#lair").style.display = "block";
+
+        for (let i = 0; i < monster.lair_description.length; i++) {
+            document.querySelector("#lair").innerHTML += `<p class="description-text">${monster.lair_description[i]}</p>`;
+        }
+    }
+
+
+    //###############################################################################################################################################################################
+
+    
+    if(monster.lair_actions.length != 0){
+        document.querySelector("#lair-actions").style.display = "block";
+
+        document.querySelector("#lair-actions").innerHTML += "<p>Quando estiver lutando dentro de seu covil, "+monster.name_pronoun+" pode invocar a magia ambiente para realizar ações de covil. No valor de iniciativa 20 (quebrando toda a sequência de iniciativa), "+monster.name_pronoun+" realiza uma ação de covil, fazendo um dos efeitos a seguir:</p>";
+
+        for (let i = 0; i < monster.lair_actions.length; i++) {
+            document.querySelector("#lair-actions").innerHTML += `<li>${monster.lair_actions[i]}</li>`;
+        }
+    }
+    
+    
+    //###############################################################################################################################################################################
+
+
+    if(monster.regional_effects_description.length != 0){
+        document.querySelector("#regional-effects").style.display = "block";
+
+        for (let i = 0; i < monster.regional_effects_description.length; i++) {
+            document.querySelector("#regional-effects").innerHTML += `<li>${monster.regional_effects_description[i]}</li>`;
+        }
+
+        document.querySelector("#regional-effects").innerHTML += `<p>${monster.regional_effects_dissolution}</p>`;
+    }
+
+
+    //###############################################################################################################################################################################
+    
 
     if(monster.description.length != 0){
         document.querySelector("#description").style.display = "block";
 
         for (let i = 0; i < monster.description.length; i++) {
-            document.querySelector("#description").innerHTML += `<p>${monster.description[i]}</p>`;
+            document.querySelector("#description").innerHTML += `<p class="description-text">${monster.description[i]}</p>`;
         }
     }
 }
