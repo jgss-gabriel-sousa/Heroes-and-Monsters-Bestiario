@@ -84,12 +84,12 @@ function checkScroll(){
         loadingContent = true;
         SpinnerLoading.style.display = "block";
         scrollTo(0, (window.innerHeight + window.pageYOffset));
-        setTimeout(loadMonster, 2000);
+        setTimeout(loadMonster, 1000);
 
         clearInterval(checkScrollInterval);
         setTimeout( () => {
-            checkScrollInterval = setInterval(checkScroll, 1000);
-        }, 3000);
+            checkScrollInterval = setInterval(checkScroll, 500);
+        }, 1500);
         loadingContent = false;
     }
     if(allLoaded){
@@ -158,7 +158,7 @@ function loadMonster(){
 
 pageStateUpdate();
 loadMonster();
-var checkScrollInterval = setInterval(checkScroll, 1000);
+var checkScrollInterval = setInterval(checkScroll, 500);
 
 window.addEventListener("beforeunload", function(){
     if(!viewingMonster){
