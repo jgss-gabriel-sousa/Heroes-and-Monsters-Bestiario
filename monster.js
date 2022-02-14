@@ -4,7 +4,7 @@ let innate_spells = [];
 const id = getURLParameter("id").toLowerCase();
 
 
-accentsTidy = function(s){
+accentsTidy = function(s) {
     var r = s.toLowerCase();
     non_asciis = {'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]', 'y': '[ýÿ]'};
     for (i in non_asciis) { r = r.replace(new RegExp(non_asciis[i], 'g'), i); }
@@ -80,7 +80,7 @@ function goBack() {
     location.href = "index.html";
 }
 
-function getSpellCost(magic_circle){
+function getSpellCost(magic_circle) {
     switch(magic_circle){
         case 1: return 1;
         case 2: return 3;
@@ -95,7 +95,7 @@ function getSpellCost(magic_circle){
     }
 }
 
-function getAttributeFromPortugueseName(portugueseAttributeName){
+function getAttributeFromPortugueseName(portugueseAttributeName) {
     switch(portugueseAttributeName){
         case "Força": return monster.strength;
         case "Vitalidade": return monster.vitality;
