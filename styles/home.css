@@ -25,7 +25,7 @@ select::-ms-expand {
 }
 
 input {
-    width: 100%;
+    width: 12.715em;
     max-width: 300px;
     color: ghostwhite;
     background-color: rgba(0, 51, 51, 0.94);
@@ -90,13 +90,43 @@ input {
 }
 
 #top-bar {
-    display: inline-flex;
+    display: flex;
     grid-gap: 20px;
     padding: 20px;
     margin-bottom: 20px;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 #top-bar label{
     font-weight: bold;
     margin: 0px 10px;
+}
+#top-bar div{
+    width: 200px;
+}
+
+@media only screen and (max-width: 920px) {
+    .bestiario{
+        grid-template-columns: repeat(auto-fit, minmax(190px, 0.5fr));
+        grid-gap: 20px;
+    }
+    .card-image{
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .bestiario{
+        grid-template-columns: repeat(auto-fit, minmax(140px, 0.5fr));
+        grid-gap: 10px;
+    }
+    .card-image{
+        width: 100px;
+        height: 100px;
+    }
+    .container{
+        padding: 10px;
+    }
 }
