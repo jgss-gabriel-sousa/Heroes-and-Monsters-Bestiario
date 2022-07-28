@@ -357,7 +357,7 @@ function generateHTML() {
     if(monster.innate_spellcasting.length != 0){
         document.querySelector("#innate-spells").style.display = "block";
 
-        const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.innate_spellcasting)-10)/2);
+        const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.innate_spellcasting_attribute)-10)/2);
         
         if(monster.innate_spellcasting_description != ""){
             document.querySelector("#innate-spells-description").innerText = monster.innate_spellcasting_description;
