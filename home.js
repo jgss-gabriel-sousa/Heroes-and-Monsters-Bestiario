@@ -9,8 +9,6 @@ let allLoaded = false;
 let viewingMonster;
 let loadingContent = false;
 let monsters;
-let firstLoaded = false;
-
 
 function accentsTidy(s){
     var r = s.toLowerCase();
@@ -23,10 +21,8 @@ function blankSpaceFix(s){
     return s.replace(/\s/g, "_");
 }
 
-
 const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
     fetch(GetMonsterUrl(index+loaded)).then(response => response.json()))
-    
 
 function generateHTML(monster){
     monsters = monster;
@@ -60,7 +56,6 @@ function generateHTML(monster){
     }, '');
 }
 
-
 const insertMonsterIntoPage = monster => {
     MonsterList.innerHTML += monster;
     
@@ -77,17 +72,14 @@ const insertMonsterIntoPage = monster => {
     filter();
 }
 
-
 function viewMonster(id){
     savePageState();
     viewingMonster = true;
 }
 
-
 function checkScroll(){
-    if(!allLoaded && !loadingContent && !firstLoaded && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+    if(!allLoaded && !loadingContent && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
         loadingContent = true;
-        firstLoaded = true;
         SpinnerLoading.style.display = "block";
         scrollTo(0, (window.innerHeight + window.pageYOffset));
         setTimeout(loadMonster, 500);
@@ -105,7 +97,6 @@ function checkScroll(){
     }
 }
 
-
 function savePageState(){
     sessionStorage.setItem("html", MonsterList.innerHTML);
     sessionStorage.setItem("saved", true);
@@ -114,7 +105,6 @@ function savePageState(){
     sessionStorage.setItem("allLoaded", allLoaded);
     sessionStorage.setItem("filter-by-type", document.querySelector("#filter-by-type").selectedIndex);
 }
-
 
 function pageStateUpdate(){
     if(sessionStorage.getItem("saved") != null){
@@ -140,7 +130,6 @@ function pageStateUpdate(){
         }, 500);
     }
 }
-
 
 function loadMonster(){
     if(loaded < TotalNumberOfMonsters){
@@ -171,7 +160,6 @@ window.addEventListener("beforeunload", function(){
         sessionStorage.clear();
     }
  }, false);
-
 
 window.onload = async function getMonstersTotal() {
     const response = await fetch(`https://heroes-and-monsters-api.herokuapp.com`);
