@@ -119,5 +119,5 @@ tr:nth-child(odd) {
 .humanoide_monstruoso   {background-color:rgb(155, 155, 155)}
 .infernal               {background-color:rgba(177, 36, 34, 0.5)}
 .inseto                 {background-color:rgb(146, 167, 106)}
-.morto-vivo             {background-color:rgb(76, 74, 71)}
+.morto-vivo             {background-color:rgba(76, 74, 71, 0.75)}
 .planta                 {background-color:rgb(139, 178, 56)}
