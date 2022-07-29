@@ -37,8 +37,7 @@ document.getElementById("filter-by-source").addEventListener('change', (event) =
 });
 
 document.getElementById("filter-by-name").addEventListener('input', (event) => {
-    activeFiltersKeys[2] = event.target.value.replace(/ /g, "-");;
-
+    activeFiltersKeys[2] = event.target.value.replace(/ /g, "-");
     filter();
 });
 

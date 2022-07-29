@@ -9,14 +9,19 @@ let allLoaded = false;
 let viewingMonster;
 let loadingContent = false;
 let monsters;
+let firstLoaded = false;
 
 
-accentsTidy = function(s){
+function accentsTidy(s){
     var r = s.toLowerCase();
     non_asciis = {'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]', 'y': '[ýÿ]'};
     for (i in non_asciis) { r = r.replace(new RegExp(non_asciis[i], 'g'), i); }
     return r;
-};
+}
+
+function blankSpaceFix(s){
+    return s.replace(/\s/g, "_");
+}
 
 
 const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
@@ -41,9 +46,9 @@ function generateHTML(monster){
             accumulator += " source-"+source[i];
         }
         
-        accumulator += ` type-${accentsTidy(type)}">
+        accumulator += ` type-${blankSpaceFix(accentsTidy(type))}">
             <a href="${link}" target="_self">
-            <div class="card highlight-on-hover ${accentsTidy(type)}" onclick="viewMonster('${accentsTidy(name)}')">
+            <div class="card highlight-on-hover ${blankSpaceFix(accentsTidy(type))}" onclick="viewMonster('${accentsTidy(name)}')">
                 <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${english_name.toLowerCase()}.png" />
             </div>
             </a>
@@ -80,16 +85,17 @@ function viewMonster(id){
 
 
 function checkScroll(){
-    if(allLoaded == false && loadingContent == false && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+    if(!allLoaded && !loadingContent && !firstLoaded && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
         loadingContent = true;
+        firstLoaded = true;
         SpinnerLoading.style.display = "block";
         scrollTo(0, (window.innerHeight + window.pageYOffset));
-        setTimeout(loadMonster, 1000);
+        setTimeout(loadMonster, 500);
 
         clearInterval(checkScrollInterval);
         setTimeout( () => {
             checkScrollInterval = setInterval(checkScroll, 500);
-        }, 1500);
+        }, 500);
         loadingContent = false;
     }
     if(allLoaded){
