@@ -27,6 +27,9 @@ const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
 function generateHTML(monster){
     monsters = monster;
 
+    if(document.querySelectorAll(".monster-element").length == TotalNumberOfMonsters)
+        return;
+
     return monster.reduce((accumulator, {name, type, english_name, source}) => {
         let link;
 
@@ -82,7 +85,7 @@ function checkScroll(){
         loadingContent = true;
         SpinnerLoading.style.display = "block";
         scrollTo(0, (window.innerHeight + window.pageYOffset));
-        setTimeout(loadMonster, 500);
+        loadMonster();
 
         clearInterval(checkScrollInterval);
         setTimeout( () => {
