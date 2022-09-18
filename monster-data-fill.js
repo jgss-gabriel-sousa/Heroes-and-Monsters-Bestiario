@@ -31,6 +31,10 @@ function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limi
 
     elementHTML += `<p><strong>Tempo de Conjuração:&nbsp</strong>${spell.cast_time}</p>`
 
+    if(spell.range != ""){
+        elementHTML += `<p><strong>Alcance:&nbsp</strong>${spell.range}</p>`
+    }
+
     if(spell.attack_roll != false){
         elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>+${spell_attribute_modvalue}</p>`
     }
