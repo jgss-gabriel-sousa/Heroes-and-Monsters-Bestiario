@@ -21,6 +21,19 @@ function blankSpaceFix(s){
     return s.replace(/\s/g, "_");
 }
 
+function NDFormat(nd){
+    if(nd == 0.5){
+        return "1/2"
+    }
+    else if(nd == 0.25){
+        return "1/4"
+    }
+    else if(nd == 0.125){
+        return "1/8"
+    }
+    return nd;
+}
+
 const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
     fetch(GetMonsterUrl(index+loaded)).then(response => response.json()))
 
@@ -30,7 +43,7 @@ function generateHTML(monster){
     if(document.querySelectorAll(".monster-element").length == TotalNumberOfMonsters)
         return;
 
-    return monster.reduce((accumulator, {name, type, english_name, source}) => {
+    return monster.reduce((accumulator, {name, type, english_name, source, challenge_ratio}) => {
         let link;
 
         if(window.location.href.includes("index"))
@@ -39,7 +52,7 @@ function generateHTML(monster){
             link = window.location.href + "monster.html?id=" + accentsTidy(name).replace(/ /g, "+");
 
         accumulator += `
-        <li class="monster-element ${name.replace(/ /g, "-")} `
+        <li class="monster-element ${name.replace(/ /g, "-")} ND${challenge_ratio} `
 
         for(let i = 0; i < source.length; i++){
             accumulator += " source-"+source[i];
@@ -52,7 +65,7 @@ function generateHTML(monster){
             </div>
             </a>
             <h2 class="card-title">${name}</h2>
-            <p class="card-subtitle">${type}</p>
+            <p class="card-subtitle">${type} (${NDFormat(challenge_ratio)})</p>
         </li>
         `
         return accumulator
@@ -60,6 +73,8 @@ function generateHTML(monster){
 }
 
 const insertMonsterIntoPage = monster => {
+    if(!monster) return;
+    
     MonsterList.innerHTML += monster;
     
     loaded += NumberOfMonstersToLoadByStep;
@@ -145,7 +160,7 @@ function loadMonster(){
         else{
             toLoad = NumberOfMonstersToLoadByStep;
         }
-        
+
         const monsterPromises = generatePromises(toLoad);
 
         Promise.all(monsterPromises)

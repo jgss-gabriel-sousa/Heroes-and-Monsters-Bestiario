@@ -4,10 +4,13 @@
 	<meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Bestiário H&M</title>
-	<link rel="stylesheet" href="styles/home.css"/>
+
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <script src="home.js" defer></script>
-    <script src="home-events.js" defer></script>
+    
+	<link rel="stylesheet" href="styles/home.css"/>
+
+    <script src="/scripts/home/home.js" defer></script>
+    <script src="/scripts/home/home-events.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -47,7 +50,21 @@
             </div>
 
             <div>
-                <label for="filter-by-name" >Buscar por Nome:</label>
+                <label>Filtrar por Nível de Dificuldade:</label>
+                <div class="ndTextLabel">
+                    <p>Mín:</p>
+                    <input type="range" min="0" max="32" value="0" class="slider" id="minNDRange">
+                    <p id="minNDRangeValue">1/8</p>
+                </div>
+                <div class="ndTextLabel">
+                    <p>Máx:</p>
+                    <input type="range" min="0" max="32" value="32" class="slider" id="maxNDRange">
+                    <p id="maxNDRangeValue">30</p>
+                </div>
+            </div>
+
+            <div>
+                <label for="filter-by-name">Buscar por Nome:</label>
                 <input type="text" id="filter-by-name">
             </div>
         </div>
