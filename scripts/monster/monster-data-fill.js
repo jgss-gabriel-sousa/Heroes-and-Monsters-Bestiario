@@ -135,28 +135,28 @@ function generateHTML() {
     document.querySelector("#monster-image").alt = monster.name;
     document.querySelector("#monster-image").src = `https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${monster.english_name.toLowerCase()}.png`;
 
-    document.querySelector("#cr-bar").innerText = convertNumberToFraction(monster.challenge_ratio);
+    document.querySelector("#cr-value").innerText = convertNumberToFraction(monster.challenge_ratio);
     document.querySelector("#cr-bar").style.width = ((monster.challenge_ratio/30)*100).toString()+"%";
 
-    document.querySelector("#atk-bar").innerText = convertNumberToFraction(monster.atk_cr);
+    document.querySelector("#atk-value").innerText = convertNumberToFraction(monster.atk_cr);
     document.querySelector("#atk-bar").style.width = ((monster.atk_cr/30)*100).toString()+"%";
     
-    document.querySelector("#dmg-bar").innerText = convertNumberToFraction(monster.damage_cr);
+    document.querySelector("#dmg-value").innerText = convertNumberToFraction(monster.damage_cr);
     document.querySelector("#dmg-bar").style.width = ((monster.damage_cr/30)*100).toString()+"%";
 
-    document.querySelector("#res-bar").innerText = convertNumberToFraction(monster.resistances_and_immunities_cr);
-    document.querySelector("#res-bar").style.width = ((monster.resistances_and_immunities_cr/30)*100).toString()+"%";
+    document.querySelector("#res-value").innerText = monster.resistances_and_immunities_cr;
+    document.querySelector("#res-bar").style.width = ((monster.resistances_and_immunities_cr/5)*100).toString()+"%";
 
-    document.querySelector("#hp-bar").innerText = convertNumberToFraction(monster.hp_cr);
+    document.querySelector("#hp-value").innerText = convertNumberToFraction(monster.hp_cr);
     document.querySelector("#hp-bar").style.width = ((monster.hp_cr/30)*100).toString()+"%";
 
-    document.querySelector("#def-bar").innerText = convertNumberToFraction(monster.defense_cr);
+    document.querySelector("#def-value").innerText = convertNumberToFraction(monster.defense_cr);
     document.querySelector("#def-bar").style.width = ((monster.defense_cr/30)*100).toString()+"%";
 
     //###############################################################################################################################################################################
 
     document.querySelector("#stats-alignment span").innerText = monster.alignment;
-    document.querySelector("#stats-challenge-ratio span").innerText = convertNumberToFraction(monster.challenge_ratio);
+    //document.querySelector("#stats-challenge-ratio span").innerText = convertNumberToFraction(monster.challenge_ratio);
     document.querySelector("#stats-xp span").innerText = addDecimalPoints(monster.xp);
     document.querySelector("#stats-defense span").innerText = monster.defense;
     document.querySelector("#stats-hp span").innerText = addDecimalPoints(monster.hp);

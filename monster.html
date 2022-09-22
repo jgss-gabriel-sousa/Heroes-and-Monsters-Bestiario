@@ -40,12 +40,60 @@
             <div id="stats">
                 <p id="stats-alignment"><strong>Alinhamento:&nbsp</strong><span></span></p>
 
-                <p id="stats-challenge-ratio"><strong>Desafio:&nbsp</strong><span></span></p>
+                <div id="nd-bars">
+                    <div class="nd-bar-element">
+                        <strong><p>Nível de Dificuldade:</p></strong>
+                        <div class="progress-bar-background">
+                            <div id="cr-bar" class="progress-bar cr"></div>
+                        </div>
+                        <b><p id="cr-value"></p></b>
+                    </div>
+
+                    <div class="nd-bar-element">
+                        <strong><p>ND Ataque:</p></strong>
+                        <div class="progress-bar-background">
+                            <div id="atk-bar" class="progress-bar atk"></div>
+                        </div>
+                        <b><p id="atk-value"></p></b>
+                    </div>
+
+                    <div class="nd-bar-element">
+                        <strong><p>ND Dano:</p></strong>
+                        <div class="progress-bar-background">
+                            <div id="dmg-bar" class="progress-bar dmg"></div>
+                        </div>
+                        <b><p id="dmg-value"></p></b>
+                    </div>
+
+                    <div class="nd-bar-element">
+                        <strong><p>ND Vida:</p></strong>
+                        <div class="progress-bar-background">
+                            <div id="hp-bar" class="progress-bar hp"></div>
+                        </div>
+                        <b><p id="hp-value"></p></b>
+                    </div>
+
+                    <div class="nd-bar-element">
+                        <strong><p>ND Defesa:</p></strong>
+                        <div class="progress-bar-background">
+                            <div id="def-bar" class="progress-bar def"></div>
+                        </div>
+                        <b><p id="def-value"></p></b>
+                    </div>
+
+                    <div class="nd-bar-element">
+                        <strong><p>Resist. e Imun.:</p></strong>
+                        <div class="progress-bar-background">
+                            <div id="res-bar" class="progress-bar res"></div>
+                        </div>
+                        <b><p id="res-value"></p></b>
+                    </div>
+                </div>
+
                 <p id="stats-xp"><strong>XP:&nbsp</strong><span></span></p>
                 
                 <p id="stats-defense"><strong>Defesa:&nbsp</strong><span></span></p>
                 <p id="stats-hp"><strong>Vida:&nbsp</strong><span></span></p>
-                <p id="stats-mana"><strong>Mana:&nbsp</strong><span></span></p>
                 
                 <p id="stats-deslocamento-w"><strong>Deslocamento (Andando):&nbsp</strong><span></span></p>
                 <p id="stats-deslocamento-h"><strong>Deslocamento (Pairando):&nbsp</strong><span></span></p>
@@ -121,6 +169,7 @@
             <h2>Magias</h2>
             <div id="spellcaster-info">
                 <p id="spellcaster-level"><strong>Nível de Conjurador:&nbsp</strong><span></span></p>
+                <p id="mana-value"><strong>Mana:&nbsp</strong><span></span></p>
                 <p id="spellcasting-attribute"><strong>Atributo de Conjuração:&nbsp</strong><span></span></p>
                 <p id="special-spell-feature"><strong>Especial:&nbsp</strong><span></span></p>
                 <p id="arcane-failure"><strong>Falha Arcana:&nbsp</strong><span></span></p>
@@ -169,53 +218,7 @@
 
 
         <div id="nd-window">
-            <h2>Nível de Dificuldade</h2>
             
-            <div id="nd-window-bars-div">
-                <div class="nd-window-element">
-                    <h3>Total</h3> 
-                    <div class="progress-bar-background">
-                        <div id="cr-bar" class="progress-bar cr"></div>
-                    </div>
-                </div>
-
-                <div id="nd-window-bars">
-                    <div class="window-element">
-                        <h4>Ataque</h4> 
-                        <div class="progress-bar-background">
-                            <div id="atk-bar" class="progress-bar atk"></div>
-                        </div>
-                    </div>
-
-                    <div class="window-element">
-                        <h4>Dano</h4> 
-                        <div class="progress-bar-background">
-                            <div id="dmg-bar" class="progress-bar dmg"></div>
-                        </div>
-                    </div>
-
-                    <div class="window-element">
-                        <h4>Vida</h4> 
-                        <div class="progress-bar-background">
-                            <div id="hp-bar" class="progress-bar hp"></div>
-                        </div>
-                    </div>
-
-                    <div class="window-element">
-                        <h4>Defesa</h4> 
-                        <div class="progress-bar-background">
-                            <div id="def-bar" class="progress-bar def"></div>
-                        </div>
-                    </div>
-
-                    <div class="window-element">
-                        <h4>Resistências e Imunidades</h4> 
-                        <div class="progress-bar-background">
-                            <div id="res-bar" class="progress-bar res"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </body>
