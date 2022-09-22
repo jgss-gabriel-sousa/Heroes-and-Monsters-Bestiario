@@ -161,10 +161,6 @@ function generateHTML() {
     document.querySelector("#stats-defense span").innerText = monster.defense;
     document.querySelector("#stats-hp span").innerText = addDecimalPoints(monster.hp);
 
-    if(monster.mana != 0){
-        document.querySelector("#stats-mana").style.display = "block";
-        document.querySelector("#stats-mana span").innerText = monster.mana;
-    }
     showStats_Meters(monster.movement_walking,"#stats-deslocamento-w");
     showStats_Meters(monster.movement_hovering,"#stats-deslocamento-h");
     showStats_Meters(monster.movement_flying,"#stats-deslocamento-f");
@@ -389,6 +385,7 @@ function generateHTML() {
         document.querySelector("#spells").style.display = "block";
 
         document.querySelector("#spellcaster-level span").innerText = monster.spellcaster_level+"º";
+        document.querySelector("#mana-value span").innerText = monster.mana;
         
         const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.spellcasting_attribute)-10)/2);
         
