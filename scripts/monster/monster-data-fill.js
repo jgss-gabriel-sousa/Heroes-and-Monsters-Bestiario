@@ -145,7 +145,7 @@ function generateHTML() {
     document.querySelector("#dmg-bar").style.width = ((monster.damage_cr/30)*100).toString()+"%";
 
     document.querySelector("#res-value").innerText = monster.resistances_and_immunities_cr;
-    document.querySelector("#res-bar").style.width = ((monster.resistances_and_immunities_cr/5)*100).toString()+"%";
+    document.querySelector("#res-bar").style.width = ((monster.resistances_and_immunities_cr/6)*100).toString()+"%";
 
     document.querySelector("#hp-value").innerText = convertNumberToFraction(monster.hp_cr);
     document.querySelector("#hp-bar").style.width = ((monster.hp_cr/30)*100).toString()+"%";
