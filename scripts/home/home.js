@@ -61,7 +61,7 @@ function generateHTML(monster){
         accumulator += ` type-${blankSpaceFix(accentsTidy(type))}">
             <a href="${link}" target="_self">
             <div class="card highlight-on-hover ${blankSpaceFix(accentsTidy(type))}" onclick="viewMonster('${accentsTidy(name)}')">
-                <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${english_name.toLowerCase()}.png" />
+                <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${english_name.toLowerCase()}.webp" />
             </div>
             </a>
             <h2 class="card-title">${name}</h2>
