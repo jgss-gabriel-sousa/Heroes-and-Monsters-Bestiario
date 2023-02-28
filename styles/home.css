@@ -89,7 +89,7 @@ input {
     display: none;
 }
 
-#top-bar {
+#filters {
     display: flex;
     grid-gap: 20px;
     padding: 20px;
@@ -98,11 +98,11 @@ input {
     justify-content: center;
     flex-wrap: wrap;
 }
-#top-bar label{
+#filters label{
     font-weight: bold;
     margin: 0px 10px;
 }
-#top-bar div{
+.filter {
     width: 250px;
 }
 

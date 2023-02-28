@@ -16,8 +16,8 @@
     <div class="container">
         <h1>Bestiário - Heroes & Monsters</h1>
 
-        <div id="top-bar">
-            <div>
+        <div id="filters">
+            <div class="filter">
                 <label for="filter-by-type" >Filtrar por Tipo:</label>
                 <select id="filter-by-type">
                     <option value="all">Mostrar Todos</option>
@@ -40,7 +40,7 @@
                 </select>
             </div>
 
-            <div>
+            <div class="filter">
                 <label for="filter-by-source" >Filtrar por Fonte:</label>
                 <select id="filter-by-source">
                     <option value="all">Mostrar Todos</option>
@@ -49,21 +49,21 @@
                 </select>
             </div>
 
-            <div>
+            <div class="filter">
                 <label>Filtrar por Nível de Dificuldade:</label>
-                <div class="ndTextLabel">
+                <div class="nd-range">
                     <p>Mín:</p>
                     <input type="range" min="0" max="32" value="0" class="slider" id="minNDRange">
                     <p id="minNDRangeValue">1/8</p>
                 </div>
-                <div class="ndTextLabel">
+                <div class="nd-range">
                     <p>Máx:</p>
                     <input type="range" min="0" max="32" value="32" class="slider" id="maxNDRange">
                     <p id="maxNDRangeValue">30</p>
                 </div>
             </div>
 
-            <div>
+            <div class="filter">
                 <label for="filter-by-name">Buscar por Nome:</label>
                 <input type="text" id="filter-by-name">
             </div>

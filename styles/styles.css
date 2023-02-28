@@ -77,12 +77,12 @@ tr:nth-child(odd) {
     margin: auto;
 }
 
-.ndTextLabel {
+.nd-range {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.ndTextLabel p {
+.nd-range p {
     margin: 0;
     font-weight: bold;
     font-size: 14px;
