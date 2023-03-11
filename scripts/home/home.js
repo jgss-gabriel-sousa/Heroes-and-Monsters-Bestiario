@@ -1,7 +1,9 @@
 const SpinnerLoading = document.querySelector("#loading")
 const MonsterList = document.querySelector('[data-js="bestiario"]');
 
-const GetMonsterUrl = id => `https://heroes-and-monsters-api-2.herokuapp.com/monster/${id}`
+const apiURL = "https://heroes-and-monsters-api.onrender.com";
+const imgApiURL = "https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/";
+const GetMonsterUrl = id => apiURL+`/monster/${id}`;
 let TotalNumberOfMonsters;
 let NumberOfMonstersToLoadByStep;
 let loaded = 0;
@@ -61,7 +63,7 @@ function generateHTML(monster){
         accumulator += ` type-${blankSpaceFix(accentsTidy(type))}">
             <a href="${link}" target="_self">
             <div class="card highlight-on-hover ${blankSpaceFix(accentsTidy(type))}" onclick="viewMonster('${accentsTidy(name)}')">
-                <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${english_name.toLowerCase()}.webp" />
+                <img class="card-image" alt="${name}" src="${imgApiURL + english_name.toLowerCase()}.webp" />
             </div>
             </a>
             <h2 class="card-title">${name}</h2>
@@ -180,7 +182,7 @@ window.addEventListener("beforeunload", function(){
  }, false);
 
 window.onload = async function getMonstersTotal() {
-    const response = await fetch(`https://heroes-and-monsters-api-2.herokuapp.com`);
+    const response = await fetch("https://heroes-and-monsters-api.onrender.com");
     api_info = await response.json();
     TotalNumberOfMonsters = api_info.monster.length;
     NumberOfMonstersToLoadByStep = TotalNumberOfMonsters;

@@ -2,7 +2,7 @@ let monster;
 var spells = {};
 let innate_spells = [];
 const id = getURLParameter("id").toLowerCase();
-
+const api = "https://heroes-and-monsters-api.onrender.com";
 
 accentsTidy = function(s) {
     var r = s.toLowerCase();
@@ -17,18 +17,18 @@ function getURLParameter(parameter) {
 }
 
 async function getMonsterData() {
-    const monster_response = await fetch(`https://heroes-and-monsters-api-2.herokuapp.com/query-${id}`);
+    const monster_response = await fetch(api+`/query-${id}`);
     monster = await monster_response.json();
     
     if(monster.spells.length > 0){
         for (let i = 0; i < monster.spells.length; i++) {
-            const response = await fetch(`https://heroes-and-monsters-api-2.herokuapp.com/query-${accentsTidy(monster.spells[i])}`);
+            const response = await fetch(api+`/query-${accentsTidy(monster.spells[i])}`);
             spells[monster.spells[i]] = await response.json()
         }
     }
     if(monster.innate_spellcasting.length > 0){
         for (let i = 0; i < monster.innate_spellcasting.length; i++) {
-            const response = await fetch(`https://heroes-and-monsters-api-2.herokuapp.com/query-${accentsTidy(monster.innate_spellcasting[i].spell)}`);
+            const response = await fetch(api+`/query-${accentsTidy(monster.innate_spellcasting[i].spell)}`);
             spells[monster.innate_spellcasting[i].spell] = await response.json()
         }
     }
@@ -97,15 +97,14 @@ function getSpellCost(magic_circle) {
 
 function getAttributeFromPortugueseName(portugueseAttributeName) {
     switch(portugueseAttributeName){
-        case "Força": return monster.strength;
-        case "Vitalidade": return monster.vitality;
-        case "Agilidade": return monster.agility;
-        case "Carisma": return monster.charisma;
-        case "Vontade": return monster.willpower;
-        case "Sabedoria": return monster.wisdom;
-        case "Inteligência": return monster.intelligence;
+        case "Força":           return monster.strength;
+        case "Vitalidade":      return monster.vitality;
+        case "Agilidade":       return monster.agility;
+        case "Carisma":         return monster.charisma;
+        case "Vontade":         return monster.willpower;
+        case "Sabedoria":       return monster.wisdom;
+        case "Inteligência":    return monster.intelligence;
     }
 }
-
 
 getMonsterData();
