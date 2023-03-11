@@ -3,13 +3,14 @@ const MonsterList = document.querySelector('[data-js="bestiario"]');
 
 const apiURL = "https://heroes-and-monsters-api.onrender.com";
 const imgApiURL = "https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/";
-const GetMonsterUrl = id => apiURL+`/monster/${id}`;
+const GetMonsterUrl = id => apiURL+`/monster/${monstersList[id]}`;
 let TotalNumberOfMonsters;
 let NumberOfMonstersToLoadByStep;
 let loaded = 0;
 let allLoaded = false;
 let viewingMonster;
 let loadingContent = false;
+let monstersList = [];
 let monsters;
 
 function accentsTidy(s){
@@ -185,5 +186,6 @@ window.onload = async function getMonstersTotal() {
     const response = await fetch("https://heroes-and-monsters-api.onrender.com");
     api_info = await response.json();
     TotalNumberOfMonsters = api_info.monster.length;
+    monstersList = api_info.monster;
     NumberOfMonstersToLoadByStep = TotalNumberOfMonsters;
 };
