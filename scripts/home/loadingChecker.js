@@ -9,8 +9,6 @@ function loadingChecker(){
 
     if(loadFinished) clearInterval(loadingCheck);
 
-    console.log(difference);
-
     if(difference >= 5000){
         document.querySelector("#slow-loading-advert").style.display = "flex";
     }
