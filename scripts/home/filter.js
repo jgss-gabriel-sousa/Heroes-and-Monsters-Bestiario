@@ -9,66 +9,54 @@ const MAX_ND = 4;
 function formatNDRange(value){
     if(value == -2) return "1/8";
     if(value == -1) return "1/4";
-    if(value == 0) return "1/2";
+    if(value == 0)  return "1/2";
     return value;
 }
 
-function filter(){
+function filter() {
     const monsters = document.querySelectorAll(".monster-element");
-    
-    for(let i = 0, x = 0; i < monsters.length; i++){
-        x = 0;
-        const ND = parseFloat(monsters[i].classList[2].slice(2));
 
-        for (let j = 0; j < activeFiltersKeys.length; j++) {
-            if(j == NAME){
-                if(activeFiltersKeys[j] == "all" || monsters[i].classList[1].includes(activeFiltersKeys[NAME]) || accentsTidy(monsters[i].classList[1]).includes(activeFiltersKeys[NAME]))
-                    x++;
-            }
-            else if(j == MIN_ND){
-                if(ND < 1){
-                    let ndNumber;
+    monsters.forEach((monster) => {
+        let matchingFilters = 0;
 
-                    if(activeFiltersKeys[MIN_ND] == "1/8") ndNumber = 0.125;
-                    if(activeFiltersKeys[MIN_ND] == "1/4") ndNumber = 0.25;
-                    if(activeFiltersKeys[MIN_ND] == "1/2") ndNumber = 0.5;
+        const nd = parseFloat(monster.classList[2].slice(2));
 
-                    if(ND >= ndNumber){
-                        x++;   
-                    }
+        activeFiltersKeys.forEach((filterKey, index) => {
+            if (index === NAME) {
+                if (filterKey === "all" || monster.classList[1].includes(filterKey) || accentsTidy(monster.classList[1]).includes(filterKey)) {
+                matchingFilters++;
                 }
-                else if(ND >= parseInt(activeFiltersKeys[MIN_ND])){
-                    x++;
+            } else if (index === MIN_ND) {
+                if (nd < 1) {
+                    const ndNumber = { "1/8": 0.125, "1/4": 0.25, "1/2": 0.5 }[filterKey];
+                if (nd >= ndNumber) {
+                    matchingFilters++;   
                 }
-            }
-            else if(j == MAX_ND){
-                if(ND <= 1){
-                    let ndNumber;
-
-                    if(activeFiltersKeys[MAX_ND] == "1/8") ndNumber = 0.125;
-                    else if(activeFiltersKeys[MAX_ND] == "1/4") ndNumber = 0.25;
-                    else if(activeFiltersKeys[MAX_ND] == "1/2") ndNumber = 0.5;
-                    else ndNumber = parseInt(activeFiltersKeys[MAX_ND]);
-
-                    if(ND <= ndNumber){
-                        x++;
-                    }
+                } else if (nd >= parseInt(filterKey)) {
+                    matchingFilters++;
                 }
-                else if(ND <= parseInt(activeFiltersKeys[MAX_ND])){
-                    x++;
+            } else if (index === MAX_ND) {
+                if (nd <= 1) {
+                    const ndNumber = { "1/8": 0.125, "1/4": 0.25, "1/2": 0.5 }[filterKey] || parseInt(filterKey);
+                if (nd <= ndNumber) {
+                    matchingFilters++;
+                }
+                } else if (nd <= parseInt(filterKey)) {
+                    matchingFilters++;
+                }
+            } else {
+                if (filterKey === "all" || monster.classList.contains(filterKey)) {
+                    matchingFilters++;
                 }
             }
-            else if(activeFiltersKeys[j] == "all" || monsters[i].classList.contains(activeFiltersKeys[j]))
-                x++;
-        }
+        });
 
-        if(x == activeFiltersKeys.length){
-            monsters[i].classList.add("show");
+        if (matchingFilters === activeFiltersKeys.length) {
+            monster.classList.add("show");
+        } else {
+            monster.classList.remove("show");
         }
-        else{
-            monsters[i].classList.remove("show");
-        }
-    };
+    });
 }
 
 document.getElementById("filter-by-type").addEventListener('change', (event) => {
