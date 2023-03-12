@@ -15,8 +15,8 @@ let monsters;
 
 function accentsTidy(s){
     var r = s.toLowerCase();
-    non_asciis = {'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]', 'y': '[ýÿ]'};
-    for (i in non_asciis) { r = r.replace(new RegExp(non_asciis[i], 'g'), i); }
+    const non_asciis = {'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]', 'y': '[ýÿ]'};
+    for (let i in non_asciis) { r = r.replace(new RegExp(non_asciis[i], 'g'), i); }
     return r;
 }
 
@@ -25,15 +25,9 @@ function blankSpaceFix(s){
 }
 
 function NDFormat(nd){
-    if(nd == 0.5){
-        return "1/2"
-    }
-    else if(nd == 0.25){
-        return "1/4"
-    }
-    else if(nd == 0.125){
-        return "1/8"
-    }
+    if(nd == 0.5)           return "1/2";
+    else if(nd == 0.25)     return "1/4";
+    else if(nd == 0.125)    return "1/8";
     return nd;
 }
 
