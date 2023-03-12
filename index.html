@@ -9,10 +9,35 @@
     
 	<link rel="stylesheet" href="styles/home.css"/>
 
+    <script src="./scripts/home/loadingChecker.js" defer></script>
     <script src="./scripts/home/home.js" defer></script>
     <script src="./scripts/home/filter.js" defer></script>
 </head>
 <body>
+    <div id="slow-loading-advert" hidden>
+        <div>
+            <button id="close-btn">X</button>
+            <p>Ops, parece que o carregamento está está levando um pouquinho mais de tempo do que o normal :(</p>
+            <p>Infelizmente, nosso servidor é gratuito e às vezes pode ficar um pouco lento</p>
+            <p>Mas não se preocupe, em breve a página estará carregada :)</p>
+            <br>
+            <p>Enquanto isso, considere conferir ou ajudar no nosso projeto Heroes and Monsters</p>
+            <br>
+
+            <section>
+                <form action="https://linktr.ee/Heroes_and_Monsters" method="post" target="_blank">
+                    <input type="image" src="./img/linktree logo.webp" name="submit" alt="Linktree Heroes and Monsters" />
+                </form>
+
+                <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                    <input type="hidden" name="currency" value="BRL" />
+                    <input type="hidden" name="receiverEmail" value="jgss.gabriel.sousa@gmail.com" />
+                    <input type="hidden" name="iot" value="button" />
+                    <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/94x52-doar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+                </form>
+            </section>
+        </div>
+    </div>
     <div class="container">
         <h1>Bestiário - Heroes & Monsters</h1>
 

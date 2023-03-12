@@ -106,6 +106,7 @@ function checkScroll(){
         loadingContent = false;
     }
     if(allLoaded){
+        loadFinished = true;
         SpinnerLoading.style.display = "none";
         clearInterval(checkScrollInterval);
         filter();
