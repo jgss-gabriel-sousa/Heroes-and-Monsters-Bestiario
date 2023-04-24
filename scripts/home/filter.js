@@ -74,14 +74,18 @@ document.getElementById("filter-by-name").addEventListener('input', (event) => {
     filter();
 });
 
+document.getElementById("minNDRange").addEventListener('input', (event) => {
+    document.getElementById("minNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
+});
 document.getElementById("minNDRange").addEventListener('change', (event) => {
     activeFiltersKeys[MIN_ND] = formatNDRange(parseInt(event.target.value)-2);
-    document.getElementById("minNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
     filter();
 });
 
+document.getElementById("maxNDRange").addEventListener('input', (event) => {
+    document.getElementById("maxNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
+});
 document.getElementById("maxNDRange").addEventListener('change', (event) => {
     activeFiltersKeys[MAX_ND] = formatNDRange(parseInt(event.target.value)-2);
-    document.getElementById("maxNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
     filter();
 });
