@@ -16,4 +16,5 @@ function loadingChecker(){
 
 document.querySelector("#close-btn").addEventListener("click", e => {
     document.querySelector("#slow-loading-advert").style.display = "none";
+    clearInterval(loadingCheck);
 });

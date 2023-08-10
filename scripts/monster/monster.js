@@ -1,7 +1,7 @@
 let monster;
 var spells = {};
 let innate_spells = [];
-const id = getURLParameter("id").toLowerCase();
+const id = getURLParameter("id");
 const api = "https://heroes-and-monsters-api.onrender.com";
 
 accentsTidy = function(s) {
@@ -13,7 +13,7 @@ accentsTidy = function(s) {
 
 function getURLParameter(parameter) {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(parameter);
+    return urlParams.get(parameter).toLowerCase;
 }
 
 async function getMonsterData() {
