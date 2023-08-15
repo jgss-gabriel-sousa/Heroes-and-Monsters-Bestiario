@@ -200,19 +200,20 @@ tr:nth-child(odd) {
     cursor: pointer;
 }
 
-.aberracao              {background-color:rgb(166, 143, 209)}
-.animal                 {background-color:rgb(233, 156, 105)}
+.aberracao              {background-color:rgba(166, 143, 209, 0.6)}
+.animal                 {background-color:rgba(233, 156, 105, 0.6)}
 .besta_magica           {background-color:rgba(14, 27, 143, 0.4)}
-.celestial              {background-color:rgb(69, 179, 226)}
+.celestial              {background-color:rgba(69, 179, 226, 0.6)}
 .corruptor              {background-color:rgba(177, 36, 34, 0.5)}
 .constructo             {background-color:rgba(209, 178, 44, 0.63);}
-.dragao                 {background-color:rgb(255, 255, 40)}
-.elemental              {background-color:rgba(55, 197, 175)}
-.fada                   {background-color:rgb(235, 166, 172)}
-.gigante                {background-color:rgb(155, 200, 50)}
-.gosma                  {background-color:rgb(185, 166, 15)}
-.humanoide              {background-color:rgb(238, 238, 238)}
-.humanoide_monstruoso   {background-color:rgb(155, 155, 155)}
-.inseto                 {background-color:rgb(150, 180, 150)}
-.morto-vivo             {background-color:rgba(76, 74, 71, 0.75)}
-.planta                 {background-color:rgb(139, 178, 56)}
+.dragao                 {background-color:rgba(255, 255, 40, 0.6)}
+.elemental              {background-color:rgba(55, 197, 175, 0.6)}
+.fada                   {background-color:rgba(235, 166, 172, 0.6)}
+.gigante                {background-color:rgba(155, 200, 50, 0.6)}
+.gosma                  {background-color:rgba(185, 166, 15, 0.6)}
+.humanoide              {background-color:rgba(238, 238, 238, 0.6)}
+.humanoide_monstruoso   {background-color:rgba(155, 155, 155, 0.6)}
+.inseto                 {background-color:rgba(150, 180, 150, 0.6)}
+.morto-vivo             {background-color:rgba(76, 74, 71, 0.6)}
+.monstruosidade         {background-color:rgba(226, 119, 194, 0.6)}
+.planta                 {background-color:rgba(122, 189, 85, 0.6)}
