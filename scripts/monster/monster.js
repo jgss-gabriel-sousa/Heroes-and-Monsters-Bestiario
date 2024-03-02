@@ -1,8 +1,8 @@
 let monster;
 var spells = {};
 let innate_spells = [];
-const id = getURLParameter("id").toLowerCase();
-const api = "https://heroes-and-monsters-api.onrender.com";
+const id = getURLParameter("id").replace(/\s/g, '-').toLowerCase();
+const api = "https://gp-tycoon-web-service.onrender.com/hnm";
 
 accentsTidy = function(s) {
     var r = s.toLowerCase();
@@ -19,6 +19,8 @@ function getURLParameter(parameter) {
 async function getMonsterData() {
     const monster_response = await fetch(api+`/query-${id}`);
     monster = await monster_response.json();
+
+    console.log("{"+api+`/query-${id}`+"}")
     
     if(monster.spells.length > 0){
         for (let i = 0; i < monster.spells.length; i++) {
