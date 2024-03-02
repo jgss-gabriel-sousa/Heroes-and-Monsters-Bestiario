@@ -1,7 +1,7 @@
 let monster;
 var spells = {};
 let innate_spells = [];
-const id = getURLParameter("id").replace(/\s/g, '-').toLowerCase();
+const id = getURLParameter("id").toLowerCase();
 const api = "https://gp-tycoon-web-service.onrender.com/hnm";
 
 accentsTidy = function(s) {
