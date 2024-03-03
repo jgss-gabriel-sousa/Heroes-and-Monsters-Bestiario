@@ -1,7 +1,7 @@
 const SpinnerLoading = document.querySelector("#loading")
 const MonsterList = document.querySelector('[data-js="bestiario"]');
 
-const apiURL = "https://heroes-and-monsters-api.onrender.com";
+const apiURL = "https://gp-tycoon-web-service.onrender.com/hnm";
 const imgApiURL = "https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/";
 const GetMonsterUrl = id => apiURL+`/monster/${monstersList[id]}`;
 let TotalNumberOfMonsters;
@@ -178,7 +178,7 @@ window.addEventListener("beforeunload", function(){
  }, false);
 
 window.onload = async function getMonstersTotal() {
-    const response = await fetch("https://heroes-and-monsters-api.onrender.com");
+    const response = await fetch("https://gp-tycoon-web-service.onrender.com/hnm");
     api_info = await response.json();
     TotalNumberOfMonsters = api_info.monster.length;
     monstersList = api_info.monster;
