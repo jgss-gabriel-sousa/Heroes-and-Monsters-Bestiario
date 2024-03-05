@@ -136,22 +136,22 @@ function generateHTML() {
     document.querySelector("#monster-image").src = `https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${monster.english_name.toLowerCase()}.webp`;
 
     document.querySelector("#cr-value").innerText = convertNumberToFraction(monster.challenge_ratio);
-    document.querySelector("#cr-bar").style.width = ((monster.challenge_ratio/30)*100).toString()+"%";
+    document.querySelector("#cr-bar").style.width = ((Math.pow(monster.challenge_ratio,2)/900)*100).toString()+"%";
 
     document.querySelector("#atk-value").innerText = convertNumberToFraction(monster.atk_cr);
-    document.querySelector("#atk-bar").style.width = ((monster.atk_cr/30)*100).toString()+"%";
+    document.querySelector("#atk-bar").style.width = ((Math.pow(monster.atk_cr,2)/900)*100).toString()+"%";
     
     document.querySelector("#dmg-value").innerText = convertNumberToFraction(monster.damage_cr);
-    document.querySelector("#dmg-bar").style.width = ((monster.damage_cr/30)*100).toString()+"%";
+    document.querySelector("#dmg-bar").style.width = ((Math.pow(monster.damage_cr,2)/900)*100).toString()+"%";
 
     document.querySelector("#res-value").innerText = monster.resistances_and_immunities_cr;
-    document.querySelector("#res-bar").style.width = ((monster.resistances_and_immunities_cr/6)*100).toString()+"%";
+    document.querySelector("#res-bar").style.width = ((Math.pow(monster.resistances_and_immunities_cr,2)/36)*100).toString()+"%";
 
     document.querySelector("#hp-value").innerText = convertNumberToFraction(monster.hp_cr);
-    document.querySelector("#hp-bar").style.width = ((monster.hp_cr/30)*100).toString()+"%";
+    document.querySelector("#hp-bar").style.width = ((Math.pow(monster.hp_cr,2)/900)*100).toString()+"%";
 
     document.querySelector("#def-value").innerText = convertNumberToFraction(monster.defense_cr);
-    document.querySelector("#def-bar").style.width = ((monster.defense_cr/30)*100).toString()+"%";
+    document.querySelector("#def-bar").style.width = ((Math.pow(monster.defense_cr,2)/900)*100).toString()+"%";
 
     //###############################################################################################################################################################################
 
