@@ -7,7 +7,7 @@ function loadingChecker(){
     const currentTime = new Date();
     const difference = currentTime - loadStartTime;
 
-    if(loadFinished) clearInterval(loadingCheck);
+    if(SpinnerLoading.style.display == "none") clearInterval(loadingCheck);
 
     if(difference >= 10000){
         document.querySelector("#slow-loading-advert").style.display = "flex";

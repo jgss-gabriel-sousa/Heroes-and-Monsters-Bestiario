@@ -1,9 +1,8 @@
 const SpinnerLoading = document.querySelector("#loading")
 const MonsterList = document.querySelector('[data-js="bestiario"]');
 
-const apiURL = "https://gp-tycoon-web-service.onrender.com/hnm";
+const apiURL = "https://jgss-web-service.onrender.com/hnm";
 const imgApiURL = "https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/";
-const GetMonsterUrl = id => apiURL+`/monster/${monstersList[id]}`;
 let TotalNumberOfMonsters;
 let NumberOfMonstersToLoadByStep;
 let loaded = 0;
@@ -11,7 +10,6 @@ let allLoaded = false;
 let viewingMonster;
 let loadingContent = false;
 let monstersList = [];
-let monsters;
 
 function accentsTidy(s){
     var r = s.toLowerCase();
@@ -31,56 +29,36 @@ function NDFormat(nd){
     return nd;
 }
 
-const generatePromises = toLoad => Array(toLoad).fill().map((_, index) =>
-    fetch(GetMonsterUrl(index+loaded)).then(response => response.json()))
-
-function generateHTML(monster){
-    monsters = monster;
-
-    if(document.querySelectorAll(".monster-element").length == TotalNumberOfMonsters)
-        return;
-
-    return monster.reduce((accumulator, {name, type, english_name, source, challenge_ratio}) => {
+function renderMonsters(monsters){
+    for (const monsterName in monsters) {
+        const monster = monsters[monsterName];     
         let link;
+        let html = "";
 
-        if(window.location.href.includes("index"))
-            link = window.location.href.substring(0, window.location.href.length-11) + "/monster.html?id=" + accentsTidy(name).replace(/ /g, "+");
-        else
-            link = window.location.href + "monster.html?id=" + accentsTidy(name).replace(/ /g, "+");
-
-        accumulator += `
-        <li class="monster-element ${name.replace(/ /g, "-")} ND${challenge_ratio} `
-
-        for(let i = 0; i < source.length; i++){
-            accumulator += " source-"+source[i];
+        html += `<li class="monster-element ${monsterName.replace(/ /g, "-")} ND${monster.challenge_ratio} `
+        
+        for(let i = 0; i < monster.source.length; i++){
+            html += " source-"+monster.source[i];
         }
         
-        accumulator += ` type-${blankSpaceFix(accentsTidy(type))}">
+        if(window.location.href.includes("index"))
+            link = window.location.href.substring(0, window.location.href.length-11) + "/monster.html?id=" + accentsTidy(monster.name).replace(/ /g, "+");
+        else
+            link = window.location.href + "monster.html?id=" + accentsTidy(monster.name).replace(/ /g, "+");
+
+        console.log(link)
+
+        html += ` type-${blankSpaceFix(accentsTidy(monster.type))}">
             <a href="${link}" target="_self">
-            <div class="card highlight-on-hover ${blankSpaceFix(accentsTidy(type))}" onclick="viewMonster('${accentsTidy(name)}')">
-                <img class="card-image" alt="${name}" src="${imgApiURL + english_name.toLowerCase()}.webp" />
+            <div class="card highlight-on-hover ${blankSpaceFix(accentsTidy(monster.type))}" onclick="viewMonster('${accentsTidy(monster.name)}')">
+                <img class="card-image" alt="${monster.name}" src="${imgApiURL + monster.english_name.toLowerCase()}.webp" />
             </div>
             </a>
-            <h2 class="card-title">${name}</h2>
-            <p class="card-subtitle">${type} (${NDFormat(challenge_ratio)})</p>
-        </li>
-        `
-        return accumulator
-    }, '');
-}
+            <h2 class="card-title">${monster.name}</h2>
+            <p class="card-subtitle">${monster.type} (${NDFormat(monster.challenge_ratio)})</p>
+        </li>`
 
-const insertMonsterIntoPage = monster => {
-    if(!monster) return;
-    
-    MonsterList.innerHTML += monster;
-    
-    loaded += NumberOfMonstersToLoadByStep;
-    if(loaded > TotalNumberOfMonsters){
-        loaded = TotalNumberOfMonsters;
-        allLoaded = true;
-    }
-    else if(loaded == TotalNumberOfMonsters){
-        allLoaded = true;
+        MonsterList.innerHTML += html;
     }
 
     SpinnerLoading.style.display = "none";
@@ -92,27 +70,6 @@ function viewMonster(id){
     viewingMonster = true;
 }
 
-function checkScroll(){
-    if(!allLoaded && !loadingContent && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-        loadingContent = true;
-        SpinnerLoading.style.display = "block";
-        scrollTo(0, (window.innerHeight + window.pageYOffset));
-        loadMonster();
-
-        clearInterval(checkScrollInterval);
-        setTimeout( () => {
-            checkScrollInterval = setInterval(checkScroll, 500);
-        }, 500);
-        loadingContent = false;
-    }
-    if(allLoaded){
-        loadFinished = true;
-        SpinnerLoading.style.display = "none";
-        clearInterval(checkScrollInterval);
-        filter();
-    }
-}
-
 function savePageState(){
     sessionStorage.setItem("html", MonsterList.innerHTML);
     sessionStorage.setItem("saved", true);
@@ -122,65 +79,41 @@ function savePageState(){
     sessionStorage.setItem("filter-by-type", document.querySelector("#filter-by-type").selectedIndex);
 }
 
-function pageStateUpdate(){
-    if(sessionStorage.getItem("saved") != null){
-        loaded = parseInt(sessionStorage.getItem("loaded"));
+async function loadMonsters(){
+    let monsters = {};
 
-        if(sessionStorage.getItem("allLoaded") == "true"){
-            allLoaded = true;
-        }
-        else{
-            allLoaded = false;
-        }
+    const response = await fetch(apiURL);
+    let monstersList = await response.json();
+    monstersList = monstersList["hnm/bestiary"];
 
-        MonsterList.innerHTML = sessionStorage.getItem("html");
-        setTimeout(() => {
-            scrollTo(0, sessionStorage.getItem("scroll"));
-        }, 500);
+    const fetchPromises = monstersList.map(async keyMonster => {
+        const response = await fetch(`${apiURL}/query-${keyMonster}`);
+        const monster = await response.json();
+        return monster;
+    });
 
-        document.querySelector("#filter-by-type").selectedIndex = sessionStorage.getItem("filter-by-type");
-    }
-    else{
-        setTimeout(() => {
-            scrollTo(0, 0);
-        }, 500);
-    }
-}
+    const monstersArray = await Promise.all(fetchPromises);
 
-function loadMonster(){
-    if(loaded < TotalNumberOfMonsters){
-        SpinnerLoading.style.display = "block";
+    monstersArray.forEach(monster => {
+        monsters[monster.name] = monster;
+    });
 
-        let toLoad;
-        if(NumberOfMonstersToLoadByStep+loaded > TotalNumberOfMonsters){
-            toLoad = TotalNumberOfMonsters-loaded;
-        }
-        else{
-            toLoad = NumberOfMonstersToLoadByStep;
-        }
+    return monsters;
+} 
 
-        const monsterPromises = generatePromises(toLoad);
+loadMonsters()
+    .then(monsters => {
+        console.log(monsters);
+        renderMonsters(monsters);
+        //pageStateUpdate();
 
-        Promise.all(monsterPromises)
-            .then(generateHTML)
-            .then(insertMonsterIntoPage);
-    }
-}
+    }).catch(error => {
+        console.error("Error loading monsters:", error);
+    });
 
-pageStateUpdate();
-loadMonster();
-var checkScrollInterval = setInterval(checkScroll, 500);
 
-window.addEventListener("beforeunload", function(){
+window.addEventListener("beforeunload", e => {
     if(!viewingMonster){
         sessionStorage.clear();
     }
- }, false);
-
-window.onload = async function getMonstersTotal() {
-    const response = await fetch("https://gp-tycoon-web-service.onrender.com/hnm");
-    api_info = await response.json();
-    TotalNumberOfMonsters = api_info.monster.length;
-    monstersList = api_info.monster;
-    NumberOfMonstersToLoadByStep = TotalNumberOfMonsters;
-};
+}, false);
