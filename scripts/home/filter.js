@@ -59,33 +59,29 @@ function filter() {
     });
 }
 
-document.getElementById("filter-by-type").addEventListener('change', (event) => {
+document.getElementById("filter-by-type").addEventListener("change", (event) => {
     activeFiltersKeys[TYPE] = event.target.value;
     filter();
 });
 
-document.getElementById("filter-by-source").addEventListener('change', (event) => {
+document.getElementById("filter-by-source").addEventListener("change", (event) => {
     activeFiltersKeys[SOURCE] = event.target.value;
     filter();
 });
 
-document.getElementById("filter-by-name").addEventListener('input', (event) => {
+document.getElementById("filter-by-name").addEventListener("input", (event) => {
     activeFiltersKeys[NAME] = event.target.value.replace(/ /g, "-");
     filter();
 });
 
-document.getElementById("minNDRange").addEventListener('input', (event) => {
+document.getElementById("minNDRange").addEventListener("input", (event) => {
     document.getElementById("minNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
-});
-document.getElementById("minNDRange").addEventListener('change', (event) => {
     activeFiltersKeys[MIN_ND] = formatNDRange(parseInt(event.target.value)-2);
     filter();
 });
 
-document.getElementById("maxNDRange").addEventListener('input', (event) => {
+document.getElementById("maxNDRange").addEventListener("input", (event) => {
     document.getElementById("maxNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
-});
-document.getElementById("maxNDRange").addEventListener('change', (event) => {
     activeFiltersKeys[MAX_ND] = formatNDRange(parseInt(event.target.value)-2);
     filter();
 });
