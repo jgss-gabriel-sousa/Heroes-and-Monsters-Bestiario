@@ -281,6 +281,43 @@ li {
     box-shadow: 0px 0px 4px 2px #333;
 }
 
+.damage-button, .roll-button {
+    text-decoration: underline;
+    border: 1px solid #222;
+    background-color: transparent;
+    border: 0;
+    color: #003333;
+    padding: 0;
+    font-family: rubik;
+    font-size: 14px;
+}
+.damage-button:hover, .roll-button:hover {
+    cursor: pointer;
+    filter: drop-shadow(1px 1px 1px #aaaaaa);
+    font-weight: bold;
+}
+
+.roll-table td, .roll-table tr {
+    border: 0;
+    background-color: transparent !important;
+}
+.roll-table td:first-child {
+    text-align: right;
+}
+.roll-table {
+    width: 100%;
+}
+
+body.swal2-shown.swal2-height-auto {
+    width: auto;
+}
+
+div.swal2-popup.swal2-modal.swal2-show {
+    background-color: #f3edd8;
+    border: 2px solid;
+}
+
+
 .progress-bar-background {
     height: 12px;
     border: 2px solid #111;

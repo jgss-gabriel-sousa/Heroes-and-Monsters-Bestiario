@@ -25,35 +25,35 @@ function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limi
     else{
         elementHTML += `
         <div class="action-info">
-            <p><strong>Custo de Mana:&nbsp</strong>${getSpellCost(spell.magic_circle)}</p>
+            <p><b>Custo de Mana:&nbsp</b>${getSpellCost(spell.magic_circle)}</p>
         `
     }
 
-    elementHTML += `<p><strong>Tempo de Conjuração:&nbsp</strong>${spell.cast_time}</p>`
+    elementHTML += `<p><b>Tempo de Conjuração:&nbsp</b>${spell.cast_time}</p>`
 
     if(spell.range != ""){
-        elementHTML += `<p><strong>Alcance:&nbsp</strong>${spell.range}</p>`
+        elementHTML += `<p><b>Alcance:&nbsp</b>${spell.range}</p>`
     }
 
     if(spell.attack_roll != false){
-        elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>+${spell_attribute_modvalue}</p>`
+        elementHTML += `<p><b>Rolagem de Ataque:&nbsp</b>+${spell_attribute_modvalue}</p>`
     }
 
     for (let i = 0; i < spell.damage.length; i++) {
-        elementHTML += `<p><strong>${spell.damage[i][0]}:&nbsp</strong>${spell.damage[i][1]}</p>`
+        elementHTML += `<p><b>${spell.damage[i][0]}:&nbsp</b>${spell.damage[i][1]}</p>`
     }
 
     if(spell.heal != ""){
         if(spell.name == "Cura")
-            elementHTML += `<p><strong>Cura:&nbsp</strong>d8+${spell_attribute_modvalue}</p>`
+            elementHTML += `<p><b>Cura:&nbsp</b>d8+${spell_attribute_modvalue}</p>`
         else
-            elementHTML += `<p><strong>Cura:&nbsp</strong>${spell.heal}</p>`
+            elementHTML += `<p><b>Cura:&nbsp</b>${spell.heal}</p>`
     }
     if(spell.saving_trow != ""){
-        elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${spellDC} de ${spell.saving_trow}</p>`
+        elementHTML += `<p><b>Teste de Salvamento:&nbsp</b>${spellDC} de ${spell.saving_trow}</p>`
     }
     if(spell.duration != ""){
-        elementHTML += `<p><strong>Duração:&nbsp</strong>${spell.duration}`
+        elementHTML += `<p><b>Duração:&nbsp</b>${spell.duration}`
         if(spell.concentration)
             elementHTML += ` (Concentração)`;  
         elementHTML += `</p>`;
@@ -61,7 +61,7 @@ function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limi
     if(spell.description.length != 0){
         elementHTML +=`
                 <div class="spell-description">
-                    <p><strong>Efeito:&nbsp</strong><span>${spell.description[0]}</span></p>
+                    <p><b>Efeito:&nbsp</b><span>${spell.description[0]}</span></p>
                 `
         
         if(spell.description.length > 1){
@@ -135,23 +135,31 @@ function generateHTML() {
     document.querySelector("#monster-image").alt = monster.name;
     document.querySelector("#monster-image").src = `https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${monster.english_name.toLowerCase()}.webp`;
 
-    document.querySelector("#cr-value").innerText = convertNumberToFraction(monster.challenge_ratio);
-    document.querySelector("#cr-bar").style.width = ((Math.log(monster.challenge_ratio)/Math.log(30))*100).toString()+"%";
-
-    document.querySelector("#atk-value").innerText = convertNumberToFraction(monster.atk_cr);
-    document.querySelector("#atk-bar").style.width = ((Math.log(monster.atk_cr)/Math.log(30))*100).toString()+"%";
+    function setElementText(selector, text) {
+        const element = document.querySelector(selector);
+        if (element) {
+            element.innerText = text;
+        }
+    }
     
-    document.querySelector("#dmg-value").innerText = convertNumberToFraction(monster.damage_cr);
-    document.querySelector("#dmg-bar").style.width = ((Math.log(monster.damage_cr)/Math.log(30))*100).toString()+"%";
+    function setElementWidth(selector, width) {
+        const element = document.querySelector(selector);
+        if (element) {
+            element.style.width = width;
+        }
+    }
 
-    document.querySelector("#res-value").innerText = monster.resistances_and_immunities_cr;
-    document.querySelector("#res-bar").style.width = ((Math.log(monster.resistances_and_immunities_cr+1)/Math.log(7))*100).toString()+"%";
+    function updateCR(selector, value, logBase) {
+        setElementText(selector+"-value", convertNumberToFraction(value));
+        setElementWidth(selector+"-bar", ((Math.log(value + 1) / Math.log(logBase)) * 100) + "%");
+    }
 
-    document.querySelector("#hp-value").innerText = convertNumberToFraction(monster.hp_cr);
-    document.querySelector("#hp-bar").style.width = ((Math.log(monster.hp_cr)/Math.log(30))*100).toString()+"%";
-
-    document.querySelector("#def-value").innerText = convertNumberToFraction(monster.defense_cr);
-    document.querySelector("#def-bar").style.width = ((Math.log(monster.defense_cr)/Math.log(30))*100).toString()+"%";
+    updateCR("#cr", monster.challenge_ratio, 30);
+    updateCR("#atk", monster.atk_cr, 30);
+    updateCR("#dmg", monster.damage_cr, 30);
+    updateCR("#res", monster.resistances_and_immunities_cr, 30);
+    updateCR("#hp", monster.hp_cr, 30);
+    updateCR("#def", monster.defense_cr, 30);
 
     //###############################################################################################################################################################################
 
@@ -235,9 +243,9 @@ function generateHTML() {
         document.querySelector("#stats-languages").style.display = "block";
 
         if(monster.only_understands == true)
-            document.querySelector("#stats-languages").innerHTML = "<strong>Idiomas que compreende, mas não pode falar:&nbsp</strong><span></span>";
+            document.querySelector("#stats-languages").innerHTML = "<b>Idiomas que compreende, mas não pode falar:&nbsp</b><span></span>";
         else
-            document.querySelector("#stats-languages").innerHTML = "<strong>Idiomas:&nbsp</strong><span></span>";
+            document.querySelector("#stats-languages").innerHTML = "<b>Idiomas:&nbsp</b><span></span>";
 
         for (let i = 0; i < monster.languages.length; i++) {
             document.querySelector("#stats-languages span").innerText += monster.languages[i];
@@ -247,8 +255,10 @@ function generateHTML() {
         }
     }
 
+    console.log(monster)
+
     if(monster.telepathy == true){
-        document.querySelector("#stats-languages strong").innerText = "Idiomas (Telepatia):\u00A0";
+        document.querySelector("#stats-languages > b").innerText = "Idiomas (Telepatia):\u00A0";
     }
 
 
@@ -282,7 +292,7 @@ function generateHTML() {
         for (let i = 0; i < monster.abilities.length; i++) {            
             let elementHTML =`
                     <div class="ability-description">
-                        <p><strong>${monster.abilities[i].name}:&nbsp</strong><span>${monster.abilities[i].description[0]}</span></p>
+                        <p><b>${monster.abilities[i].name}:&nbsp</b><span>${monster.abilities[i].description[0]}</span></p>
                     `
             
             if(monster.abilities[i].description.length > 1){
@@ -310,30 +320,30 @@ function generateHTML() {
         `
 
         if(action.limit != ""){
-            elementHTML += `<p><strong>Limite:&nbsp</strong>${action.limit}</p>`
+            elementHTML += `<p><b>Limite:&nbsp</b>${action.limit}</p>`
         }
         if(action.recharge != ""){
-            elementHTML += `<p><strong>Recarga:&nbsp</strong>${action.recharge}</p>`
+            elementHTML += `<p><b>Recarga:&nbsp</b>${action.recharge}</p>`
         }
         if(action.range != ""){
-            elementHTML += `<p><strong>Alcance:&nbsp</strong>${action.range}</p>`
+            elementHTML += `<p><b>Alcance:&nbsp</b>${action.range}</p>`
         }
         if(action.roll != ""){
-            elementHTML += `<p><strong>Rolagem de Ataque:&nbsp</strong>${action.roll}</p>`
+            elementHTML += `<p><b>Rolagem de Ataque:&nbsp</b><button class="roll-button">${action.roll}</button></p>`
         }
         if(action.damage != ""){
-            elementHTML += `<p><strong>Dano:&nbsp</strong>${action.damage}</p>`
+            elementHTML += `<p><b>Dano:&nbsp</b><button class="damage-button">${action.damage}</button></p>`
         }
         if(action.save_throw != ""){
-            elementHTML += `<p><strong>Teste de Salvamento:&nbsp</strong>${action.save_throw}</p>`
+            elementHTML += `<p><b>Teste de Salvamento:&nbsp</b>${action.save_throw}</p>`
         }
         if(action.time != ""){
-            elementHTML += `<p><strong>Tempo:&nbsp</strong>${action.time}</p>`
+            elementHTML += `<p><b>Tempo:&nbsp</b>${action.time}</p>`
         }
         if(action.effect.length != 0){
             elementHTML +=`
                     <div class="spell-description">
-                        <p><strong>Efeito:&nbsp</strong><span>${action.effect[0]}</span></p>
+                        <p><b>Efeito:&nbsp</b><span>${action.effect[0]}</span></p>
                     `
             
             if(action.effect.length > 1){
@@ -369,7 +379,7 @@ function generateHTML() {
 
         if(monster.innate_spellcasting_attribute != ""){
             document.querySelector("#innate-spells-attribute").style.display = "block";
-            document.querySelector("#innate-spells-attribute").innerHTML = `<strong>Atributo de Conjuração:&nbsp</strong>${monster.innate_spellcasting_attribute} (+${spell_attribute_modvalue})`;
+            document.querySelector("#innate-spells-attribute").innerHTML = `<b>Atributo de Conjuração:&nbsp</b>${monster.innate_spellcasting_attribute} (+${spell_attribute_modvalue})`;
         }
 
         for (let i = 0; i < monster.innate_spellcasting.length; i++) {
@@ -423,13 +433,13 @@ function generateHTML() {
         document.querySelector("#legendary-actions").innerHTML += "<p>"+name+" pode realizar 3 ações lendárias, escolhidas dentre as opções abaixo. Apenas uma ação lendária pode ser usada por vez e apenas no final do turno de outra criatura. "+name+" recupera as ações lendárias gastas no começo do turno dele:</p>";
 
         for (let i = 0; i < monster.legendary_actions.length; i++) {
-            let action = "<li><strong>"+monster.legendary_actions[i].name;
+            let action = "<li><b>"+monster.legendary_actions[i].name;
 
             if(monster.legendary_actions[i].cost == 1){
-                action += ":</strong>";
+                action += ":</b>";
             }
             else{
-                action += " (Custa "+monster.legendary_actions[i].cost+" Ações):</strong>";
+                action += " (Custa "+monster.legendary_actions[i].cost+" Ações):</b>";
             }
 
             action += ` ${monster.legendary_actions[i].description}</li>`;
@@ -489,4 +499,228 @@ function generateHTML() {
             document.querySelector("#description").innerHTML += `<p class="description-text">${monster.description[i]}</p>`;
         }
     }
+
+
+    //###############################################################################################################################################################################
+
+    
+    document.querySelectorAll(".damage-button").forEach(e => {
+        e.addEventListener("click", event => {
+            const damageString = event.target.innerText;
+            const roll = rollDice(damageString);
+            let html = ``;
+            html += `<table class="roll-table">`
+
+            roll.results.forEach(result => {
+                
+                html += `
+                <tr>
+                    <td>${result.expression}:</td>
+                    <td>(
+                `
+
+                for (let i = 0; i < result.subroll.length; i++) {
+                    const r = result.subroll[i];
+                    
+                    html += `
+                        ${r.roll}
+                    `
+
+                    if(i+1 < result.subroll.length){
+                        html += ` + `
+                    }
+                    else if(result.modifier != 0) {
+                        html += `) + ${result.modifier}`
+                    }
+                    else {
+                        html += `)`
+                    }
+                }
+
+                html += `
+                        <td>=</td>
+                        <td><b>${result.total}</b></td>
+                    <tr>
+                `
+            });
+
+
+            Swal.fire({
+                html: `
+                    ${html}
+                    <h1>${roll.total}</h1>
+                `,
+                showCloseButton: true,
+                focusConfirm: false,
+              });
+        });
+    });
+
+
+    document.querySelectorAll(".roll-button").forEach(e => {
+        e.addEventListener("click", event => {
+            const damageString = "d20"+event.target.innerText;
+            const roll = rollDice(damageString);
+            let html = ``;
+            html += `<table class="roll-table">`
+
+            roll.results.forEach(result => {
+                
+                html += `
+                <tr>
+                    <td>${result.expression}:</td>
+                    <td>(
+                `
+
+                for (let i = 0; i < result.subroll.length; i++) {
+                    const r = result.subroll[i];
+                    
+                    html += `
+                        ${r.roll}
+                    `
+
+                    if(i+1 < result.subroll.length){
+                        html += ` + `
+                    }
+                    else if(result.modifier != 0) {
+                        html += `) + ${result.modifier}`
+                    }
+                    else {
+                        html += `)`
+                    }
+                }
+
+                html += `
+                        <td>=</td>
+                        <td><b>${result.total}</b></td>
+                    <tr>
+                `
+            });
+
+
+            Swal.fire({
+                html: `
+                    ${html}
+                    <h1>${roll.total}</h1>
+                `,
+                showCloseButton: true,
+                focusConfirm: false,
+              });
+        });
+    });
 }
+
+
+function filterDamageString(damageString) {
+    const regex = /(\d*d\d+(\+\d+)?)/g;
+    const matches = damageString.match(regex);
+
+    if (matches) {
+        const formattedMatches = matches.map(diceValue => {
+            if (diceValue.startsWith('d')) {
+                diceValue = '1' + diceValue;
+            }
+            return diceValue;
+        });
+
+        const resultString = formattedMatches.join(' + ');
+
+        return resultString;
+
+    } else {
+        throw new Error("Invalid damage string format");
+    }
+}
+
+function rollDice(diceString) {
+    function diceRoll(sides) {
+        return Math.floor(Math.random() * sides) + 1;
+    }
+
+    function rollSingleDiceExpression(expression) {
+        const regex = /(\d*)d(\d+)(\+\d+)?/;
+        const matches = expression.match(regex);
+        const roll = [];
+        roll.subroll = [];
+
+        if (matches) {
+            const count = matches[1] ? parseInt(matches[1]) : 1; // Quantidade de dados
+            const sides = parseInt(matches[2]); // Lados do dado
+            const modifier = matches[3] ? parseInt(matches[3]) : 0; // Modificador adicional
+
+            let total = 0;
+
+            for (let i = 0; i < count; i++) {
+                const rollValue = diceRoll(sides);
+                
+                const subroll = {
+                    roll: 0,
+                    sides: 0,
+                }
+
+                subroll.sides = sides;
+                subroll.roll = rollValue;
+
+                roll.subroll.push(subroll);
+
+                total += rollValue;
+            }
+
+            roll.expression = matches.input;
+            roll.modifier = modifier;
+            roll.total = total+modifier;
+
+            total += modifier;
+
+            return roll;
+
+        } else {
+            throw new Error("Invalid dice expression format");
+        }
+    }
+
+    const diceExpressions = diceString.split(' + ');
+
+    const results = diceExpressions.map(rollSingleDiceExpression);
+
+    return {results, total: results.reduce((total, roll) => total + roll.total, 0)};
+}
+/*
+function rollDice(diceString) {
+    function diceRoll(sides) {
+        return Math.floor(Math.random() * sides) + 1;
+    }
+
+    const roll = {
+        subrolls: [],
+        total: 0
+    }
+    const regex = /(\d*)d(\d+)(\+\d+)?/g;
+    let matches;
+    let total = 0;
+
+    while ((matches = regex.exec(diceString)) !== null) {
+        let count = matches[1] ? parseInt(matches[1]) : 1;
+        let sides = parseInt(matches[2]);
+        let modifier = matches[3] ? parseInt(matches[3]) : 0;
+
+        for (let i = 0; i < count; i++) {
+            const rollValue = diceRoll(sides)
+
+            roll.subrolls.push({
+                sides: sides,
+                roll: rollValue
+            });
+
+            total += rollValue;
+        }
+
+        total += modifier;
+
+        roll.total = total
+        roll.modifier = modifier
+    }
+
+    return roll;
+}
+*/
