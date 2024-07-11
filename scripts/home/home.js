@@ -46,8 +46,6 @@ function renderMonsters(monsters){
         else
             link = window.location.href + "monster.html?id=" + accentsTidy(monster.name).replace(/ /g, "+");
 
-        console.log(link)
-
         html += ` type-${blankSpaceFix(accentsTidy(monster.type))}">
             <a href="${link}" target="_self">
             <div class="card highlight-on-hover ${blankSpaceFix(accentsTidy(monster.type))}" onclick="viewMonster('${accentsTidy(monster.name)}')">
@@ -103,7 +101,6 @@ async function loadMonsters(){
 
 loadMonsters()
     .then(monsters => {
-        console.log(monsters);
         renderMonsters(monsters);
         //pageStateUpdate();
 

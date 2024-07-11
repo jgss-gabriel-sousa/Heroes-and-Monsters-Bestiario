@@ -20,8 +20,6 @@ async function getMonsterData() {
     const monster_response = await fetch(api+`/query-${id}`);
     monster = await monster_response.json();
 
-    console.log("{"+api+`/query-${id}`+"}")
-    
     if(monster.spells.length > 0){
         for (let i = 0; i < monster.spells.length; i++) {
             const response = await fetch(api+`/query-${accentsTidy(monster.spells[i])}`);
