@@ -495,7 +495,92 @@ export function generateHTML(monster) {
 
 
     //###############################################################################################################################################################################
+    const attributes = {
+        FOR: {
+            element: document.getElementById("attribute-FOR"),
+            content: `
+                <ul>
+                    <li>Atletismo</li>
+                </ul>
+            `
+        },
+        VIT: {
+            element: document.getElementById("attribute-VIT"),
+            content: `
+                <ul>
+                    <li>Resistência</li>
+                </ul>
+            `
+        },
+        AGI: {
+            element: document.getElementById("attribute-AGI"),
+            content: `
+                <ul>
+                    <li>Acrobacia</li>
+                    <li>Furtividade</li>
+                    <li>Ladroagem</li>
+                    <li>Reflexos</li>
+                </ul>
+            `
+        },
+        CAR: {
+            element: document.getElementById("attribute-CAR"),
+            content: `
+                <ul>
+                    <li>Atuação</li>
+                    <li>Diplomacia</li>
+                    <li>Enganação</li>
+                </ul>
+            `
+        },
+        VON: {
+            element: document.getElementById("attribute-VON"),
+            content: `
+                <ul>
+                    <li>Concentração</li>
+                    <li>Coragem</li>
+                    <li>Intimidação</li>
+                </ul>
+            `
+        },
+        SAB: {
+            element: document.getElementById("attribute-SAB"),
+            content: `
+                <ul>
+                    <li>Iniciativa</li>
+                    <li>Lidar com Animais</li>
+                    <li>Medicina</li>
+                    <li>Percepção</li>
+                    <li>Sobrevivência</li>
+                </ul>
+            `
+        },
+        INT: {
+            element: document.getElementById("attribute-INT"),
+            content: `
+                <ul>
+                    <li>Arcanismo</li>
+                    <li>Conhecimento</li>
+                    <li>Construir</li>
+                    <li>Investigação</li>
+                    <li>Religião</li>
+                </ul>
+            `
+        }
+    };
+    
+    Object.values(attributes).forEach(attr => {
+        tippy(attr.element, {
+            content: attr.content,
+            allowHTML: true,
+            interactive: true,
+            theme: 'attributes',
+        });
+    });
+    
 
+    
+    //###############################################################################################################################################################################
     
     document.querySelectorAll(".damage-button").forEach(e => {
         e.addEventListener("click", event => {

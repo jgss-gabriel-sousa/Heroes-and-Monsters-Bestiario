@@ -339,6 +339,23 @@ div.swal2-popup.swal2-modal.swal2-show {
     background-color: #222222bd;
 }
 
+.tippy-box[data-theme~='attributes'] {
+    color: white;
+    padding: 5px;
+    margin: 0;
+}
+.tippy-box[data-theme~='attributes'] li {
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+.tippy-box[data-theme~='attributes'] ul {
+    list-style-type: square;
+    list-style-position: outside;
+    list-style-image: none;
+    padding-left: 15px;
+}
+
 /*
 .cr     {background-color: #1a8d1a;}
 .hp     {background-color: rgb(200, 0, 0);}
