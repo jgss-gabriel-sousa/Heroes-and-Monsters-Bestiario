@@ -5,13 +5,6 @@ const MonsterList = document.querySelector('[data-js="bestiario"]');
 
 const apiURL = "https://jgss-web-service.onrender.com/hnm";
 const imgApiURL = "https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/";
-let TotalNumberOfMonsters;
-let NumberOfMonstersToLoadByStep;
-let loaded = 0;
-let allLoaded = false;
-let viewingMonster;
-let loadingContent = false;
-let monstersList = [];
 
 function accentsTidy(s){
     var r = s.toLowerCase();
@@ -69,16 +62,6 @@ function renderPage(){
 
 function viewMonster(id){
     savePageState();
-    viewingMonster = true;
-}
-
-function savePageState(){
-    sessionStorage.setItem("html", MonsterList.innerHTML);
-    sessionStorage.setItem("saved", true);
-    sessionStorage.setItem("scroll", window.pageYOffset);
-    sessionStorage.setItem("loaded", loaded);
-    sessionStorage.setItem("allLoaded", allLoaded);
-    sessionStorage.setItem("filter-by-type", document.querySelector("#filter-by-type").selectedIndex);
 }
 
 async function getMonstersCache(){
