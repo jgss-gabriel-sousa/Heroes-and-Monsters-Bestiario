@@ -60,7 +60,9 @@ function renderMonsters(monsters){
 
         MonsterList.innerHTML += html;
     }
+}
 
+function renderPage(){
     SpinnerLoading.style.display = "none";
     filter();
 }
@@ -79,32 +81,62 @@ function savePageState(){
     sessionStorage.setItem("filter-by-type", document.querySelector("#filter-by-type").selectedIndex);
 }
 
+async function getMonstersCache(){
+    const monstersCached = JSON.parse(localStorage.getItem("hnm-bestiary-monsters"));
+
+    if(monstersCached){
+        if(Date.now() - monstersCached.date > 3600000){
+            localStorage.removeItem("hnm-bestiary-monsters");
+            return null;
+        }
+
+        return monstersCached.monsters;
+    }
+    return null;
+}
+
+function saveMonstersCache(monsters){
+    localStorage.setItem("hnm-bestiary-monsters", JSON.stringify(
+        {
+            monsters: monsters,
+            date: Date.now()
+        })
+    );
+}
+
 async function loadMonsters(){
-    let monsters = {};
+    let monsters = await getMonstersCache();
 
-    const response = await fetch(apiURL);
-    let monstersList = await response.json();
-    monstersList = monstersList["hnm/bestiary"];
-
-    const fetchPromises = monstersList.map(async keyMonster => {
-        const response = await fetch(`${apiURL}/query-${keyMonster}`);
-        const monster = await response.json();
-        return monster;
-    });
-
-    const monstersArray = await Promise.all(fetchPromises);
-
-    monstersArray.forEach(monster => {
-        monsters[monster.name] = monster;
-    });
-
-    return monsters;
+    if(monsters){
+        return monsters;
+    }
+    else{
+        const response = await fetch(apiURL);
+        let monstersList = await response.json();
+        monstersList = monstersList["hnm/bestiary"];
+    
+        const fetchPromises = monstersList.map(async keyMonster => {
+            const response = await fetch(`${apiURL}/query-${keyMonster}`);
+            const monster = await response.json();
+            return monster;
+        });
+    
+        const monstersArray = await Promise.all(fetchPromises);
+        
+        monsters = {};
+        monstersArray.forEach(monster => {
+            monsters[monster.name] = monster;
+        });
+    
+        saveMonstersCache(monsters);
+        return monsters;
+    }
 } 
 
 loadMonsters()
     .then(monsters => {
         renderMonsters(monsters);
-        //pageStateUpdate();
+        renderPage();
 
     }).catch(error => {
         console.error("Error loading monsters:", error);
