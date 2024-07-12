@@ -1,6 +1,6 @@
 let loadFinished = false;
 let loadStartTime = new Date();
-
+const SpinnerLoading = document.querySelector("#loading")
 const loadingCheck = setInterval(loadingChecker,1000);
 
 function loadingChecker(){

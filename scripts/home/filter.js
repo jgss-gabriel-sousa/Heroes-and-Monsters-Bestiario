@@ -13,7 +13,7 @@ function formatNDRange(value){
     return value;
 }
 
-function filter() {
+export function filter() {
     const monsters = document.querySelectorAll(".monster-element");
 
     monsters.forEach((monster) => {

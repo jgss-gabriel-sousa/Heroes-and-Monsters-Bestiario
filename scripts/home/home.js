@@ -1,3 +1,5 @@
+import { filter } from "./filter.js";
+
 const SpinnerLoading = document.querySelector("#loading")
 const MonsterList = document.querySelector('[data-js="bestiario"]');
 
