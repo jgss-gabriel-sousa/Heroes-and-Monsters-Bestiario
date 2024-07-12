@@ -1,4 +1,4 @@
-function hideSideButtons(monster){
+export function hideSideButtons(monster){
     if(monster.abilities.length == 0)
         document.getElementById("abilities-btn").style.display = "none";
 

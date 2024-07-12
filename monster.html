@@ -10,14 +10,16 @@
 	<link rel="stylesheet" href="styles/monster.css"/>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
 
-    <script src="./scripts/monster/monster-events.js" defer></script>
-    <script src="./scripts/monster/monster-data-fill.js" defer></script>
-    <script src="./scripts/monster/monster.js" defer></script>
+    <script src="./scripts/monster/monster-events.js" type="module" defer></script>
+    <script src="./scripts/monster/monster-data-fill.js" type="module" defer></script>
+    <script src="./scripts/monster/monster.js" type="module" defer></script>
 </head>
 <body>
     <div id="side-buttons-section">
-        <button class="side-button" onclick="goBack()">Voltar</button>
+        <button class="side-button" id="back-btn">Voltar</button>
         <button class="side-button" onclick="window.location.href='#page-top'">Topo</button>
         <button id="abilities-btn" class="side-button" onclick="window.location.href='#abilities'">Habilidades</button>
         <button id="innate-btn" class="side-button" onclick="window.location.href='#innate-spells'">Conjuração Inata</button>
@@ -84,7 +86,7 @@
                     </div>
 
                     <div class="nd-bar-element">
-                        <strong><p>Resist. e Imun.:</p></strong>
+                        <strong><p>ND Resist. e Imun.:</p></strong>
                         <div class="progress-bar-background">
                             <div id="res-bar" class="progress-bar res"></div>
                         </div>
@@ -106,13 +108,13 @@
                 
                 <table id="attributes">
                     <tr>
-                        <th>FOR</th>
-                        <th>VIT</th>
-                        <th>AGI</th>
-                        <th>CAR</th>
-                        <th>VON</th>
-                        <th>SAB</th>
-                        <th>INT</th>
+                        <th id="attribute-FOR">FOR</th>
+                        <th id="attribute-VIT">VIT</th>
+                        <th id="attribute-AGI">AGI</th>
+                        <th id="attribute-CAR">CAR</th>
+                        <th id="attribute-VON">VON</th>
+                        <th id="attribute-SAB">SAB</th>
+                        <th id="attribute-INT">INT</th>
                     </tr>
                     <tr id="attributes-value">
                         <td></td>

@@ -1,9 +1,4 @@
-function showStats_Meters(variable, element_id){
-    if(variable != 0){
-        document.querySelector(element_id).style.display = "block";
-        document.querySelector(element_id+" span").innerText = variable+" metros";
-    }
-}
+import { addDecimalPoints, convertNumberToFraction, showStats_Meters } from "./utils.js";
 
 function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limit){
     const spell = spells[spellName];
@@ -123,7 +118,7 @@ function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limi
 }
 
 
-function generateHTML() {
+export function generateHTML(monster) {
     let title = monster.name;
     title = title.charAt(0).toUpperCase() + title.slice(1);
     document.querySelector("title").innerHTML = title;
@@ -254,8 +249,6 @@ function generateHTML() {
             }
         }
     }
-
-    console.log(monster)
 
     if(monster.telepathy == true){
         document.querySelector("#stats-languages > b").innerText = "Idiomas (Telepatia):\u00A0";
