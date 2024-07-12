@@ -4,8 +4,8 @@ import { hideSideButtons } from "./monster-events.js";
 let monster;
 export let spells = {};
 let innate_spells = [];
-const id = getURLParameter("id").toLowerCase();
-const api = "https://jgss-web-service.onrender.com/hnm";
+const keyMonster = getURLParameter("id").toLowerCase();
+const apiURL = "https://jgss-web-service.onrender.com/hnm";
 
 function accentsTidy(s){
     var r = s.toLowerCase();
@@ -20,24 +20,34 @@ function getURLParameter(parameter) {
 }
 
 async function getMonsterData() {
-    const monster_response = await fetch(api+`/query-${id}`);
-    monster = await monster_response.json();
+    const monsterResponse = await fetch(apiURL+`/query-${keyMonster}`);
+    monster = await monsterResponse.json();
+    
+    const spellPromises = [];
 
     if(monster.spells.length > 0){
-        for (let i = 0; i < monster.spells.length; i++) {
-            const response = await fetch(api+`/query-${accentsTidy(monster.spells[i])}`);
-            spells[monster.spells[i]] = await response.json()
-        }
+        monster.spells.forEach(spell => {
+            const responsePromise = fetch(apiURL + `/query-${accentsTidy(spell)}`).then(response => response.json());
+            spellPromises.push(responsePromise);
+        });
     }
     if(monster.innate_spellcasting.length > 0){
-        for (let i = 0; i < monster.innate_spellcasting.length; i++) {
-            const response = await fetch(api+`/query-${accentsTidy(monster.innate_spellcasting[i].spell)}`);
-            spells[monster.innate_spellcasting[i].spell] = await response.json()
-        }
+        monster.innate_spellcasting.forEach(spellCasting => {
+            const responsePromise = fetch(apiURL + `/query-${accentsTidy(spellCasting.spell)}`).then(response => response.json());
+            spellPromises.push(responsePromise);
+        });
     }
 
-    hideSideButtons(monster);
+    const spellsArray = await Promise.all(spellPromises);
+    spellsArray.forEach((spellData, index) => {
+        if (index < monster.spells.length) {
+            spells[monster.spells[index]] = spellData;
+        } else {
+            spells[monster.innate_spellcasting[index - monster.spells.length].spell] = spellData;
+        }
+    });
 
+    hideSideButtons(monster);
     generateHTML(monster);
 }
 
