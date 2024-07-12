@@ -129,13 +129,15 @@ li {
 }
 
 .action-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 0.5fr));
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: stretch;
 }
 
 .spell-list{
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     justify-content: center;
 }
@@ -155,10 +157,15 @@ li {
     margin: 10px;
     display: flex;
     flex-direction: column;
-    max-width: 100%;
     height: auto;
     align-items: center;
     background-color: rgba(128, 128, 128, 0.1);
+    max-width: 50%;
+    width: 350px;
+}
+.spell-list .action-element {
+    max-width: 100%;
+    width: 450px;
 }
 .action-info {
     width: 100%;
