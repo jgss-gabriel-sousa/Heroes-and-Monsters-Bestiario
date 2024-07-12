@@ -58,7 +58,7 @@ export function getSpellCost(magic_circle) {
     }
 }
 
-export function getAttributeFromPortugueseName(portugueseAttributeName) {
+export function getAttributeFromPortugueseName(portugueseAttributeName, monster) {
     switch(portugueseAttributeName){
         case "Força":           return monster.strength;
         case "Vitalidade":      return monster.vitality;

@@ -2,15 +2,15 @@ import { generateHTML } from "./monster-data-fill.js";
 import { hideSideButtons } from "./monster-events.js";
 
 let monster;
-var spells = {};
+export let spells = {};
 let innate_spells = [];
 const id = getURLParameter("id").toLowerCase();
 const api = "https://jgss-web-service.onrender.com/hnm";
 
 function accentsTidy(s){
     var r = s.toLowerCase();
-    non_asciis = {'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]', 'y': '[ýÿ]'};
-    for (i in non_asciis) { r = r.replace(new RegExp(non_asciis[i], 'g'), i); }
+    const non_asciis = {'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]', 'y': '[ýÿ]'};
+    for (let i in non_asciis) { r = r.replace(new RegExp(non_asciis[i], 'g'), i); }
     return r;
 };
 
@@ -42,7 +42,7 @@ async function getMonsterData() {
 }
 
 document.querySelector("#back-btn").addEventListener("click", () => {
-    location.href = "index.html";
+    history.back();
 });
 
 getMonsterData();

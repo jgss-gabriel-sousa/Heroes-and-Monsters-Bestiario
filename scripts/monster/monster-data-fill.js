@@ -1,4 +1,5 @@
-import { addDecimalPoints, convertNumberToFraction, showStats_Meters } from "./utils.js";
+import { spells } from "./monster.js";
+import { addDecimalPoints, convertNumberToFraction, getAttributeFromPortugueseName, getSpellCost, showStats_Meters } from "./utils.js";
 
 function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limit){
     const spell = spells[spellName];
@@ -360,7 +361,7 @@ export function generateHTML(monster) {
     if(monster.innate_spellcasting.length != 0){
         document.querySelector("#innate-spells").style.display = "block";
 
-        const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.innate_spellcasting_attribute)-10)/2);
+        const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.innate_spellcasting_attribute, monster)-10)/2);
         
         if(monster.innate_spellcasting_description != ""){
             document.querySelector("#innate-spells-description").innerText = monster.innate_spellcasting_description;
@@ -376,7 +377,7 @@ export function generateHTML(monster) {
         }
 
         for (let i = 0; i < monster.innate_spellcasting.length; i++) {
-            generateSpellHTML("innate",monster.innate_spellcasting[i].spell,spell_attribute_modvalue,monster.innate_spellcasting[i].limit);
+            generateSpellHTML("innate", monster.innate_spellcasting[i].spell, spell_attribute_modvalue, monster.innate_spellcasting[i].limit);
         }
     }
 
@@ -390,7 +391,7 @@ export function generateHTML(monster) {
         document.querySelector("#spellcaster-level span").innerText = monster.spellcaster_level+"º";
         document.querySelector("#mana-value span").innerText = monster.mana;
         
-        const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.spellcasting_attribute)-10)/2);
+        const spell_attribute_modvalue = Math.floor((getAttributeFromPortugueseName(monster.spellcasting_attribute, monster)-10)/2);
         
         document.querySelector("#spellcasting-attribute span").innerText = monster.spellcasting_attribute+" (+"+spell_attribute_modvalue+")";
 
