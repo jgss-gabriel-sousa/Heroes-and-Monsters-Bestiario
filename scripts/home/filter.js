@@ -16,6 +16,12 @@ function formatNDRange(value){
 export function filter() {
     const monsters = document.querySelectorAll(".monster-element");
 
+    activeFiltersKeys[TYPE] = document.querySelector("#filter-by-type").value;
+    activeFiltersKeys[SOURCE] = document.querySelector("#filter-by-source").value;
+    activeFiltersKeys[NAME] = document.querySelector("#filter-by-name").value;
+    activeFiltersKeys[MIN_ND] = document.querySelector("#minNDRange").value;
+    activeFiltersKeys[MAX_ND] = document.querySelector("#maxNDRange").value;
+
     monsters.forEach((monster) => {
         let matchingFilters = 0;
 
