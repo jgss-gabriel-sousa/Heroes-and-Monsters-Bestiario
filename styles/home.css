@@ -35,7 +35,6 @@ select::-ms-expand {
 .monster-element {
     list-style: none;
     text-align: center;
-    display: none;
 }
 
 .show {

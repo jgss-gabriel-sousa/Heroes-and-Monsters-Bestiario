@@ -1,5 +1,5 @@
 import { spells } from "./monster.js";
-import { addDecimalPoints, convertNumberToFraction, getAttributeFromPortugueseName, getSpellCost, showStats_Meters } from "./utils.js";
+import { addDecimalPoints, convertNumberToFraction, getAttributeFromPortugueseName, getSpellCost, showStats_Meters } from "../utils.js";
 
 function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limit){
     const spell = spells[spellName];

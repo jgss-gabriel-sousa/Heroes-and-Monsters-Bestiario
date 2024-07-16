@@ -1,3 +1,6 @@
+import { accentsTidy } from "../utils.js";
+
+
 let activeFiltersKeys = ["all","all","all","1/8","30"];
 
 const TYPE = 0;
