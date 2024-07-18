@@ -1,120 +1,88 @@
 import { spells } from "./monster.js";
 import { addDecimalPoints, convertNumberToFraction, getAttributeFromPortugueseName, getSpellCost, showStats_Meters } from "../utils.js";
 
+
 function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limit){
     const spell = spells[spellName];
     const spellDC = 6 + spell_attribute_modvalue + spell.magic_circle;
 
-    let elementHTML = `
+    // Função auxiliar para gerar linhas de evolução da magia
+    function generateSpellEvolutionHTML(evolutionArray, evolutionType) {
+        let evolutionHTML = '<table><tr><th>' + (evolutionType === "level" ? "Nível" : evolutionType === "mana" ? "Mana" : evolutionType) + '</th><th>Efeito</th></tr>';
+        evolutionArray.forEach(evolution => {
+            evolutionHTML += `<tr><td>${evolution[0]}</td><td>${evolution[1]}</td></tr>`;
+        });
+        evolutionHTML += '</table>';
+
+        return evolutionHTML;
+    }
+
+    let HTML = `
     <div class="action-element">
         <div class="action-name">
             <h4>${spell.name} (${spell.magic_circle}º Círculo)</h4>
-        </div>`
-        
+        </div>`;
+
     if(type == "innate"){
-        elementHTML += `
+        HTML += `
             <h4>${spell_limit}</h4>
-
             <div id="innate-spell-info" class="action-info">
-        `
-    }
-    else{
-        elementHTML += `
+        `;
+    } else {
+        HTML += `
         <div class="action-info">
-            <p><b>Custo de Mana:&nbsp</b>${getSpellCost(spell.magic_circle)}</p>
-        `
+            <p><b>Custo de Mana:&nbsp;</b>${getSpellCost(spell.magic_circle)}</p>
+        `;
     }
 
-    elementHTML += `<p><b>Tempo de Conjuração:&nbsp</b>${spell.cast_time}</p>`
+    HTML += `<p><b>Tempo de Conjuração:&nbsp;</b>${spell.cast_time}</p>`;
 
-    if(spell.range != ""){
-        elementHTML += `<p><b>Alcance:&nbsp</b>${spell.range}</p>`
-    }
-
-    if(spell.attack_roll != false){
-        elementHTML += `<p><b>Rolagem de Ataque:&nbsp</b>+${spell_attribute_modvalue}</p>`
+    if(spell.range) {
+        HTML += `<p><b>Alcance:&nbsp;</b>${spell.range}</p>`;
     }
 
-    for (let i = 0; i < spell.damage.length; i++) {
-        elementHTML += `<p><b>${spell.damage[i][0]}:&nbsp</b>${spell.damage[i][1]}</p>`
+    if(spell.attack_roll) {
+        HTML += `<p><b>Rolagem de Ataque:&nbsp;</b>+${spell_attribute_modvalue}</p>`;
     }
 
-    if(spell.heal != ""){
-        if(spell.name == "Cura")
-            elementHTML += `<p><b>Cura:&nbsp</b>d8+${spell_attribute_modvalue}</p>`
-        else
-            elementHTML += `<p><b>Cura:&nbsp</b>${spell.heal}</p>`
+    spell.damage.forEach(dmg => {
+        HTML += `<p><b>${dmg[0]}:&nbsp;</b>${dmg[1]}</p>`;
+    });
+
+    if(spell.heal) {
+        HTML += `<p><b>Cura:&nbsp;</b>${spell.name === "Cura" ? `d8+${spell_attribute_modvalue}` : spell.heal}</p>`;
     }
-    if(spell.saving_trow != ""){
-        elementHTML += `<p><b>Teste de Salvamento:&nbsp</b>${spellDC} de ${spell.saving_trow}</p>`
+
+    if(spell.saving_trow) {
+        HTML += `<p><b>Teste de Salvamento:&nbsp;</b>${spellDC} de ${spell.saving_trow}</p>`;
     }
-    if(spell.duration != ""){
-        elementHTML += `<p><b>Duração:&nbsp</b>${spell.duration}`
-        if(spell.concentration)
-            elementHTML += ` (Concentração)`;  
-        elementHTML += `</p>`;
+
+    if(spell.duration) {
+        HTML += `<p><b>Duração:&nbsp;</b>${spell.duration}${spell.concentration ? " (Concentração)" : ""}</p>`;
     }
-    if(spell.description.length != 0){
-        elementHTML +=`
-                <div class="spell-description">
-                    <p><b>Efeito:&nbsp</b><span>${spell.description[0]}</span></p>
-                `
+
+    if(spell.description.length) {
+        HTML += `<div class="spell-description"><p><b>Efeito:&nbsp;</b><span>${spell.description[0]}</span></p>`;
+        for (let j = 1; j < spell.description.length; j++) {
+            HTML += `<p>${spell.description[j]}</p>`;
+        }
+    }
+
+    if(spell.spell_evolution.length) {
+        const evolutionDesc = spell.spell_evolution_type === "level" ? "Esta magia evolui conforme seu nível de conjurador:" :
+                              spell.spell_evolution_type === "mana" ? "Esta magia evolui se conjurada com o custo de mana de um círculo superior:" :
+                              spell.spell_evolution_desc;
         
-        if(spell.description.length > 1){
-            for (let j = 1; j < spell.description.length; j++) {
-                elementHTML += `<p>${spell.description[j]}</p>`;
-            }
-        }
-    }
-    if(spell.spell_evolution.length != 0){
-        if(spell.spell_evolution_type == "level"){
-            elementHTML += "<p>Esta magia evolui conforme seu nível de conjurador:</p>"
-        }
-        else if(spell.spell_evolution_type == "mana"){
-            elementHTML += "<p>Esta magia evolui se conjurada com o custo de mana de um círculo superior:</p>"
-        }
-        else{
-            elementHTML += `<p>${spell.spell_evolution_desc}</p>`
-        }
-        elementHTML += `</div>`
-        
-        elementHTML += "<table><tr><th>"
-
-        if(spell.spell_evolution_type == "level"){
-            elementHTML += "Nível</th>";
-        }
-        else if(spell.spell_evolution_type == "mana"){
-            elementHTML += "Mana</th>";
-        }
-        else{
-            elementHTML += spell.spell_evolution_type+"</th>";
-        }
-        
-        elementHTML += "<th>Efeito</th></tr>"
-
-        for(let i = 0; i < spell.spell_evolution.length; i++){
-            const element = spell.spell_evolution[i];
-
-            elementHTML += `
-            <tr>
-                <td>${element[0]}</td>
-                <td>${element[1]}</td>
-            </tr>
-            `;
-        }
-
-    }
-    else{
-        elementHTML += `</table></div>`
+        HTML += `<p>${evolutionDesc}</p>`;
+        HTML += generateSpellEvolutionHTML(spell.spell_evolution, spell.spell_evolution_type);
     }
 
-    elementHTML +=`</div></div>`
+    HTML += `</div></div>`;
 
     if(type == "innate"){
-        document.querySelector("#innate-spells .spell-list").innerHTML += elementHTML;
-    }
-    else{
-        document.querySelector("#spells .spell-list").innerHTML += elementHTML;
+        document.querySelector("#innate-spells .spell-list").innerHTML += HTML;
+    } else {
+        document.querySelector("#spells .spell-list").innerHTML += HTML;
     }
 }
 
@@ -145,17 +113,17 @@ export function generateHTML(monster) {
         }
     }
 
-    function updateCR(selector, value, logBase) {
+    function updateCRBar(selector, value, logBase) {
         setElementText(selector+"-value", convertNumberToFraction(value));
         setElementWidth(selector+"-bar", ((Math.log(value + 1) / Math.log(logBase)) * 100) + "%");
     }
-
-    updateCR("#cr", monster.challenge_ratio, 30);
-    updateCR("#atk", monster.atk_cr, 30);
-    updateCR("#dmg", monster.damage_cr, 30);
-    updateCR("#res", monster.resistances_and_immunities_cr, 30);
-    updateCR("#hp", monster.hp_cr, 30);
-    updateCR("#def", monster.defense_cr, 30);
+    
+    updateCRBar("#cr", monster.challenge_ratio, 30);
+    updateCRBar("#atk", monster.atk_cr, 30);
+    updateCRBar("#dmg", monster.damage_cr, 30);
+    updateCRBar("#res", monster.resistances_and_immunities_cr, 30);
+    updateCRBar("#hp", monster.hp_cr, 30);
+    updateCRBar("#def", monster.defense_cr, 30);
 
     //###############################################################################################################################################################################
 
