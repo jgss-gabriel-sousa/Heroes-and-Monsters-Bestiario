@@ -83,6 +83,11 @@ li {
     }
 }
 
+#attributes-modifier button {
+    font-weight: bold;
+    font-size: 16px;
+}
+
 #top-section h1 {
     grid-column-start: 1;
     grid-column-end: 3;

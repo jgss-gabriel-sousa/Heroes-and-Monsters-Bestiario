@@ -246,6 +246,17 @@ export function generateHTML(monster) {
     document.querySelector("#attributes").rows[2].cells[6].innerHTML = (monster.intelligence >= 10 ? "+" : "") + Math.floor((monster.intelligence-10)/2);  
 
 
+    const cells = document.querySelector("#attributes").rows[2].cells;
+
+    for (let i = 0; i < cells.length; i++) {
+        const e = cells[i];
+
+        const baseHTML = e.innerHTML;
+        let html = `<button class="roll-button">${baseHTML}</button>`;
+        e.innerHTML = html;
+    }
+
+
     //###############################################################################################################################################################################
 
     if(monster.abilities.length != 0){
