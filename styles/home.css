@@ -37,8 +37,8 @@ select::-ms-expand {
     text-align: center;
 }
 
-.show {
-    display: block;
+.hide {
+    display: none;
 }
 
 .card {

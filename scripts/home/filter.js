@@ -26,44 +26,46 @@ export function filter() {
     activeFiltersKeys[MAX_ND] = document.querySelector("#maxNDRange").value;
 
     monsters.forEach((monster) => {
-        let matchingFilters = 0;
+        let matchingFilters = 2;
 
-        const nd = parseFloat(monster.classList[2].slice(2));
+        const nd = monster.classList[2].slice(2);
 
         activeFiltersKeys.forEach((filterKey, index) => {
             if (index === NAME) {
                 if (filterKey === "all" || monster.classList[1].includes(filterKey) || accentsTidy(monster.classList[1]).includes(filterKey)) {
-                matchingFilters++;
+                    matchingFilters++;
                 }
-            } else if (index === MIN_ND) {
+            } 
+            
+            /*else if (index === MIN_ND) {
                 if (nd < 1) {
                     const ndNumber = { "1/8": 0.125, "1/4": 0.25, "1/2": 0.5 }[filterKey];
-                if (nd >= ndNumber) {
-                    matchingFilters++;   
-                }
+                    if (nd >= ndNumber) {
+                        matchingFilters++;   
+                    }
                 } else if (nd >= parseInt(filterKey)) {
                     matchingFilters++;
                 }
             } else if (index === MAX_ND) {
                 if (nd <= 1) {
                     const ndNumber = { "1/8": 0.125, "1/4": 0.25, "1/2": 0.5 }[filterKey] || parseInt(filterKey);
-                if (nd <= ndNumber) {
-                    matchingFilters++;
-                }
+                    if (nd <= ndNumber) {
+                        matchingFilters++;
+                    }
                 } else if (nd <= parseInt(filterKey)) {
                     matchingFilters++;
                 }
-            } else {
+            } */else {
                 if (filterKey === "all" || monster.classList.contains(filterKey)) {
                     matchingFilters++;
                 }
             }
         });
 
-        if (matchingFilters === activeFiltersKeys.length) {
-            monster.classList.add("show");
+        if (matchingFilters != activeFiltersKeys.length) {
+            monster.classList.add("hide");
         } else {
-            monster.classList.remove("show");
+            monster.classList.remove("hide");
         }
     });
 }
@@ -85,12 +87,12 @@ document.getElementById("filter-by-name").addEventListener("input", (event) => {
 
 document.getElementById("minNDRange").addEventListener("input", (event) => {
     document.getElementById("minNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
-    activeFiltersKeys[MIN_ND] = formatNDRange(parseInt(event.target.value)-2);
-    filter();
+    //activeFiltersKeys[MIN_ND] = formatNDRange(parseInt(event.target.value));
+    //filter();
 });
 
 document.getElementById("maxNDRange").addEventListener("input", (event) => {
     document.getElementById("maxNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
-    activeFiltersKeys[MAX_ND] = formatNDRange(parseInt(event.target.value)-2);
-    filter();
+    //activeFiltersKeys[MAX_ND] = formatNDRange(parseInt(event.target.value));
+    //filter();
 });
