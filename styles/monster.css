@@ -35,11 +35,11 @@ li {
     margin-bottom: 10pt;
 }
 
-#container {
+main {
     padding: 40px 20px 40px 150px;
 }
 @media only screen and (max-width: 500px) {
-    #container {
+    main {
         padding: 20px 20px 20px 20px;
         margin: 10px 10px;
     }
@@ -167,6 +167,8 @@ li {
 .spell-list .action-element {
     max-width: 100%;
     width: 450px;
+    max-height: 200px;
+    overflow-y: auto;
 }
 .action-info {
     width: 100%;

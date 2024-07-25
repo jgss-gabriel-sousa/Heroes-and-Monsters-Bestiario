@@ -1,5 +1,5 @@
 import { accentsTidy } from "../utils.js";
-import { generateHTML } from "./monster-data-fill.js";
+import { generateHTML } from "./display.js";
 import { hideSideButtons } from "./monster-events.js";
 
 let monster;

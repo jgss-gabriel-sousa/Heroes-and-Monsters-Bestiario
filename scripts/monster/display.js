@@ -1,90 +1,8 @@
-import { spells } from "./monster.js";
-import { addDecimalPoints, convertNumberToFraction, getAttributeFromPortugueseName, getSpellCost, showStats_Meters } from "../utils.js";
-
-
-function generateSpellHTML(type, spellName, spell_attribute_modvalue, spell_limit){
-    const spell = spells[spellName];
-    const spellDC = 6 + spell_attribute_modvalue + spell.magic_circle;
-
-    // Função auxiliar para gerar linhas de evolução da magia
-    function generateSpellEvolutionHTML(evolutionArray, evolutionType) {
-        let evolutionHTML = '<table><tr><th>' + (evolutionType === "level" ? "Nível" : evolutionType === "mana" ? "Mana" : evolutionType) + '</th><th>Efeito</th></tr>';
-        evolutionArray.forEach(evolution => {
-            evolutionHTML += `<tr><td>${evolution[0]}</td><td>${evolution[1]}</td></tr>`;
-        });
-        evolutionHTML += '</table>';
-
-        return evolutionHTML;
-    }
-
-    let HTML = `
-    <div class="action-element">
-        <div class="action-name">
-            <h4>${spell.name} (${spell.magic_circle}º Círculo)</h4>
-        </div>`;
-
-    if(type == "innate"){
-        HTML += `
-            <h4>${spell_limit}</h4>
-            <div id="innate-spell-info" class="action-info">
-        `;
-    } else {
-        HTML += `
-        <div class="action-info">
-            <p><b>Custo de Mana:&nbsp;</b>${getSpellCost(spell.magic_circle)}</p>
-        `;
-    }
-
-    HTML += `<p><b>Tempo de Conjuração:&nbsp;</b>${spell.cast_time}</p>`;
-
-    if(spell.range) {
-        HTML += `<p><b>Alcance:&nbsp;</b>${spell.range}</p>`;
-    }
-
-    if(spell.attack_roll) {
-        HTML += `<p><b>Rolagem de Ataque:&nbsp;</b>+${spell_attribute_modvalue}</p>`;
-    }
-
-    spell.damage.forEach(dmg => {
-        HTML += `<p><b>${dmg[0]}:&nbsp;</b>${dmg[1]}</p>`;
-    });
-
-    if(spell.heal) {
-        HTML += `<p><b>Cura:&nbsp;</b>${spell.name === "Cura" ? `d8+${spell_attribute_modvalue}` : spell.heal}</p>`;
-    }
-
-    if(spell.saving_trow) {
-        HTML += `<p><b>Teste de Salvamento:&nbsp;</b>${spellDC} de ${spell.saving_trow}</p>`;
-    }
-
-    if(spell.duration) {
-        HTML += `<p><b>Duração:&nbsp;</b>${spell.duration}${spell.concentration ? " (Concentração)" : ""}</p>`;
-    }
-
-    if(spell.description.length) {
-        HTML += `<div class="spell-description"><p><b>Efeito:&nbsp;</b><span>${spell.description[0]}</span></p>`;
-        for (let j = 1; j < spell.description.length; j++) {
-            HTML += `<p>${spell.description[j]}</p>`;
-        }
-    }
-
-    if(spell.spell_evolution.length) {
-        const evolutionDesc = spell.spell_evolution_type === "level" ? "Esta magia evolui conforme seu nível de conjurador:" :
-                              spell.spell_evolution_type === "mana" ? "Esta magia evolui se conjurada com o custo de mana de um círculo superior:" :
-                              spell.spell_evolution_desc;
-        
-        HTML += `<p>${evolutionDesc}</p>`;
-        HTML += generateSpellEvolutionHTML(spell.spell_evolution, spell.spell_evolution_type);
-    }
-
-    HTML += `</div></div>`;
-
-    if(type == "innate"){
-        document.querySelector("#innate-spells .spell-list").innerHTML += HTML;
-    } else {
-        document.querySelector("#spells .spell-list").innerHTML += HTML;
-    }
-}
+import { addDecimalPoints, convertNumberToFraction, getAttributeFromPortugueseName, showStats_Meters } from "../utils.js";
+import { generateSpellHTML } from "./fillData/spell.js";
+import { fillData_skills } from "./fillData/skills.js";
+import { fillData_res_and_immunities } from "./fillData/resistances_and_immunities.js";
+import { fillData_attributes } from "./fillData/attributes.js";
 
 
 export function generateHTML(monster) {
@@ -92,9 +10,9 @@ export function generateHTML(monster) {
     title = title.charAt(0).toUpperCase() + title.slice(1);
     document.querySelector("title").innerHTML = title;
 
-    document.querySelector("#container h1").innerHTML = monster.name;
+    document.querySelector("main h1").innerHTML = monster.name;
 
-    document.querySelector("#container h3").innerHTML = `${monster.type}, ${monster.size}`;
+    document.querySelector("main h3").innerHTML = `${monster.type}, ${monster.size}`;
 
     document.querySelector("#monster-image").alt = monster.name;
     document.querySelector("#monster-image").src = `https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${monster.english_name.toLowerCase()}.webp`;
@@ -158,51 +76,13 @@ export function generateHTML(monster) {
         }
         document.querySelector("#stats-defense span").innerText += ")"
     }
-    if(monster.skills.length != 0){
-        document.querySelector("#stats-skills").style.display = "block";
-        for (let i = 0; i < monster.skills.length; i++) {
-            document.querySelector("#stats-skills span").innerText += monster.skills[i];
-            if(i+1 < monster.skills.length){
-                document.querySelector("#stats-skills span").innerText += ",\u00A0"
-            }
-        }
-    }
-    if(monster.vulnerability.length != 0){
-        document.querySelector("#stats-vulnerability").style.display = "block";
-        for (let i = 0; i < monster.vulnerability.length; i++) {
-            document.querySelector("#stats-vulnerability span").innerText += monster.vulnerability[i];
-            if(i+1 < monster.vulnerability.length){
-                document.querySelector("#stats-vulnerability span").innerText += ",\u00A0"
-            }
-        }
-    }
-    if(monster.resistances.length != 0){
-        document.querySelector("#stats-resistances").style.display = "block";
-        for (let i = 0; i < monster.resistances.length; i++) {
-            document.querySelector("#stats-resistances span").innerText += monster.resistances[i];
-            if(i+1 < monster.resistances.length){
-                document.querySelector("#stats-resistances span").innerText += ",\u00A0"
-            }
-        }
-    }
-    if(monster.immunities.length != 0){
-        document.querySelector("#stats-immunities").style.display = "block";
-        for (let i = 0; i < monster.immunities.length; i++) {
-            document.querySelector("#stats-immunities span").innerText += monster.immunities[i];
-            if(i+1 < monster.immunities.length){
-                document.querySelector("#stats-immunities span").innerText += ",\u00A0"
-            }
-        }
-    }
-    if(monster.condition_immunities.length != 0){
-        document.querySelector("#stats-condition_immunities").style.display = "block";
-        for (let i = 0; i < monster.condition_immunities.length; i++) {
-            document.querySelector("#stats-condition_immunities span").innerText += " "+monster.condition_immunities[i];
-            if(i+1 < monster.condition_immunities.length){
-                document.querySelector("#stats-condition_immunities span").innerText += ","
-            }
-        }
-    }
+
+    fillData_skills(monster.skills);
+    fillData_res_and_immunities("vulnerability", monster.vulnerability);
+    fillData_res_and_immunities("resistances", monster.resistances);
+    fillData_res_and_immunities("immunities", monster.immunities);
+    fillData_res_and_immunities("condition_immunities", monster.condition_immunities);
+
     if(monster.languages.length != 0){
         document.querySelector("#stats-languages").style.display = "block";
 
@@ -218,44 +98,11 @@ export function generateHTML(monster) {
             }
         }
     }
-
     if(monster.telepathy == true){
         document.querySelector("#stats-languages > b").innerText = "Idiomas (Telepatia):\u00A0";
     }
 
-
-    document.querySelector("#attributes").rows[1].cells[0].innerHTML = monster.strength;
-    document.querySelector("#attributes").rows[2].cells[0].innerHTML = (monster.strength >= 10 ? "+" : "") + Math.floor((monster.strength-10)/2);
-    
-    document.querySelector("#attributes").rows[1].cells[1].innerHTML = monster.vitality;
-    document.querySelector("#attributes").rows[2].cells[1].innerHTML = (monster.vitality >= 10 ? "+" : "") + Math.floor((monster.vitality-10)/2);
-
-    document.querySelector("#attributes").rows[1].cells[2].innerHTML = monster.agility;
-    document.querySelector("#attributes").rows[2].cells[2].innerHTML = (monster.agility >= 10 ? "+" : "") + Math.floor((monster.agility-10)/2);
-
-    document.querySelector("#attributes").rows[1].cells[3].innerHTML = monster.charisma;
-    document.querySelector("#attributes").rows[2].cells[3].innerHTML = (monster.charisma >= 10 ? "+" : "") + Math.floor((monster.charisma-10)/2);
-
-    document.querySelector("#attributes").rows[1].cells[4].innerHTML = monster.willpower;
-    document.querySelector("#attributes").rows[2].cells[4].innerHTML = (monster.willpower >= 10 ? "+" : "") + Math.floor((monster.willpower-10)/2);
-
-    document.querySelector("#attributes").rows[1].cells[5].innerHTML = monster.wisdom;
-    document.querySelector("#attributes").rows[2].cells[5].innerHTML = (monster.wisdom >= 10 ? "+" : "") + Math.floor((monster.wisdom-10)/2);
-
-    document.querySelector("#attributes").rows[1].cells[6].innerHTML = monster.intelligence;
-    document.querySelector("#attributes").rows[2].cells[6].innerHTML = (monster.intelligence >= 10 ? "+" : "") + Math.floor((monster.intelligence-10)/2);  
-
-
-    const cells = document.querySelector("#attributes").rows[2].cells;
-
-    for (let i = 0; i < cells.length; i++) {
-        const e = cells[i];
-
-        const baseHTML = e.innerHTML;
-        let html = `<button class="roll-button">${baseHTML}</button>`;
-        e.innerHTML = html;
-    }
-
+    fillData_attributes(monster);
 
     //###############################################################################################################################################################################
 
@@ -668,28 +515,6 @@ export function generateHTML(monster) {
     });
 }
 
-
-function filterDamageString(damageString) {
-    const regex = /(\d*d\d+(\+\d+)?)/g;
-    const matches = damageString.match(regex);
-
-    if (matches) {
-        const formattedMatches = matches.map(diceValue => {
-            if (diceValue.startsWith('d')) {
-                diceValue = '1' + diceValue;
-            }
-            return diceValue;
-        });
-
-        const resultString = formattedMatches.join(' + ');
-
-        return resultString;
-
-    } else {
-        throw new Error("Invalid damage string format");
-    }
-}
-
 function rollDice(diceString) {
     function diceRoll(sides) {
         return Math.floor(Math.random() * sides) + 1;
@@ -743,42 +568,3 @@ function rollDice(diceString) {
 
     return {results, total: results.reduce((total, roll) => total + roll.total, 0)};
 }
-/*
-function rollDice(diceString) {
-    function diceRoll(sides) {
-        return Math.floor(Math.random() * sides) + 1;
-    }
-
-    const roll = {
-        subrolls: [],
-        total: 0
-    }
-    const regex = /(\d*)d(\d+)(\+\d+)?/g;
-    let matches;
-    let total = 0;
-
-    while ((matches = regex.exec(diceString)) !== null) {
-        let count = matches[1] ? parseInt(matches[1]) : 1;
-        let sides = parseInt(matches[2]);
-        let modifier = matches[3] ? parseInt(matches[3]) : 0;
-
-        for (let i = 0; i < count; i++) {
-            const rollValue = diceRoll(sides)
-
-            roll.subrolls.push({
-                sides: sides,
-                roll: rollValue
-            });
-
-            total += rollValue;
-        }
-
-        total += modifier;
-
-        roll.total = total
-        roll.modifier = modifier
-    }
-
-    return roll;
-}
-*/

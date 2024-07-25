@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/tippy.js@6"></script>
 
     <script src="./scripts/monster/monster-events.js" type="module" defer></script>
-    <script src="./scripts/monster/monster-data-fill.js" type="module" defer></script>
+    <script src="./scripts/monster/display.js" type="module" defer></script>
     <script src="./scripts/monster/monster.js" type="module" defer></script>
 </head>
 <body>
@@ -32,7 +32,7 @@
         <button id="description-btn" class="side-button" onclick="window.location.href='#description'">Descrição</button>
     </div>
     <div id="page-top"></div>
-    <div id="container">
+    <main>
         <h1></h1>
 
         <div id="top-section">
@@ -152,7 +152,6 @@
             </div>
         </div>
 
-
         <div id="abilities">
             <hr>
             <h2>Habilidades</h2>
@@ -164,7 +163,6 @@
             <h2>Conjuração Inata</h2>
             <p id="innate-spells-description"></p>
             <p id="innate-spells-attribute"></p>
-
             <div class="spell-list"></div>
         </div>
 
@@ -178,10 +176,8 @@
                 <p id="special-spell-feature"><strong>Especial:&nbsp</strong><span></span></p>
                 <p id="arcane-failure"><strong>Falha Arcana:&nbsp</strong><span></span></p>
             </div>
-
             <div class="spell-list"></div>
         </div>
-
 
         <div id="actions">
             <hr>
@@ -189,30 +185,25 @@
             <div class="action-list"></div>
         </div>
         
-
         <div id="legendary-actions">
             <hr>
             <h2>Ações Lendárias</h2>
         </div>
         
-
         <div id="lair">
             <hr>
             <h2>Covil</h2>
         </div>
         
-
         <div id="lair-actions">
             <hr>
             <h2>Ações de Covil</h2>
         </div>
         
-
         <div id="regional-effects">
             <hr>
             <h2>Efeitos Regionais</h2>
         </div>
-
 
         <div id="description">
             <hr>
@@ -220,10 +211,7 @@
             <div></div>
         </div>
 
-
-        <div id="nd-window">
-            
-        </div>
-    </div>
+        <div id="nd-window"></div>
+    </main>
 </body>
 </html>
