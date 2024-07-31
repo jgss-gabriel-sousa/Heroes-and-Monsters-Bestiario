@@ -45,8 +45,6 @@ async function getMonsterData() {
     generateHTML(monster);
 }
 
-document.querySelector("#back-btn").addEventListener("click", () => {
-    history.back();
-});
+document.querySelector("#back-btn").addEventListener("click", () => history.back());
 
 getMonsterData();
