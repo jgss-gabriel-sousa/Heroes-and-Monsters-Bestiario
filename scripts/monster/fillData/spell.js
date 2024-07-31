@@ -41,15 +41,15 @@ export function generateSpellHTML(type, spellName, spell_attribute_modvalue, spe
     }
 
     if(spell.attack_roll) {
-        HTML += `<p><b>Rolagem de Ataque:&nbsp;</b>+${spell_attribute_modvalue}</p>`;
+        HTML += `<p><b>Rolagem de Ataque:&nbsp;</b><button class="roll-button">+${spell_attribute_modvalue}</button></p>`;
     }
 
     spell.damage.forEach(dmg => {
-        HTML += `<p><b>${dmg[0]}:&nbsp;</b>${dmg[1]}</p>`;
+        HTML += `<p><b>${dmg[0]}:&nbsp;</b><button class="roll-button">${dmg[1]}</button></p>`;
     });
 
     if(spell.heal) {
-        HTML += `<p><b>Cura:&nbsp;</b>${spell.name === "Cura" ? `d8+${spell_attribute_modvalue}` : spell.heal}</p>`;
+        HTML += `<p><b>Cura:&nbsp;</b><button class="roll-button">${spell.name === "Cura" ? `d8+${spell_attribute_modvalue}` : spell.heal}</button></p>`;
     }
 
     if(spell.saving_trow) {
