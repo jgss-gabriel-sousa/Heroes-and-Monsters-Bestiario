@@ -10,10 +10,11 @@ const MIN_ND = 3;
 const MAX_ND = 4;
 
 function formatNDRange(value){
-    if(value == -2) return "1/8";
-    if(value == -1) return "1/4";
-    if(value == 0)  return "1/2";
-    return value;
+    if(value == 0) return "1/8";
+    if(value == 1) return "1/4";
+    if(value == 2)  return "1/2";
+    
+    return value-2;
 }
 
 export function filter() {
@@ -31,32 +32,30 @@ export function filter() {
         const nd = monster.classList[2].slice(2);
 
         activeFiltersKeys.forEach((filterKey, index) => {
-            if (index === NAME) {
-                if (filterKey === "all" || monster.classList[1].includes(filterKey) || accentsTidy(monster.classList[1]).includes(filterKey)) {
+            if(index === NAME){
+                if(filterKey === "all" || monster.classList[1].includes(filterKey) || accentsTidy(monster.classList[1]).includes(filterKey)){
                     matchingFilters++;
                 }
             } 
-            
-            /*else if (index === MIN_ND) {
-                if (nd < 1) {
-                    const ndNumber = { "1/8": 0.125, "1/4": 0.25, "1/2": 0.5 }[filterKey];
-                    if (nd >= ndNumber) {
-                        matchingFilters++;   
-                    }
-                } else if (nd >= parseInt(filterKey)) {
-                    matchingFilters++;
-                }
-            } else if (index === MAX_ND) {
-                if (nd <= 1) {
-                    const ndNumber = { "1/8": 0.125, "1/4": 0.25, "1/2": 0.5 }[filterKey] || parseInt(filterKey);
-                    if (nd <= ndNumber) {
+            else if(index === MIN_ND || index === MAX_ND){
+                filterKey = formatNDRange(filterKey);
+                if(filterKey == "1/2") filterKey = 0.5;
+                if(filterKey == "1/4") filterKey = 0.25;
+                if(filterKey == "1/8") filterKey = 0.125;
+                
+                if(index === MIN_ND){
+                    if(nd < filterKey){
                         matchingFilters++;
                     }
-                } else if (nd <= parseInt(filterKey)) {
-                    matchingFilters++;
                 }
-            } */else {
-                if (filterKey === "all" || monster.classList.contains(filterKey)) {
+                if(index === MAX_ND){
+                    if(nd > filterKey){
+                        matchingFilters++;
+                    }
+                }
+            }            
+            else {
+                if(filterKey === "all" || monster.classList.contains(filterKey)){
                     matchingFilters++;
                 }
             }
@@ -86,13 +85,13 @@ document.getElementById("filter-by-name").addEventListener("input", (event) => {
 });
 
 document.getElementById("minNDRange").addEventListener("input", (event) => {
-    document.getElementById("minNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
-    //activeFiltersKeys[MIN_ND] = formatNDRange(parseInt(event.target.value));
-    //filter();
+    document.getElementById("minNDRangeValue").innerText = formatNDRange(parseInt(event.target.value));
+    activeFiltersKeys[MIN_ND] = formatNDRange(parseInt(event.target.value));
+    filter();
 });
 
 document.getElementById("maxNDRange").addEventListener("input", (event) => {
-    document.getElementById("maxNDRangeValue").innerText = formatNDRange(parseInt(event.target.value)-2);
-    //activeFiltersKeys[MAX_ND] = formatNDRange(parseInt(event.target.value));
-    //filter();
+    document.getElementById("maxNDRangeValue").innerText = formatNDRange(parseInt(event.target.value));
+    activeFiltersKeys[MAX_ND] = formatNDRange(parseInt(event.target.value));
+    filter();
 });
