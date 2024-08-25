@@ -30,11 +30,19 @@ function renderMonsters(monsters){
         let link;
         let html = "";
 
-        html += `<li class="monster-element ${monsterName.replace(/ /g, "-")} ND${monster.challenge_ratio} `
-        
+        html += `<li `
+
+        html += `data-source="`;
         for(let i = 0; i < monster.source.length; i++){
-            html += " source-"+monster.source[i];
+            html += monster.source[i];
+
+            if(i != monster.source.length-1)
+                html += `,`;
         }
+        html += `"`;
+
+        html += `class="monster-element ${monsterName.replace(/ /g, "-")} ND${monster.challenge_ratio} `
+        
         
         if(window.location.href.includes("index"))
             link = window.location.href.substring(0, window.location.href.length-11) + "/monster.html?id=" + accentsTidy(monster.name).replace(/ /g, "+");
