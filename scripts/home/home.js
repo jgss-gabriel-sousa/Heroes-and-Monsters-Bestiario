@@ -4,7 +4,7 @@ const SpinnerLoading = document.querySelector("#loading")
 const MonsterList = document.querySelector('[data-js="bestiario"]');
 
 const apiURL = "https://jgss-web-service.onrender.com/hnm";
-const imgApiURL = "https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/";
+const imgApiURL = "../img/monsters/";
 
 function accentsTidy(s){
     var r = s.toLowerCase();

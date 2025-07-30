@@ -15,8 +15,8 @@ export function generateHTML(monster) {
     document.querySelector("main h3").innerHTML = `${monster.type}, ${monster.size}`;
 
     document.querySelector("#monster-image").alt = monster.name;
-    document.querySelector("#monster-image").src = `https://raw.githubusercontent.com/JGSS-GabrielSousa/RPG-Image-API/main/monster/${monster.english_name.toLowerCase()}.webp`;
-
+    document.querySelector("#monster-image").src = `../img/monsters/${monster.english_name.toLowerCase()}.webp`;
+    
     function setElementText(selector, text) {
         const element = document.querySelector(selector);
         if (element) {
