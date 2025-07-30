@@ -4,7 +4,6 @@ const SpinnerLoading = document.querySelector("#loading")
 const MonsterList = document.querySelector('[data-js="bestiario"]');
 
 const apiURL = "https://jgss-web-service.onrender.com/hnm";
-const imgApiURL = "../img/monsters/";
 
 function accentsTidy(s){
     var r = s.toLowerCase();
@@ -52,7 +51,7 @@ function renderMonsters(monsters){
         html += ` type-${blankSpaceFix(accentsTidy(monster.type))}">
             <a href="${link}" target="_self">
             <div class="card highlight-on-hover ${blankSpaceFix(accentsTidy(monster.type))}" onclick="viewMonster('${accentsTidy(monster.name)}')">
-                <img class="card-image" alt="${monster.name}" src="${imgApiURL + monster.english_name.toLowerCase()}.webp" />
+                <img class="card-image" alt="${monster.name}" src="${"./img/monsters/" + monster.english_name.toLowerCase()}.webp" onerror="this.onerror=null; this.src='../img/monsters/';"/>
             </div>
             </a>
             <h2 class="card-title">${monster.name}</h2>

@@ -15,7 +15,11 @@ export function generateHTML(monster) {
     document.querySelector("main h3").innerHTML = `${monster.type}, ${monster.size}`;
 
     document.querySelector("#monster-image").alt = monster.name;
-    document.querySelector("#monster-image").src = `../img/monsters/${monster.english_name.toLowerCase()}.webp`;
+    document.querySelector("#monster-image").src = `./img/monsters/${monster.english_name.toLowerCase()}.webp`;
+    document.querySelector("#monster-image").onerror = function() {
+        this.onerror = null;
+        this.src = `../img/monsters/${monster.english_name.toLowerCase()}.webp`;
+    };
     
     function setElementText(selector, text) {
         const element = document.querySelector(selector);
