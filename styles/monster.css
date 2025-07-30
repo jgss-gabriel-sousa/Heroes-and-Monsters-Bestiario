@@ -310,6 +310,7 @@ main {
 .roll-table td, .roll-table tr {
     border: 0;
     background-color: transparent !important;
+    white-space: nowrap;
 }
 .roll-table td:first-child {
     text-align: right;
@@ -327,6 +328,9 @@ div.swal2-popup.swal2-modal.swal2-show {
     border: 2px solid;
 }
 
+div#swal2-html-container {
+    overflow: hidden;
+}
 
 .progress-bar-background {
     height: 12px;
