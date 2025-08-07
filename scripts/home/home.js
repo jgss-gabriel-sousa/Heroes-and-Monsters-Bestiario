@@ -40,7 +40,7 @@ function renderMonsters(monsters){
         }
         html += `"`;
 
-        html += `class="monster-element ${monsterName.replace(/ /g, "-")} ND${monster.challenge_ratio} `
+        html += `class="monster-element ${monsterName.replace(/ /g, "-")} ND${monster.challenge_ratio} ${monster.english_name.replace(/ /g, "-")}`
         
         
         if(window.location.href.includes("index"))

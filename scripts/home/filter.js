@@ -32,7 +32,7 @@ export function filter() {
 
         activeFiltersKeys.forEach((filterKey, index) => {
             if(index === TYPE){
-                if(filterKey === "all" || monster.classList[3].includes(filterKey) || accentsTidy(monster.classList[3]).includes(filterKey)){
+                if(filterKey === "all" || monster.classList[4].includes(filterKey) || accentsTidy(monster.classList[4]).includes(filterKey)){
                     matchingFilters[TYPE] = true;
                 }
             } 
@@ -42,7 +42,9 @@ export function filter() {
                 }
             } 
             else if(index === NAME){
-                if(filterKey === "all" || monster.classList[1].includes(filterKey) || accentsTidy(monster.classList[1]).includes(filterKey)){
+                const nameKey = filterKey.replace(/ /g, "-")
+                if(nameKey === "all" || monster.classList[1].includes(nameKey) || accentsTidy(monster.classList[1]).includes(nameKey)
+                || monster.classList[3].includes(nameKey) || accentsTidy(monster.classList[3]).includes(nameKey)){
                     matchingFilters[NAME] = true;
                 }
             } 
